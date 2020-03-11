@@ -1,0 +1,29 @@
+.color-picker-container {
+    width: 1000px;
+    height: 1000px;
+    background-color: #e3e3e3;
+    .gradient {
+        float: left;
+        padding: 50px;
+        .selector {
+            position: absolute;
+        }
+    }
+    .color-picker-controls {
+        display: grid;
+        float: left;
+        width: 300px;
+        height: 200px;
+        margin: 25px;
+        padding: 25px;
+        background-color: #d4d4d4;
+        .button {
+            display: inline-grid;
+            height: 20px;
+            width: 20px;
+            padding:5px;
+            
+        }
+    }
+}
+
