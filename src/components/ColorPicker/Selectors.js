@@ -93,7 +93,7 @@ const Selectors = props => {
     let degreeOffset = 0;
     let pixel = canvas.current.getContext("2d").getImageData(x1, y1, 1, 1).data;
     let pixelColor =
-    "#" + ((1 << 24) + (pixel[0] << 16) + (pixel[1] << 8) + pixel[2]).toString(16).slice(1);
+    "#" + ((1 << 24) + (pixel[0] << 16) + (pixel[1] << 8) + pixel[2]).toString(16).toUpperCase().slice(1);
     svg.current.children[0].style.fill = pixelColor;
     svg.current.children[0].setAttribute("cx", `${cx}`);
     svg.current.children[0].setAttribute("cy", `${cy}`);
@@ -108,7 +108,7 @@ const Selectors = props => {
 
       pixel = canvas.current.getContext("2d").getImageData(x2, y2, 1, 1).data;
       let pixelColor =
-        "#" + ((1 << 24) + (pixel[0] << 16) + (pixel[1] << 8) + pixel[2]).toString(16).slice(1);
+      "#" + ((1 << 24) + (pixel[0] << 16) + (pixel[1] << 8) + pixel[2]).toString(16).toUpperCase().slice(1);
       svg.current.children[i].style.fill = pixelColor;
       colorsContainer.current.children[i].style.backgroundColor = pixelColor;
       colorsContainer.current.children[i].value = pixelColor;
@@ -142,7 +142,7 @@ const Selectors = props => {
     let y = event.clientY - canvas.current.offsetTop;
     let pixel = canvas.current.getContext("2d").getImageData(x, y, 1, 1).data;
     let pixelColor =
-      "#" + ((1 << 24) + (pixel[0] << 16) + (pixel[1] << 8) + pixel[2]).toString(16).slice(1);
+      "#" + ((1 << 24) + (pixel[0] << 16) + (pixel[1] << 8) + pixel[2]).toString(16).toUpperCase().slice(1);
     circle.style.fill = pixelColor;
     circle.setAttribute("cx", `${x}`);
     circle.setAttribute("cy", `${y}`);
@@ -176,7 +176,7 @@ const Selectors = props => {
       let y = svg.current.children[i].getAttribute("cy");
       let pixel = canvas.current.getContext("2d").getImageData(x, y, 1, 1).data;
       let pixelColor =
-        "#" + ((1 << 24) + (pixel[0] << 16) + (pixel[1] << 8) + pixel[2]).toString(16).slice(1);
+      "#" + ((1 << 24) + (pixel[0] << 16) + (pixel[1] << 8) + pixel[2]).toString(16).toUpperCase().slice(1);
       svg.current.children[i].style.fill = pixelColor;
       colorsContainer.current.children[i].style.backgroundColor = pixelColor;
       colorsContainer.current.children[i].value = pixelColor;

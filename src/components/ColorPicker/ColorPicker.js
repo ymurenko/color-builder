@@ -18,14 +18,11 @@ const ColorPicker = () => {
   const setSelectors = (val) => {
     setSelectorCount(val)
   }
-  const getBackgroundColor = (div) => {
-    return div.style.getBackgroundColor
-  }
   const getColors = () => {
     let colorArray = [];
     for(let i =0; i<selectorCount; i++){
       colorArray.push(
-      <input type="button" className="color-block" style={{height: 20+100/selectorCount}} defaultValue="0" key={i} onClick={e => {copy(e.target.value)}}/>
+      <input type="button" className="color-block" style={{height: 20+100/selectorCount, color: light < 50 ? '#fff' : '#000'}} defaultValue="#fff" key={i} onClick={e => {copy(e.target.value)}}/>
       )
     }
     console.log("getColors")
