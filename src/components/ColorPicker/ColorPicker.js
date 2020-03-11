@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import ColorWheel from "./ColorWheel";
 import "./ColorPicker.scss";
+import copy from 'copy-to-clipboard';
 
 const ColorPicker = () => {
   const [bright, setBright] = useState("white");
@@ -24,10 +25,7 @@ const ColorPicker = () => {
     let colorArray = [];
     for(let i =0; i<selectorCount; i++){
       colorArray.push(
-      <input type="button" className="color-block" style={{height: 20+100/selectorCount}} defaultValue="sdfs" key={i}/>
-
-
-
+      <input type="button" className="color-block" style={{height: 20+100/selectorCount}} defaultValue="0" key={i} onClick={e => {copy(e.target.value)}}/>
       )
     }
     console.log("getColors")

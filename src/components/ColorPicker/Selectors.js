@@ -51,6 +51,8 @@ const Selectors = props => {
   };
 
   const getPointMath = () => {
+    //gets the current angles and radii of the points 
+    //(called once after points are linked)
     let mathVars = [];
     let x = svg.current.children[0].getAttribute("cx");
     let y = svg.current.children[0].getAttribute("cy");
