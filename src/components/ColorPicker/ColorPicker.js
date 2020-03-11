@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ColorWheel from "./ColorWheel";
 import "./ColorPicker.scss";
 
 const ColorPicker = () => {
   const [bright, setBright] = useState("white");
   const [light, setLight] = useState(50)
-  const [selectorCount, setSelectorCount] = useState(5);
+  const [selectorCount, setSelectorCount] = useState(3);
   const [isLinked, setIsLinked] = useState(false)
+  const colorContainer = useRef(null);
+  
 
   const setLightness = (val) => {
     setLight(val)
@@ -15,9 +17,27 @@ const ColorPicker = () => {
   const setSelectors = (val) => {
     setSelectorCount(val)
   }
+  const getBackgroundColor = (div) => {
+    return div.style.getBackgroundColor
+  }
+  const getColors = () => {
+    let colorArray = [];
+    for(let i =0; i<selectorCount; i++){
+      colorArray.push(
+      <input type="button" className="color-block" style={{height: 20+100/selectorCount}} defaultValue="sdfs" key={i}/>
+
+
+
+      )
+    }
+    console.log("getColors")
+    return colorArray
+  }
   return (
     <div className="color-picker-container">
-      <ColorWheel mode={bright} lightness={light} selectors={selectorCount} isLinked={isLinked}/>
+        
+      <ColorWheel mode={bright} lightness={light} selectors={selectorCount} isLinked={isLinked} colorsContainer={colorContainer}/>
+    
       <div className="color-picker-controls">
         <div className="control-container">
           <p className="control-label">Lightness</p>
@@ -57,6 +77,9 @@ const ColorPicker = () => {
           />
         </div>
       </div>
+      <div className="colors-container" ref={colorContainer}>
+          {getColors()}
+        </div>
     </div>
   );
 };
