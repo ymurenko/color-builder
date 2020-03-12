@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useMemo, useLayoutEffect, useRef, useState } from "react";
 import Selectors from "./Selectors";
 import * as xLUT from "./xLUT.json";
 import * as yLUT from "./yLUT.json";
@@ -7,7 +7,9 @@ import * as sinLUT from "./sinLUT.json";
 
 const ColorWheel = props => {
   const [linkState, setLinkState] = useState(0);
+  const dark = useMemo(() => props.isDarkMode)
   let selectorCount = props.selectors;
+
 
   const canvas = useRef(null);
   const svg = useRef(null);
@@ -26,8 +28,8 @@ const ColorWheel = props => {
 
       gradient.addColorStop("0", `${props.lightness > 45 ? "white" : "black"}`);
       gradient.addColorStop("0.95", `hsl(${value}, 100%, ${props.lightness}%)`);
-      gradient.addColorStop("0.95", `white`);
-      gradient.addColorStop("1", `white`);
+      gradient.addColorStop("0.95", `${ dark ? '#262626': '#fff'}`);
+      gradient.addColorStop("1", `${ dark ? '#262626': '#fff'}`);
 
       canvasContext.strokeStyle = gradient;
       canvasContext.beginPath();
@@ -40,6 +42,7 @@ const ColorWheel = props => {
   useLayoutEffect(() => {
     generateGradient();
   });
+
 
   return (
     <div className="gradient">

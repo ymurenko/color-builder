@@ -1,7 +1,57 @@
+$secondary-font-size: 0.9rem;
+$secondary-font-weight: 600;
+$secondary-font-color: #404040;
+$font-family: "helvetica";
+
+$secondary-font-color-dark: #bdbdbd;
+
+$color-primary: #e3e3e3;
+$color-secondary: #d4d4d4;
+
+$color-secondary-dark: #292929;
+$color-primary-dark: #333333;
+
+.App {
+  background-color: $color-primary;
+  color: $secondary-font-color;
+  &.dark {
+    background-color: $color-primary-dark;
+    color: $secondary-font-color-dark
+  }
+}
+
+.button {
+  cursor: pointer;
+  font-size: $secondary-font-size;
+  font-weight: $secondary-font-weight;
+  font-family: $font-family;
+  height: 30px;
+  width: 100px;
+  padding: 5px;
+  border: none;
+  color: inherit;
+  background-color: $color-primary;
+  &.set-dark{
+    position: absolute;
+    left: 0px;
+  }
+  &.linked-true {
+    border: solid 2px $secondary-font-color;
+    &.dark {
+      border-color: $color-primary;
+    }
+  }
+  &.dark {
+    background-color: $color-primary-dark;
+    
+  }
+}
+
 .color-picker-container {
   width: 1000px;
   height: 1000px;
-  background-color: #e3e3e3;
+  margin: auto;
+  background-color: $color-primary;
   .gradient {
     float: left;
     padding: 50px;
@@ -10,19 +60,28 @@
     }
   }
   .color-picker-controls {
+    font-size: $secondary-font-size;
+    font-weight: $secondary-font-weight;
+    font-family: $font-family;
     display: grid;
     float: left;
     width: 300px;
-    height: 200px;
+    height: auto;
     margin: 25px;
     padding: 25px;
-    background-color: #d4d4d4;
-    .button {
-      display: inline-grid;
-      height: 20px;
-      width: 20px;
-      padding: 5px;
+    background-color: $color-secondary;
+    .control-container {
+      margin: 20px 0;
     }
+    .control-label {
+      margin: 0;
+    }
+    &.dark {
+      background-color: $color-secondary-dark;
+    }
+  }
+  &.dark {
+    background-color: $color-primary-dark;
   }
 }
 
@@ -32,11 +91,14 @@
   width: 300px;
   margin: 25px;
   padding: 25px;
-  background-color: #d4d4d4;
+  background-color: $color-secondary;
   .color-block {
     cursor: pointer;
     border: none;
     background-color: #fff;
     width: 100%;
+  }
+  &.dark {
+    background-color: $color-secondary-dark;
   }
 }
