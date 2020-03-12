@@ -27,10 +27,10 @@ const ColorWheel = props => {
       );
 
       gradient.addColorStop("0", `${props.lightness > 45 ? "white" : "black"}`);
-      gradient.addColorStop("0.95", `hsl(${value}, 100%, ${props.lightness}%)`);
-      gradient.addColorStop("0.95", `${ dark ? '#262626': '#fff'}`);
-      gradient.addColorStop("1", `${ dark ? '#262626': '#fff'}`);
-
+      gradient.addColorStop("0.95", `hsl(${value}, ${props.saturation}%, ${props.lightness}%)`);
+      gradient.addColorStop("0.95", `${ dark ? '#262626': '#bdbdbd'}`);
+      gradient.addColorStop("1", `${ dark ? '#333333': '#e3e3e3'}`);
+   
       canvasContext.strokeStyle = gradient;
       canvasContext.beginPath();
       canvasContext.moveTo(250, 250);
@@ -51,6 +51,7 @@ const ColorWheel = props => {
           isLinked={props.isLinked}
           selectorCount={selectorCount}
           canvas={canvas}
+          lightness={props.lightness}
         />
 
       <canvas width={"500"} height={"500"} ref={canvas} />

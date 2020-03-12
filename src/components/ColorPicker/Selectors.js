@@ -22,6 +22,12 @@ const Selectors = props => {
         .toUpperCase()
         .slice(1);
     svg.current.children[key].style.fill = pixelColor;
+    if(props.lightness < 50){
+      svg.current.children[key].style.stroke = '#d4d4d4';
+    } else {
+      svg.current.children[key].style.stroke = '#4d4d4d';
+    }
+    
     colorsContainer.current.children[key].style.backgroundColor = pixelColor;
     colorsContainer.current.children[key].value = pixelColor;
   };
@@ -38,9 +44,9 @@ const Selectors = props => {
         <circle
           cx={x}
           cy={y}
-          r="10"
-          stroke="#fff"
-          stroke-width="3"
+          r="15"
+          stroke="#4d4d4d"
+          stroke-width="0.5"
           style={{ filter: "drop-shadow(0 0 4px #4d4d4d)" }}
           onMouseDown={e => handleMouseDown(e)}
           onMouseUp={e => handleMouseUp(e)}
@@ -88,7 +94,7 @@ const Selectors = props => {
   };
 
   const isInCircle = (x, y) => {
-    if (Math.sqrt((250 - x) * (250 - x) + (250 - y) * (250 - y)) > 238)
+    if (Math.sqrt((250 - x) * (250 - x) + (250 - y) * (250 - y)) > 237)
       return false;
     else return true;
   };

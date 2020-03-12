@@ -15,7 +15,7 @@ function App() {
               darkMode ? setDarkMode(false) : setDarkMode(true);
             }}
           >
-            {darkMode ? 'Dark' : 'Light'}
+            {darkMode ? 'Light Mode' : 'Dark Mode'}
           </button>
       <ColorPicker darkMode={darkMode}/>
     </div>
