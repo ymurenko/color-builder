@@ -5,7 +5,7 @@ import copy from "copy-to-clipboard";
 
 const ColorPicker = props => {
   const [bright, setBright] = useState("white");
-  const [light, setLight] = useState(50);
+  const [lightness, setLightness] = useState(50);
   const [saturation, setSaturation] = useState(100)
   const [selectorCount, setSelectorCount] = useState(3);
   const [isLinked, setIsLinked] = useState(false);
@@ -14,11 +14,6 @@ const ColorPicker = props => {
   const linkedButton = useRef(null);
   let isDarkMode = props.darkMode;
 
-
-  
-  const setLightness = val => {
-    setLight(val);
-  };
 
   const setSelectors = val => {
     setSelectorCount(val);
@@ -48,7 +43,7 @@ const ColorPicker = props => {
           className="color-block"
           style={{
             height: 20 + 100 / selectorCount,
-            color: light < 50 ?  "#bdbdbd" : "#404040"
+            color: lightness < 50 ?  "#bdbdbd" : "#404040"
           }}
           defaultValue="#fff"
           key={i}
@@ -63,7 +58,7 @@ const ColorPicker = props => {
     <div className={`color-picker-container ${isDarkMode ? "dark" : ""}`} key={reset}>
       <ColorWheel
         mode={bright}
-        lightness={light}
+        lightness={lightness}
         saturation={saturation}
         selectors={selectorCount}
         isLinked={isLinked}
@@ -75,7 +70,7 @@ const ColorPicker = props => {
 
       <div className={`color-picker-controls ${isDarkMode ? "dark" : ""}`}>
         <div className="control-container">
-          <p className="control-label">Lightness: {light}%</p>
+          <p className="control-label">Lightness: {lightness}%</p>
           <input
             type="range"
             className="set-light"
