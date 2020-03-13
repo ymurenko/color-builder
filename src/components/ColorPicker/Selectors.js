@@ -94,9 +94,13 @@ const Selectors = props => {
   };
 
   const isInCircle = (x, y) => {
-    if (Math.sqrt((250 - x) * (250 - x) + (250 - y) * (250 - y)) > 237)
+    if (Math.sqrt((250 - x) * (250 - x) + (250 - y) * (250 - y)) > 237){
+      handleMouseUp()
       return false;
-    else return true;
+    }
+    else {
+      return true;
+    }
   };
 
   const addMouseTrackerLinked = event => {

@@ -7,14 +7,13 @@ import * as sinLUT from "./sinLUT.json";
 
 const ColorWheel = props => {
   const [linkState, setLinkState] = useState(0);
-  const dark = useMemo(() => props.isDarkMode)
-  let selectorCount = props.selectors;
-
+  let dark = useMemo(() => props.isDarkMode)
+  let reset = useMemo(() => props.reset)
 
   const canvas = useRef(null);
   const svg = useRef(null);
 
-  const generateGradient = () => {
+  const generateGradient = (S = 100, L = 50) => {
     let canvasContext = canvas.current.getContext("2d");
     canvasContext.clearRect(0, 0, 500, 500);
     for (var i = 0; i < 3600; i += 1) {
@@ -26,8 +25,8 @@ const ColorWheel = props => {
         yLUT.default[value]
       );
 
-      gradient.addColorStop("0", `${props.lightness > 45 ? "white" : "black"}`);
-      gradient.addColorStop("0.95", `hsl(${value}, ${props.saturation}%, ${props.lightness}%)`);
+      gradient.addColorStop("0", `${L > 45 ? "white" : "black"}`);
+      gradient.addColorStop("0.95", `hsl(${value}, ${S}%, ${L}%)`);
       gradient.addColorStop("0.95", `${ dark ? '#262626': '#bdbdbd'}`);
       gradient.addColorStop("1", `${ dark ? '#333333': '#e3e3e3'}`);
    
@@ -40,18 +39,22 @@ const ColorWheel = props => {
   };
 
   useLayoutEffect(() => {
-    generateGradient();
+    generateGradient(props.saturation, props.lightness);
   });
 
+  useLayoutEffect(() => {
+    generateGradient();
+  },[props.reset]);
 
   return (
     <div className="gradient">
         <Selectors
           colorsContainer={props.colorsContainer}
           isLinked={props.isLinked}
-          selectorCount={selectorCount}
+          selectorCount={props.selectors}
           canvas={canvas}
           lightness={props.lightness}
+          reset={reset}
         />
 
       <canvas width={"500"} height={"500"} ref={canvas} />

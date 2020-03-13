@@ -7,7 +7,7 @@ import ColorPicker from './components/ColorPicker/ColorPicker';
 function App() {
   const [darkMode, setDarkMode] = useState(false)
   return (
-    <div className={`App ${darkMode ? 'dark' : ''}`}>
+    <div className={`App ${darkMode ? 'dark' : ''}`} >
       <button
             className={`button set-dark ${darkMode ? 'dark' : ''}`}
             type="button"

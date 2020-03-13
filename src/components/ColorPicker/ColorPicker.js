@@ -9,9 +9,12 @@ const ColorPicker = props => {
   const [saturation, setSaturation] = useState(100)
   const [selectorCount, setSelectorCount] = useState(3);
   const [isLinked, setIsLinked] = useState(false);
+  const [reset, triggerReset] = useState(1);
   const colorContainer = useRef(null);
   const linkedButton = useRef(null);
   let isDarkMode = props.darkMode;
+
+
   
   const setLightness = val => {
     setLight(val);
@@ -57,7 +60,7 @@ const ColorPicker = props => {
   };
 
   return (
-    <div className={`color-picker-container ${isDarkMode ? "dark" : ""}`}>
+    <div className={`color-picker-container ${isDarkMode ? "dark" : ""}`} key={reset}>
       <ColorWheel
         mode={bright}
         lightness={light}
@@ -66,6 +69,8 @@ const ColorPicker = props => {
         isLinked={isLinked}
         colorsContainer={colorContainer}
         isDarkMode={props.darkMode}
+        reset={reset}
+        key={reset}
       />
 
       <div className={`color-picker-controls ${isDarkMode ? "dark" : ""}`}>
@@ -105,7 +110,7 @@ const ColorPicker = props => {
             min={1}
             max={15}
             step={1}
-            defaultValue={5}
+            defaultValue={3}
             onChange={val => {
               setSelectors(val.target.value);
             }}
@@ -122,6 +127,24 @@ const ColorPicker = props => {
             }}
           >
             {isLinked ? "Un-link" : "Link Points"}
+          </button>
+          <button
+            className={`button ${
+              isDarkMode ? "dark" : ""
+            }`}
+            type="button"
+            onClick={() => {
+              //reset === 1 ? triggerReset(2) : triggerReset(1);
+              if(reset === 1){
+                setSelectors(3)
+                triggerReset(2)
+              } else {
+                setSelectors(3)
+                triggerReset(1)
+              }
+            }}
+          >
+            Reset
           </button>
         </div>
       </div>
