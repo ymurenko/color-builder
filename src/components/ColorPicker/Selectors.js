@@ -7,7 +7,7 @@ import React, {
 } from "react";
 
 const Selectors = props => {
-  let { colorsContainer, isLinked, selectorCount, canvas } = props;
+  let { colorsContainer, isLinked, selectorCount, lightness, canvas, reset } = props;
   const svg = useRef(null);
   let activeCircle = null;
   let circleRefs = [];
@@ -29,8 +29,11 @@ const Selectors = props => {
     }
     
     colorsContainer.current.children[key].style.backgroundColor = pixelColor;
+    colorsContainer.current.children[key].style.color = lightness < 50 ?  "#d4d4d4" : "#404040"
+    colorsContainer.current.children[key].style.height = 20 + 100 / selectorCount
     colorsContainer.current.children[key].value = pixelColor;
   };
+
 
   const createSelectors = () => {
     let radOffset = 0;
@@ -94,9 +97,13 @@ const Selectors = props => {
   };
 
   const isInCircle = (x, y) => {
-    if (Math.sqrt((250 - x) * (250 - x) + (250 - y) * (250 - y)) > 237)
+    if (Math.sqrt((250 - x) * (250 - x) + (250 - y) * (250 - y)) > 237){
+      handleMouseUp()
       return false;
-    else return true;
+    }
+    else {
+      return true;
+    }
   };
 
   const addMouseTrackerLinked = event => {
