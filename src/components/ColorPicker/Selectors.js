@@ -29,7 +29,7 @@ const Selectors = props => {
     }
     
     colorsContainer.current.children[key].style.backgroundColor = pixelColor;
-    colorsContainer.current.children[key].style.color = lightness < 50 ?  "#bdbdbd" : "#404040"
+    colorsContainer.current.children[key].style.color = lightness < 50 ?  "#d4d4d4" : "#404040"
     colorsContainer.current.children[key].style.height = 20 + 100 / selectorCount
     colorsContainer.current.children[key].value = pixelColor;
   };
