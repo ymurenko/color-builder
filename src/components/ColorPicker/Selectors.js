@@ -5,9 +5,17 @@ import React, {
   useState,
   createRef
 } from "react";
+	
 
-const Selectors = props => {
-  let { colorsContainer, isLinked, selectorCount, lightness, canvas, reset } = props;
+import { connect } from 'react-redux';
+
+const Selectors_ = props => {
+  let {
+    colorsContainer,
+    isLinked,
+    canvas,
+    reset
+  } = props;
   const svg = useRef(null);
   let activeCircle = null;
   let circleRefs = [];
@@ -22,24 +30,24 @@ const Selectors = props => {
         .toUpperCase()
         .slice(1);
     svg.current.children[key].style.fill = pixelColor;
-    if(props.lightness < 50){
-      svg.current.children[key].style.stroke = '#d4d4d4';
+    if (props.lightness < 50) {
+      svg.current.children[key].style.stroke = "#d4d4d4";
     } else {
-      svg.current.children[key].style.stroke = '#4d4d4d';
+      svg.current.children[key].style.stroke = "#4d4d4d";
     }
-    
     colorsContainer.current.children[key].style.backgroundColor = pixelColor;
-    colorsContainer.current.children[key].style.color = lightness < 50 ?  "#d4d4d4" : "#404040"
-    colorsContainer.current.children[key].style.height = 20 + 100 / selectorCount
+    colorsContainer.current.children[key].style.color =
+      props.lightness < 50 ? "#d4d4d4" : "#404040";
+    colorsContainer.current.children[key].style.height =
+      20 + 100 / props.selectorCount;
     colorsContainer.current.children[key].value = pixelColor;
   };
-
 
   const createSelectors = () => {
     let radOffset = 0;
     let selectors = [];
-    let radIncrement = Math.round(360 / selectorCount) * (Math.PI / 180);
-    for (let i = 0; i < selectorCount; i++) {
+    let radIncrement = Math.round(360 / props.selectorCount) * (Math.PI / 180);
+    for (let i = 0; i < props.selectorCount; i++) {
       let x = 250 + 200 * Math.cos(radOffset);
       let y = 250 + 200 * Math.sin(radOffset);
       let circleRef = createRef(null);
@@ -74,7 +82,7 @@ const Selectors = props => {
       angle: 0,
       radius: radius
     });
-    for (let i = 1; i < selectorCount; i++) {
+    for (let i = 1; i < props.selectorCount; i++) {
       let x1 = svg.current.children[i - 1].getAttribute("cx");
       let y1 = svg.current.children[i - 1].getAttribute("cy");
       let x2 = svg.current.children[i].getAttribute("cx");
@@ -97,11 +105,10 @@ const Selectors = props => {
   };
 
   const isInCircle = (x, y) => {
-    if (Math.sqrt((250 - x) * (250 - x) + (250 - y) * (250 - y)) > 237){
-      handleMouseUp()
+    if (Math.sqrt((250 - x) * (250 - x) + (250 - y) * (250 - y)) > 237) {
+      handleMouseUp();
       return false;
-    }
-    else {
+    } else {
       return true;
     }
   };
@@ -119,7 +126,7 @@ const Selectors = props => {
 
       setColor(x0, y0, 0);
 
-      for (let i = 1; i < selectorCount; i++) {
+      for (let i = 1; i < props.selectorCount; i++) {
         radsOffset += circleProps[i].angle;
 
         let x = svg.current.children[i].getAttribute("cx");
@@ -162,7 +169,7 @@ const Selectors = props => {
 
   const handleMouseUp = e => {
     activeCircle = null;
-    if (!props.isLinked) {
+    if (!props.linked) {
       svg.current.removeEventListener("mousemove", addMouseTracker);
     } else {
       svg.current.removeEventListener("mousemove", addMouseTrackerLinked);
@@ -171,7 +178,7 @@ const Selectors = props => {
 
   const handleMouseDown = e => {
     activeCircle = e.target;
-    if (!props.isLinked) {
+    if (!props.linked) {
       svg.current.addEventListener("mousemove", addMouseTracker);
     } else {
       svg.current.addEventListener("mousemove", addMouseTrackerLinked);
@@ -179,7 +186,19 @@ const Selectors = props => {
   };
 
   useEffect(() => {
-    for (let i = 0; i < selectorCount; i++) {
+    let radOffset = 0;
+    let radIncrement = Math.round(360 / props.selectorCount) * (Math.PI / 180);
+    for (let i = 0; i < props.selectorCount; i++) {
+      let x = 250 + 200 * Math.cos(radOffset);
+      let y = 250 + 200 * Math.sin(radOffset);
+      svg.current.children[i].setAttribute("cx", `${x}`);
+      svg.current.children[i].setAttribute("cy", `${y}`);
+      radOffset += radIncrement;
+    }
+  },[props.selectorCount])
+
+  useEffect(() => {
+    for (let i = 0; i < props.selectorCount; i++) {
       let x = svg.current.children[i].getAttribute("cx");
       let y = svg.current.children[i].getAttribute("cy");
       setColor(x, y, i);
@@ -202,5 +221,16 @@ const Selectors = props => {
     </svg>
   );
 };
+
+function mapStateToProps(state) {
+  return {
+    selectorCount: state.actionReducer.SELECTOR_COUNT,
+    lightness: state.actionReducer.LIGHTNESS,
+    saturation: state.actionReducer.SATURATION,
+    linked: state.actionReducer.LINKED
+  };
+}
+
+const Selectors = connect(mapStateToProps)(Selectors_);
 
 export default Selectors;

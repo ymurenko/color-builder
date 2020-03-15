@@ -1,11 +1,10 @@
 import React, { useMemo, useLayoutEffect, useRef, useState } from "react";
+import { connect } from 'react-redux';
 import Selectors from "./Selectors";
 import * as xLUT from "./xLUT.json";
 import * as yLUT from "./yLUT.json";
-import * as cosLUT from "./cosLUT.json";
-import * as sinLUT from "./sinLUT.json";
 
-const ColorWheel = props => {
+const ColorWheel_ = props => {
   const [linkState, setLinkState] = useState(0);
   let dark = useMemo(() => props.isDarkMode)
   let reset = useMemo(() => props.reset)
@@ -13,7 +12,7 @@ const ColorWheel = props => {
   const canvas = useRef(null);
   const svg = useRef(null);
 
-  const generateGradient = (S = 100, L = 50) => {
+  const generateGradient = () => {
     let canvasContext = canvas.current.getContext("2d");
     canvasContext.clearRect(0, 0, 500, 500);
     for (var i = 0; i < 3600; i += 1) {
@@ -25,8 +24,8 @@ const ColorWheel = props => {
         yLUT.default[value]
       );
 
-      gradient.addColorStop("0", `${L > 45 ? "white" : "black"}`);
-      gradient.addColorStop("0.95", `hsl(${value}, ${S}%, ${L}%)`);
+      gradient.addColorStop("0", `${props.lightness > 45 ? "white" : "black"}`);
+      gradient.addColorStop("0.95", `hsl(${value}, ${props.saturation}%, ${props.lightness}%)`);
       gradient.addColorStop("0.95", `${ dark ? '#262626': '#bdbdbd'}`);
       gradient.addColorStop("1", `${ dark ? '#333333': '#e3e3e3'}`);
    
@@ -39,8 +38,8 @@ const ColorWheel = props => {
   };
 
   useLayoutEffect(() => {
-    generateGradient(props.saturation, props.lightness);
-  });
+    generateGradient();
+  },[props.lightness, props.saturation]);
 
   useLayoutEffect(() => {
     generateGradient();
@@ -51,15 +50,22 @@ const ColorWheel = props => {
         <Selectors
           colorsContainer={props.colorsContainer}
           isLinked={props.isLinked}
-          selectorCount={props.selectors}
           canvas={canvas}
-          lightness={props.lightness}
           reset={reset}
         />
-
       <canvas width={"500"} height={"500"} ref={canvas} />
     </div>
   );
 };
 
+function mapStateToProps(state) {
+  return {
+    lightness: state.actionReducer.LIGHTNESS,
+    saturation: state.actionReducer.SATURATION,
+  };
+}
+
+const ColorWheel = connect(mapStateToProps)(ColorWheel_);
+
 export default ColorWheel;
+
