@@ -1,26 +1,21 @@
-import React, { useLayoutEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ColorWheel from "./ColorWheel";
 import "./ColorPicker.scss";
 import copy from "copy-to-clipboard";
-import { connect } from 'react-redux';
-import { storeLightness, storeSaturation, storeSelectorCount, resetState, setLinkedState } from "../../redux/actions/actions"
+import { connect } from "react-redux";
+import {
+  storeLightness,
+  storeSaturation,
+  storeSelectorCount,
+  resetState,
+  setLinkedState,
+} from "../../redux/actions/actions";
 
 const ColorPicker_ = props => {
-  const [bright, setBright] = useState("white");
-  const [lightness, setLightness] = useState(50);
-  const [saturation, setSaturation] = useState(100);
-  const [isLinked, setIsLinked] = useState(false);
-  const [reset, triggerReset] = useState(1);
   const colorContainer = useRef(null);
-  const linkedButton = useRef(null);
-  let isDarkMode = props.darkMode;
 
   const copyAllColors = () => {
-    let colorCopy = [];
-    for (let i = 0; i < props.selectorCount; i++) {
-      colorCopy.push(colorContainer.current.children[i].value);
-    }
-    copy(colorCopy);
+    copy(props.colors);
   };
 
   const displayCopyPrompt = event => {
@@ -42,7 +37,7 @@ const ColorPicker_ = props => {
     );
   };
 
-  const getColors = () => {
+  const createColorBlocks = () => {
     let colorArray = [];
     for (let i = 0; i < props.selectorCount; i++) {
       colorArray.push(
@@ -51,9 +46,8 @@ const ColorPicker_ = props => {
           className="color-block"
           style={{
             height: 20 + 100 / props.selectorCount,
-            color: lightness < 50 ? "#bdbdbd" : "#404040"
+            color: props.lightness < 50 ? "#bdbdbd" : "#404040"
           }}
-          defaultValue="#fff"
           key={i}
           onMouseEnter={e => displayCopyPrompt(e)}
         />
@@ -64,19 +58,13 @@ const ColorPicker_ = props => {
 
   return (
     <div
-      className={`color-picker-container ${isDarkMode ? "dark" : ""}`}
-      key={reset}
+      className={`color-picker-container ${props.darkMode ? "dark" : ""}`}
     >
       <ColorWheel
-        mode={bright}
-        isLinked={isLinked}
         colorsContainer={colorContainer}
-        isDarkMode={props.darkMode}
-        reset={reset}
-        key={reset}
       />
       <div className="boxes">
-        <div className={`color-picker-controls ${isDarkMode ? "dark" : ""}`}>
+        <div className={`color-picker-controls ${props.darkMode ? "dark" : ""}`}>
           <div className="control-container">
             <p className="control-label">Lightness: {props.lightness}%</p>
             <input
@@ -123,34 +111,34 @@ const ColorPicker_ = props => {
           </div>
           <div className="control-container ">
             <button
-              className={`button ${props.linked ? "linked-true" : "linked-false"} ${
-                isDarkMode ? "dark" : ""
-              }`}
+              className={`button ${
+                props.linked ? "linked-true" : "linked-false"
+              } ${props.darkMode ? "dark" : ""}`}
               type="button"
               onClick={() => {
-                props.setLinkedState()
+                props.setLinkedState();
               }}
             >
-              {isLinked ? "Unlink" : "Link"}
+              {props.linked ? "Unlink" : "Link"}
             </button>
             <button
-              className={`button ${isDarkMode ? "dark" : ""}`}
+              className={`button ${props.darkMode ? "dark" : ""}`}
               type="button"
               onClick={() => {
-               props.resetState()
+                props.resetState();
               }}
             >
               Reset
             </button>
           </div>
         </div>
-        <div className={`colors-wrapper ${isDarkMode ? "dark" : ""}`}>
+        <div className={`colors-wrapper ${props.darkMode ? "dark" : ""}`}>
           <div className="colors-container" ref={colorContainer}>
-            {getColors()}
+            {createColorBlocks()}
           </div>
           <div className="control-container">
             <button
-              className={`button ${isDarkMode ? "dark" : ""}`}
+              className={`button ${props.darkMode ? "dark" : ""}`}
               type="button"
               onClick={() => {
                 copyAllColors();
@@ -165,18 +153,23 @@ const ColorPicker_ = props => {
   );
 };
 
-
 function mapStateToProps(state) {
   return {
     lightness: state.actionReducer.LIGHTNESS,
     saturation: state.actionReducer.SATURATION,
     selectorCount: state.actionReducer.SELECTOR_COUNT,
-    linked: state.actionReducer.LINKED
+    linked: state.actionReducer.LINKED,
+    darkMode: state.actionReducer.DARK_MODE,
+    colors: state.actionReducer.COLORS
   };
 }
 
 const mapDispatchToProps = {
-  storeLightness, storeSaturation, storeSelectorCount, resetState, setLinkedState
+  storeLightness,
+  storeSaturation,
+  storeSelectorCount,
+  resetState,
+  setLinkedState,
 };
 
 const ColorPicker = connect(mapStateToProps, mapDispatchToProps)(ColorPicker_);

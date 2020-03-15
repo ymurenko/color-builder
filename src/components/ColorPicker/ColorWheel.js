@@ -1,16 +1,11 @@
-import React, { useMemo, useLayoutEffect, useRef, useState } from "react";
+import React, {useLayoutEffect, useRef, useState } from "react";
 import { connect } from 'react-redux';
 import Selectors from "./Selectors";
 import * as xLUT from "./xLUT.json";
 import * as yLUT from "./yLUT.json";
 
 const ColorWheel_ = props => {
-  const [linkState, setLinkState] = useState(0);
-  let dark = useMemo(() => props.isDarkMode)
-  let reset = useMemo(() => props.reset)
-
   const canvas = useRef(null);
-  const svg = useRef(null);
 
   const generateGradient = () => {
     let canvasContext = canvas.current.getContext("2d");
@@ -26,8 +21,8 @@ const ColorWheel_ = props => {
 
       gradient.addColorStop("0", `${props.lightness > 45 ? "white" : "black"}`);
       gradient.addColorStop("0.95", `hsl(${value}, ${props.saturation}%, ${props.lightness}%)`);
-      gradient.addColorStop("0.95", `${ dark ? '#262626': '#bdbdbd'}`);
-      gradient.addColorStop("1", `${ dark ? '#333333': '#e3e3e3'}`);
+      gradient.addColorStop("0.95", `${ props.darkMode ? '#262626': '#bdbdbd'}`);
+      gradient.addColorStop("1", `${ props.darkMode ? '#333333': '#e3e3e3'}`);
    
       canvasContext.strokeStyle = gradient;
       canvasContext.beginPath();
@@ -39,19 +34,13 @@ const ColorWheel_ = props => {
 
   useLayoutEffect(() => {
     generateGradient();
-  },[props.lightness, props.saturation]);
-
-  useLayoutEffect(() => {
-    generateGradient();
-  },[props.reset]);
+  });
 
   return (
     <div className="gradient">
         <Selectors
           colorsContainer={props.colorsContainer}
-          isLinked={props.isLinked}
           canvas={canvas}
-          reset={reset}
         />
       <canvas width={"500"} height={"500"} ref={canvas} />
     </div>
@@ -62,6 +51,7 @@ function mapStateToProps(state) {
   return {
     lightness: state.actionReducer.LIGHTNESS,
     saturation: state.actionReducer.SATURATION,
+    darkMode: state.actionReducer.DARK_MODE
   };
 }
 
