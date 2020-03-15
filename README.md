@@ -1,68 +1,23 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Color Builder
 
-## Available Scripts
+A color palette builder app built using react and redux. Allows for a multitude of settings, but most importantly it allows you to create color palettes up to 15 colors (a reasonable limit).
 
-In the project directory, you can run:
+Most palette builders allow for a very small palette (usually 6 colors). There are a lot of use cases where that's not enough colors, such as data visualizations.
 
-### `npm start`
+### Features
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Set a palette size from 1 to 15 colors
+- Set saturation, lightness of the color wheel
+- Toggle for a dark mode to better visualize colors on a darker background
+- Move color selectors individually, or link them all together 
+- Colors are stored as hex color codes
+- Click each color block to copy its color
+- Press "copy all" to copy the entire list of colors in the palette, with values separated by commas
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Design
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+ - This color builder manually creates a color wheel with all colors by drawing svg lines around a circle, increasing in hue values.
+ - The color selectors are created as SVGs over the canvas, a canvas pixel color query is used to get their color
+ - Color selector motion can be either singular or linked
+     - In linked motion, the first color selector is used to drag the entire array of color selectors
+     - The positions of the selectors are updated according to the new position of the first selector
