@@ -8,10 +8,10 @@ import { connect } from "react-redux";
 
 const ColorPicker_ = props => {
   const colorContainer = useRef(null);
-  
+  /*
   const copyAllColors = () => {
     copy(props.colors);
-  };
+  };*/
 
   return (
     <div className={`color-picker-container ${props.darkMode ? "dark" : ""}`}>
@@ -24,7 +24,7 @@ const ColorPicker_ = props => {
             <button
               className={`button ${props.darkMode ? "dark" : ""}`}
               type="button"
-              onClick={() => { copyAllColors(); }}
+              onClick={() => { /*copyAllColors(); */}}
             >
               Copy all
             </button>
@@ -42,7 +42,7 @@ function mapStateToProps(state) {
     selectorCount: state.actionReducer.SELECTOR_COUNT,
     linked: state.actionReducer.LINKED,
     darkMode: state.actionReducer.DARK_MODE,
-    colors: state.actionReducer.COLORS
+   // colors: state.actionReducer.COLORS
   };
 }
 

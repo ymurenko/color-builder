@@ -7,7 +7,6 @@ const Selectors_ = props => {
   const svg = useRef(null);
   let { colorsContainer, canvas } = props;
 
-  
   let circleRefs = null;
   let circleCoordinates = [];
   let currentActiveCircle = null;
@@ -27,13 +26,18 @@ const Selectors_ = props => {
     } else {
       circleRefs[key].style.stroke = "#4d4d4d";
     }
-    props.storeColor(pixelColor, key)
-   colorBlockRefs[key].style.backgroundColor = pixelColor;
+
+    props.storeColor(pixelColor, key);
+    /*
+
+    //set palette colors directly for performance:
+    colorBlockRefs[key].style.backgroundColor = pixelColor;
     colorBlockRefs[key].style.color =
       props.lightness < 50 ? "#d4d4d4" : "#404040";
-    colorBlockRefs[key].style.height =
-      20 + 100 / props.selectorCount;
+    colorBlockRefs[key].style.height = 20 + 100 / props.selectorCount;
     colorBlockRefs[key].value = pixelColor;
+    
+    */
   };
 
   const createCircles = () => {

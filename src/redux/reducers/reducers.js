@@ -4,7 +4,7 @@ const initialState = {
   COLORS: ['#FFF','#FFF','#FFF'],
   LIGHTNESS: 50,
   SATURATION: 100,
-  SELECTOR_COUNT: 3,
+  SELECTOR_COUNT: 4,
   LINKED: false,
   DARK_MODE: false,
   RESET: 0 //for comp. rerender if init state doesnt change a prop

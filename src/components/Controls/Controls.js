@@ -88,7 +88,6 @@ function mapStateToProps(state) {
       selectorCount: state.actionReducer.SELECTOR_COUNT,
       linked: state.actionReducer.LINKED,
       darkMode: state.actionReducer.DARK_MODE,
-      colors: state.actionReducer.COLORS
     };
   }
   

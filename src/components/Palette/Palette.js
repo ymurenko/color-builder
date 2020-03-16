@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useLayoutEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
+import ColorBlock from "./ColorBlock"
 import copy from "copy-to-clipboard";
 
 const Palette_ = props => {
@@ -25,6 +26,7 @@ const Palette_ = props => {
   };
 
   const createColorBlocks = () => {
+    console.log("sdfs")
     let colorArray = [];
     for (let i = 0; i < props.selectorCount; i++) {
       colorArray.push(
@@ -43,8 +45,8 @@ const Palette_ = props => {
     return colorArray;
   };
   /*
-  useEffect(() =>{
-    let colorBlockRefs = colorContainer.current.children;
+  useLayoutEffect(() =>{
+    let colorBlockRefs = props.paletteRef.current.children;
     for (let i = 0; i < props.selectorCount; i++) {
       colorBlockRefs[i].style.backgroundColor = props.colors[i];
       colorBlockRefs[i].style.color =
@@ -55,9 +57,13 @@ const Palette_ = props => {
     }
   },[props.colors])
   */
+const renderColorBlocks = props.colors.map((color, i) => (
+  <ColorBlock color={color} key={i} />
+))
+
   return (
     <div className="colors-container" ref={props.paletteRef}>
-      {createColorBlocks()}
+      {renderColorBlocks}
     </div>
   );
 };
