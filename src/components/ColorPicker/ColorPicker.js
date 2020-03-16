@@ -1,148 +1,30 @@
 import React, { useEffect, useState, useRef } from "react";
-import ColorWheel from "./ColorWheel";
+import ColorWheel from "../ColorWheel/ColorWheel";
+import Controls from "../Controls/Controls";
+import Palette from "../Palette/Palette"
 import "./ColorPicker.scss";
 import copy from "copy-to-clipboard";
 import { connect } from "react-redux";
-import {
-  storeLightness,
-  storeSaturation,
-  storeSelectorCount,
-  resetState,
-  setLinkedState,
-} from "../../redux/actions/actions";
 
 const ColorPicker_ = props => {
   const colorContainer = useRef(null);
-
+  
   const copyAllColors = () => {
     copy(props.colors);
   };
 
-  const displayCopyPrompt = event => {
-    let color = event.target.value;
-    event.target.value = "Click to copy";
-    event.target.addEventListener(
-      "mouseleave",
-      event => {
-        event.target.value = color;
-      },
-      { once: true }
-    );
-    event.target.addEventListener(
-      "click",
-      () => {
-        copy(color);
-      },
-      { once: true }
-    );
-  };
-
-  const createColorBlocks = () => {
-    let colorArray = [];
-    for (let i = 0; i < props.selectorCount; i++) {
-      colorArray.push(
-        <input
-          type="button"
-          className="color-block"
-          style={{
-            height: 20 + 100 / props.selectorCount,
-            color: props.lightness < 50 ? "#bdbdbd" : "#404040"
-          }}
-          key={i}
-          onMouseEnter={e => displayCopyPrompt(e)}
-        />
-      );
-    }
-    return colorArray;
-  };
-
   return (
-    <div
-      className={`color-picker-container ${props.darkMode ? "dark" : ""}`}
-    >
-      <ColorWheel
-        colorsContainer={colorContainer}
-      />
+    <div className={`color-picker-container ${props.darkMode ? "dark" : ""}`}>
+      <ColorWheel colorsContainer={colorContainer} />
       <div className="boxes">
-        <div className={`color-picker-controls ${props.darkMode ? "dark" : ""}`}>
-          <div className="control-container">
-            <p className="control-label">Lightness: {props.lightness}%</p>
-            <input
-              type="range"
-              className="set-light"
-              min={10}
-              max={90}
-              step={5}
-              value={props.lightness}
-              onChange={val => {
-                props.storeLightness(val.target.value);
-              }}
-            />
-          </div>
-          <div className="control-container">
-            <p className="control-label">Saturation: {props.saturation}%</p>
-            <input
-              type="range"
-              className="set-light"
-              min={10}
-              max={100}
-              step={5}
-              value={props.saturation}
-              onChange={val => {
-                props.storeSaturation(val.target.value);
-              }}
-            />
-          </div>
-          <div className="control-container">
-            <p className="control-label">
-              Number of selectors: {props.selectorCount}
-            </p>
-            <input
-              type="range"
-              className="set-light"
-              min={1}
-              max={15}
-              step={1}
-              value={props.selectorCount}
-              onChange={val => {
-                props.storeSelectorCount(val.target.value);
-              }}
-            />
-          </div>
-          <div className="control-container ">
-            <button
-              className={`button ${
-                props.linked ? "linked-true" : "linked-false"
-              } ${props.darkMode ? "dark" : ""}`}
-              type="button"
-              onClick={() => {
-                props.setLinkedState();
-              }}
-            >
-              {props.linked ? "Unlink" : "Link"}
-            </button>
-            <button
-              className={`button ${props.darkMode ? "dark" : ""}`}
-              type="button"
-              onClick={() => {
-                props.resetState();
-              }}
-            >
-              Reset
-            </button>
-          </div>
-        </div>
+        <Controls />
         <div className={`colors-wrapper ${props.darkMode ? "dark" : ""}`}>
-          <div className="colors-container" ref={colorContainer}>
-            {createColorBlocks()}
-          </div>
+          <Palette paletteRef={colorContainer} />
           <div className="control-container">
             <button
               className={`button ${props.darkMode ? "dark" : ""}`}
               type="button"
-              onClick={() => {
-                copyAllColors();
-              }}
+              onClick={() => { copyAllColors(); }}
             >
               Copy all
             </button>
@@ -164,14 +46,6 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = {
-  storeLightness,
-  storeSaturation,
-  storeSelectorCount,
-  resetState,
-  setLinkedState,
-};
-
-const ColorPicker = connect(mapStateToProps, mapDispatchToProps)(ColorPicker_);
+const ColorPicker = connect(mapStateToProps)(ColorPicker_);
 
 export default ColorPicker;

@@ -1,6 +1,6 @@
 import React, {useLayoutEffect, useRef, useState } from "react";
 import { connect } from 'react-redux';
-import Selectors from "./Selectors";
+import Selectors from "../Selectors/Selectors";
 import * as xLUT from "./xLUT.json";
 import * as yLUT from "./yLUT.json";
 

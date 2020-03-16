@@ -28,7 +28,7 @@ const Selectors_ = props => {
       circleRefs[key].style.stroke = "#4d4d4d";
     }
     props.storeColor(pixelColor, key)
-    colorBlockRefs[key].style.backgroundColor = pixelColor;
+   colorBlockRefs[key].style.backgroundColor = pixelColor;
     colorBlockRefs[key].style.color =
       props.lightness < 50 ? "#d4d4d4" : "#404040";
     colorBlockRefs[key].style.height =

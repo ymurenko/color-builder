@@ -13,7 +13,7 @@ const initialState = {
 export const actionReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_COLOR":
-      let CURRENT_COLORS =  state.COLORS;
+      let CURRENT_COLORS =  [...state.COLORS];
       CURRENT_COLORS[action.INDEX] = action.COLOR
       return {
         ...state,
