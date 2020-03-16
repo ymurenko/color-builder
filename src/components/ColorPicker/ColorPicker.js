@@ -1,17 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 import ColorWheel from "../ColorWheel/ColorWheel";
 import Controls from "../Controls/Controls";
 import Palette from "../Palette/Palette"
 import "./ColorPicker.scss";
 import copy from "copy-to-clipboard";
 import { connect } from "react-redux";
+import { store } from "../../redux/reducers/reducers"
 
 const ColorPicker_ = props => {
   const colorContainer = useRef(null);
-  /*
   const copyAllColors = () => {
-    copy(props.colors);
-  };*/
+    console.log(store.getState())
+    copy(store.getState().actionReducer.COLORS);
+  };
 
   return (
     <div className={`color-picker-container ${props.darkMode ? "dark" : ""}`}>
@@ -24,7 +25,7 @@ const ColorPicker_ = props => {
             <button
               className={`button ${props.darkMode ? "dark" : ""}`}
               type="button"
-              onClick={() => { /*copyAllColors(); */}}
+              onClick={() => { copyAllColors(); }}
             >
               Copy all
             </button>
@@ -42,7 +43,6 @@ function mapStateToProps(state) {
     selectorCount: state.actionReducer.SELECTOR_COUNT,
     linked: state.actionReducer.LINKED,
     darkMode: state.actionReducer.DARK_MODE,
-   // colors: state.actionReducer.COLORS
   };
 }
 

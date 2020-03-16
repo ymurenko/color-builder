@@ -28,16 +28,6 @@ const Selectors_ = props => {
     }
 
     props.storeColor(pixelColor, key);
-    /*
-
-    //set palette colors directly for performance:
-    colorBlockRefs[key].style.backgroundColor = pixelColor;
-    colorBlockRefs[key].style.color =
-      props.lightness < 50 ? "#d4d4d4" : "#404040";
-    colorBlockRefs[key].style.height = 20 + 100 / props.selectorCount;
-    colorBlockRefs[key].value = pixelColor;
-    
-    */
   };
 
   const createCircles = () => {

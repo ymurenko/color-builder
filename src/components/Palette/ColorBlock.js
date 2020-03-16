@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useRef } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import copy from "copy-to-clipboard";
 

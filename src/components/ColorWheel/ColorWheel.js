@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useRef, useState } from "react";
+import React, {useLayoutEffect, useRef } from "react";
 import { connect } from 'react-redux';
 import Selectors from "../Selectors/Selectors";
 import * as xLUT from "./xLUT.json";
