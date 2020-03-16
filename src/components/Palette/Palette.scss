@@ -8,23 +8,16 @@
     width: 300px;
     margin: 10px 25px;
     padding: 25px;
+    height: 400px;
     background-color: $color-secondary;
     border-radius: 25px;
     box-shadow: 0 0px 15px 0 #a1a1a1;
     .colors-container {
+      height: 350px;
       border-radius: 10px;
       overflow: hidden;
     }
-    .color-block {
-      cursor: pointer;
-      border: none;
-      background-color: #fff;
-      width: 100%;
-      font-family: Verdana;
-      font-weight: 400;
-      font-size: 1.1rem;
-      color: filter
-    }
+
     .control-container {
       margin-top: 10px;
     }

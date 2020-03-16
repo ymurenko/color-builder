@@ -48,7 +48,7 @@ const Controls_ = props => {
               type="range"
               className="set-light"
               min={1}
-              max={15}
+              max={10}
               step={1}
               value={props.selectorCount}
               onChange={val => {

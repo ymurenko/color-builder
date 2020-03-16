@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import ColorBlock from "./ColorBlock";
+import ColorBlock from "../ColorBlock/ColorBlock";
 import "./Palette.scss"
 
 const Palette_ = props => {
