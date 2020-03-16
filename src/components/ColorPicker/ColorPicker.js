@@ -10,7 +10,6 @@ import { store } from "../../redux/reducers/reducers"
 const ColorPicker_ = props => {
   const colorContainer = useRef(null);
   const copyAllColors = () => {
-    console.log(store.getState())
     copy(store.getState().actionReducer.COLORS);
   };
 

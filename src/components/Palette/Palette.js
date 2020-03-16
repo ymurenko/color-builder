@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import ColorBlock from "./ColorBlock";
+import "./Palette.scss"
 
 const Palette_ = props => {
   const renderColorBlocks = props.colors.map((color, i) => (

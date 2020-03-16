@@ -7,6 +7,7 @@ import {
   resetState,
   setLinkedState,
 } from "../../redux/actions/actions";
+import "./Controls.scss"
 
 const Controls_ = props => {
     return (

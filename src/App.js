@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { setDarkMode } from "./redux/actions/actions";
 import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 import ColorPicker from "./components/ColorPicker/ColorPicker";
 
 const App_ = (props) => {
