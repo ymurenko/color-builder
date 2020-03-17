@@ -21,9 +21,11 @@
 }
 
 .color-picker-container {
-  width: auto;
+  display: block;
+  width: 1500px;
   height: auto;
   margin: auto;
+  text-align: center;
   background-color: $color-primary;
   .gradient {
     float: left;

@@ -4,6 +4,7 @@
   background-color: $color-primary;
   color: $secondary-font-color;
   height: 100vh;
+  width: 100vw;
   &.dark {
     background-color: $color-primary-dark;
     color: $secondary-font-color-dark
