@@ -13,10 +13,7 @@
   color: inherit;
   background-color: $color-primary;
   &.set-dark{
-    position: absolute;
-    left: 0px;
-    width: 120px;
-    font-size: 1.2rem
+    margin: 0 0 20px ;
   }
   &.dark {
     background-color: $color-primary-dark;

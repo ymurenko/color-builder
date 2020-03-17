@@ -34,7 +34,7 @@ const Palette_ = props => {
       </div>
       <div className="control-container">
         <button
-          className={`button ${props.hash ? "" : "active"} ${
+          className={`button ${props.hash ? "active" : ""} ${
             props.darkMode ? "dark" : ""
           }`}
           type="button"
@@ -42,10 +42,10 @@ const Palette_ = props => {
             props.setHash();
           }}
         >
-          Without Hash
+          Hash
         </button>
         <button
-          className={`button ${props.quotes ? "" : "active"} ${
+          className={`button ${props.quotes ? "active" : ""} ${
             props.darkMode ? "dark" : ""
           }`}
           type="button"
@@ -53,7 +53,7 @@ const Palette_ = props => {
             props.setQuotes();
           }}
         >
-          Without Quotes
+          Quotes
         </button>
       </div>
       <div className="control-container">

@@ -5,7 +5,7 @@ import "./ColorBlock.scss";
 
 const ColorBlock_ = (props) => {
   const hover = useRef(null)
-  let height = 350 / props.selectorCount
+  let height = 400 / props.selectorCount
   let textColor = props.lightness < 50 ? "#bdbdbd" : "#404040";
   let accentColor = props.lightness < 50 ? "#404040" :  "hsla(0,0%,100%,0.8)";
   return (
