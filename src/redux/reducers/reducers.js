@@ -5,6 +5,7 @@ const initialState = {
   LIGHTNESS: 50,
   SATURATION: 100,
   SELECTOR_COUNT: 4,
+  SELECTOR_RAD: 180,
   LINKED: false,
   DARK_MODE: false,
   HASH: true,
@@ -40,10 +41,10 @@ export const actionReducer = (state = initialState, action) => {
         COLORS: NEW_COLORS,
         SELECTOR_COUNT: action.SELECTOR_COUNT
       };
-      case "SET_LIGHTNESS":
+      case "SET_SELECTOR_RAD":
       return {
         ...state,
-        SELECTOR_SPACE: action.SELECTOR_SPACE
+        SELECTOR_RAD: action.SELECTOR_RAD
       };
     case "SET_LINKED":
       return {

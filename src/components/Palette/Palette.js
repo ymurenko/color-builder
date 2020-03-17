@@ -77,7 +77,8 @@ function mapStateToProps(state) {
     lightness: state.actionReducer.LIGHTNESS,
     colors: state.actionReducer.COLORS,
     hash: state.actionReducer.HASH,
-    quotes: state.actionReducer.QUOTES
+    quotes: state.actionReducer.QUOTES,
+    darkMode: state.actionReducer.DARK_MODE
   };
 }
 

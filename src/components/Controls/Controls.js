@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  storeLightness,
-  storeSaturation,
-  storeSelectorCount,
+  setLightness,
+  setSaturation,
+  setSelectorCount,
   resetState,
   setLinkedState,
+  setSelectorRad
 } from "../../redux/actions/actions";
 import "./Controls.scss"
 
@@ -22,7 +23,7 @@ const Controls_ = props => {
               step={5}
               value={props.lightness}
               onChange={val => {
-                props.storeLightness(val.target.value);
+                props.setLightness(val.target.value);
               }}
             />
           </div>
@@ -36,7 +37,7 @@ const Controls_ = props => {
               step={5}
               value={props.saturation}
               onChange={val => {
-                props.storeSaturation(val.target.value);
+                props.setSaturation(val.target.value);
               }}
             />
           </div>
@@ -52,7 +53,23 @@ const Controls_ = props => {
               step={1}
               value={props.selectorCount}
               onChange={val => {
-                props.storeSelectorCount(val.target.value);
+                props.setSelectorCount(val.target.value);
+              }}
+            />
+          </div>
+          <div className="control-container">
+            <p className="control-label">
+              Selector Spacing: {(Math.round(props.selectorRad/props.selectorCount*10)/10).toFixed(1)}º
+            </p>
+            <input
+              type="range"
+              className="slider"
+              min={10}
+              max={360}
+              step={1}
+              value={props.selectorRad}
+              onChange={val => {
+                props.setSelectorRad(val.target.value);
               }}
             />
           </div>
@@ -87,17 +104,19 @@ function mapStateToProps(state) {
       lightness: state.actionReducer.LIGHTNESS,
       saturation: state.actionReducer.SATURATION,
       selectorCount: state.actionReducer.SELECTOR_COUNT,
+      selectorRad: state.actionReducer.SELECTOR_RAD,
       linked: state.actionReducer.LINKED,
       darkMode: state.actionReducer.DARK_MODE,
     };
   }
   
   const mapDispatchToProps = {
-    storeLightness,
-    storeSaturation,
-    storeSelectorCount,
+    setLightness,
+    setSaturation,
+    setSelectorCount,
     resetState,
     setLinkedState,
+    setSelectorRad
   };
   
   const Controls

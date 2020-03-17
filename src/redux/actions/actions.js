@@ -3,17 +3,17 @@
 export const storeColor = (val, index) => (
   { type: 'SET_COLOR', COLOR: val, INDEX: index }
 )
-export const storeLightness = (val) => (
+export const setLightness = (val) => (
   { type: 'SET_LIGHTNESS', LIGHTNESS: val }
 )
-export const storeSaturation = (val) => (
+export const setSaturation = (val) => (
   { type: 'SET_SATURATION', SATURATION: val }
 )
-export const storeSelectorCount = (val) => (
+export const setSelectorCount = (val) => (
   { type: 'SET_SELECTOR_COUNT', SELECTOR_COUNT: val }
 )
-export const storeSelectorSpace = (val) => (
-  { type: 'SET_SELECTOR_SPACE', SELECTOR_SPACE: val }
+export const setSelectorRad = (val) => (
+  { type: 'SET_SELECTOR_RAD', SELECTOR_RAD: val }
 )
 export const setLinkedState = () => (
   { type: 'SET_LINKED' }
