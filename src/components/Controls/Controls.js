@@ -6,7 +6,8 @@ import {
   setSelectorCount,
   resetState,
   setLinkedState,
-  setSelectorRad,
+  setSelectorAngle,
+  setSelectorRadius,
   setDarkMode
 } from "../../redux/actions/actions";
 import "./Controls.scss";
@@ -55,7 +56,7 @@ const Controls_ = props => {
       </div>
       <div className="control-container">
         <p className="control-label">
-          Number of selectors: {props.selectorCount}
+          Number of Points: {props.selectorCount}
         </p>
         <input
           type="range"
@@ -71,9 +72,9 @@ const Controls_ = props => {
       </div>
       <div className="control-container">
         <p className="control-label">
-          Selector Spacing:{" "}
+          Point Spacing Angle:{" "}
           {(
-            Math.round((props.selectorRad / props.selectorCount) * 10) / 10
+            Math.round((props.selectorAngle / props.selectorCount) * 10) / 10
           ).toFixed(1)}
           º
         </p>
@@ -83,13 +84,32 @@ const Controls_ = props => {
           min={10}
           max={360}
           step={1}
-          value={props.selectorRad}
+          value={props.selectorAngle}
           onChange={val => {
-            props.setSelectorRad(val.target.value);
+            props.setSelectorAngle(val.target.value);
           }}
         />
       </div>
-      <div className="control-container ">
+      <div className="control-container">
+        <p className="control-label">
+          Distance from Origin:{" "}
+          {(
+            Math.round((props.selectorRadius / 236) * 1000) / 10
+          ).toFixed(0)}
+        </p>
+        <input
+          type="range"
+          className="slider"
+          min={1}
+          max={236}
+          step={1}
+          value={props.selectorRadius}
+          onChange={val => {
+            props.setSelectorRadius(val.target.value);
+          }}
+        />
+      </div>
+      <div className="control-container" style={{marginTop: '25px'}}>
         <button
           className={`button ${props.linked ? "active" : ""} ${
             props.darkMode ? "dark" : ""
@@ -120,7 +140,8 @@ function mapStateToProps(state) {
     lightness: state.actionReducer.LIGHTNESS,
     saturation: state.actionReducer.SATURATION,
     selectorCount: state.actionReducer.SELECTOR_COUNT,
-    selectorRad: state.actionReducer.SELECTOR_RAD,
+    selectorAngle: state.actionReducer.SELECTOR_ANGLE,
+    selectorRadius: state.actionReducer.SELECTOR_RADIUS,
     linked: state.actionReducer.LINKED,
     darkMode: state.actionReducer.DARK_MODE
   };
@@ -132,7 +153,8 @@ const mapDispatchToProps = {
   setSelectorCount,
   resetState,
   setLinkedState,
-  setSelectorRad,
+  setSelectorAngle,
+  setSelectorRadius,
   setDarkMode
 };
 

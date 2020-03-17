@@ -1,8 +1,8 @@
 import React, { useEffect, useLayoutEffect, useRef, createRef } from "react";
-import useDidMountEffect from '../../util/useDidMountEffect'
+import useDidMountEffect from "../../util/useDidMountEffect";
 
 import { connect } from "react-redux";
-import { storeColor, setSelectorRad } from "../../redux/actions/actions";
+import { storeColor } from "../../redux/actions/actions";
 
 const Selectors_ = props => {
   const svg = useRef(null);
@@ -11,7 +11,7 @@ const Selectors_ = props => {
   let circleRefs = null;
   let circleCoordinates = [];
   let currentActiveCircle = null;
-  let totalRadians = props.selectorRad;
+  let firstCircleAngle = 0;
 
   const setColor = (x, y, key) => {
     let pixel = canvas.current.getContext("2d").getImageData(x, y, 1, 1).data;
@@ -33,12 +33,12 @@ const Selectors_ = props => {
 
   const createCircles = () => {
     let elements = [];
-    let radOffset = 0;
+    let radOffset = firstCircleAngle;
     let radIncrement =
-      Math.round(props.selectorRad / props.selectorCount) * (Math.PI / 180);
+      Math.round(props.selectorAngle / props.selectorCount) * (Math.PI / 180);
     for (let i = 0; i < props.selectorCount; i++) {
-      let x = 250 + 200 * Math.cos(radOffset);
-      let y = 250 + 200 * Math.sin(radOffset);
+      let x = 250 + props.selectorRadius * Math.cos(radOffset);
+      let y = 250 + props.selectorRadius * Math.sin(radOffset);
       elements.push(
         <circle
           cx={x}
@@ -65,10 +65,16 @@ const Selectors_ = props => {
     let x0 = circleRefs[0].getAttribute("cx");
     let y0 = circleRefs[0].getAttribute("cy");
     let radius = Math.sqrt((250 - x0) * (250 - x0) + (250 - y0) * (250 - y0));
+    let dx = 250;
+    let dy = 0;
+    let d0x = x0 - 250;
+    let d0y = y0 - 250;
+    let angle = Math.atan2(d0y, d0x) - Math.atan2(dy, dx);
     mathVars.push({
-      angle: 0,
+      angle: angle,
       radius: radius
     });
+    firstCircleAngle = angle;
     for (let i = 1; i < props.selectorCount; i++) {
       let x1 = circleRefs[i - 1].getAttribute("cx");
       let y1 = circleRefs[i - 1].getAttribute("cy");
@@ -87,7 +93,6 @@ const Selectors_ = props => {
         angle: angle,
         radius: radius
       });
-      totalRadians += angle;
     }
     return mathVars;
   };
@@ -106,8 +111,11 @@ const Selectors_ = props => {
     let mouseY = event.pageY - canvas.current.offsetTop;
     let x0 = circleRefs[0].getAttribute("cx");
     let y0 = circleRefs[0].getAttribute("cy");
+    let d0x = x0 - 250;
+    let d0y = y0 - 250;
+    let radsFromMouse = Math.atan2(d0y, d0x);
     let radsOffset = 0;
-
+    
     if (isInCircle(mouseX, mouseY)) {
       circleRefs[0].setAttribute("cx", `${mouseX}`);
       circleRefs[0].setAttribute("cy", `${mouseY}`);
@@ -119,9 +127,7 @@ const Selectors_ = props => {
 
         let x = circleRefs[i].getAttribute("cx");
         let y = circleRefs[i].getAttribute("cy");
-        let d0x = x0 - 250;
-        let d0y = y0 - 250;
-        let radsFromMouse = Math.atan2(d0y, d0x);
+
         let angle = radsOffset + radsFromMouse;
         let radius =
           circleCoordinates[i].radius -
@@ -146,7 +152,6 @@ const Selectors_ = props => {
       currentActiveCircle.setAttribute("cx", `${mouseX}`);
       currentActiveCircle.setAttribute("cy", `${mouseY}`);
       setColor(mouseX, mouseY, currentActiveCircle.id);
-      getPointMath();
     }
   };
 
@@ -157,6 +162,7 @@ const Selectors_ = props => {
     } else {
       svg.current.removeEventListener("mousemove", addMouseTrackerLinked);
     }
+    circleCoordinates = getPointMath();
   };
 
   const handleMouseDown = e => {
@@ -166,20 +172,43 @@ const Selectors_ = props => {
     } else {
       svg.current.addEventListener("mousemove", addMouseTrackerLinked);
     }
+    circleCoordinates = getPointMath();
   };
 
   useEffect(() => {
-    let radOffset = 0;
+    let radOffset = firstCircleAngle;
     //createCircles();
-    let radIncrement = Math.round(props.selectorRad / props.selectorCount) * (Math.PI / 180);
+    let radIncrement =
+      Math.round(props.selectorAngle / props.selectorCount) * (Math.PI / 180);
     for (let i = 0; i < props.selectorCount; i++) {
-      let x = 250 + 200 * Math.cos(radOffset);
-      let y = 250 + 200 * Math.sin(radOffset);
+      let x = 250 + props.selectorRadius * Math.cos(radOffset);
+      let y = 250 + props.selectorRadius * Math.sin(radOffset);
       circleRefs[i].setAttribute("cx", `${x}`);
       circleRefs[i].setAttribute("cy", `${y}`);
       radOffset += radIncrement;
     }
-  }, [props.reset, props.selectorCount]);
+  }, [
+    props.reset,
+    props.selectorCount,
+    props.selectorRadius
+  ]);
+
+  useEffect(() => {
+    let radOffset = circleCoordinates[0].angle;
+    //createCircles();
+    let radIncrement =
+      Math.round(props.selectorAngle / props.selectorCount) * (Math.PI / 180);
+    for (let i = 0; i < props.selectorCount; i++) {
+      let x = 250 + circleCoordinates[0].radius * Math.cos(radOffset);
+      let y = 250 + circleCoordinates[0].radius * Math.sin(radOffset);
+      circleRefs[i].setAttribute("cx", `${x}`);
+      circleRefs[i].setAttribute("cy", `${y}`);
+      radOffset += radIncrement;
+    }
+  }, [
+    props.selectorAngle
+  ]);
+
 
   useEffect(() => {
     for (let i = 0; i < props.selectorCount; i++) {
@@ -210,7 +239,8 @@ const Selectors_ = props => {
 function mapStateToProps(state) {
   return {
     selectorCount: state.actionReducer.SELECTOR_COUNT,
-    selectorRad: state.actionReducer.SELECTOR_RAD,
+    selectorAngle: state.actionReducer.SELECTOR_ANGLE,
+    selectorRadius: state.actionReducer.SELECTOR_RADIUS,
     lightness: state.actionReducer.LIGHTNESS,
     saturation: state.actionReducer.SATURATION,
     linked: state.actionReducer.LINKED,
@@ -219,8 +249,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  storeColor,
-  setSelectorRad
+  storeColor
 };
 
 const Selectors = connect(mapStateToProps, mapDispatchToProps)(Selectors_);

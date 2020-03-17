@@ -1,11 +1,12 @@
 import { combineReducers, createStore } from "redux";
 
 const initialState = {
-  COLORS: ['#FFF','#FFF','#FFF'],
+  COLORS: ["#FFF", "#FFF", "#FFF"],
   LIGHTNESS: 50,
   SATURATION: 100,
   SELECTOR_COUNT: 4,
-  SELECTOR_RAD: 180,
+  SELECTOR_ANGLE: 180,
+  SELECTOR_RADIUS: 200,
   LINKED: false,
   DARK_MODE: false,
   HASH: true,
@@ -16,8 +17,8 @@ const initialState = {
 export const actionReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_COLOR":
-      let CURRENT_COLORS =  [...state.COLORS];
-      CURRENT_COLORS[action.INDEX] = action.COLOR
+      let CURRENT_COLORS = [...state.COLORS];
+      CURRENT_COLORS[action.INDEX] = action.COLOR;
       return {
         ...state,
         COLORS: CURRENT_COLORS
@@ -35,16 +36,21 @@ export const actionReducer = (state = initialState, action) => {
     case "SET_SELECTOR_COUNT":
       let NEW_COLORS = [];
       NEW_COLORS.length = action.SELECTOR_COUNT;
-      NEW_COLORS.fill('#FFF')
+      NEW_COLORS.fill("#FFF");
       return {
         ...state,
         COLORS: NEW_COLORS,
         SELECTOR_COUNT: action.SELECTOR_COUNT
       };
-      case "SET_SELECTOR_RAD":
+    case "SET_SELECTOR_ANGLE":
       return {
         ...state,
-        SELECTOR_RAD: action.SELECTOR_RAD
+        SELECTOR_ANGLE: action.SELECTOR_ANGLE
+      };
+    case "SET_SELECTOR_RADIUS":
+      return {
+        ...state,
+        SELECTOR_RADIUS: action.SELECTOR_RADIUS
       };
     case "SET_LINKED":
       return {
@@ -56,17 +62,17 @@ export const actionReducer = (state = initialState, action) => {
         ...state,
         DARK_MODE: !state.DARK_MODE
       };
-      case "SET_DARK_MODE":
+    case "SET_DARK_MODE":
       return {
         ...state,
         DARK_MODE: !state.DARK_MODE
       };
-      case "SET_HASH":
+    case "SET_HASH":
       return {
         ...state,
         HASH: !state.HASH
       };
-      case "SET_QUOTES":
+    case "SET_QUOTES":
       return {
         ...state,
         QUOTES: !state.QUOTES

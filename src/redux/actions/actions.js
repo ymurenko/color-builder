@@ -12,8 +12,11 @@ export const setSaturation = (val) => (
 export const setSelectorCount = (val) => (
   { type: 'SET_SELECTOR_COUNT', SELECTOR_COUNT: val }
 )
-export const setSelectorRad = (val) => (
-  { type: 'SET_SELECTOR_RAD', SELECTOR_RAD: val }
+export const setSelectorAngle = (val) => (
+  { type: 'SET_SELECTOR_ANGLE', SELECTOR_ANGLE: val }
+)
+export const setSelectorRadius = (val) => (
+  { type: 'SET_SELECTOR_RADIUS', SELECTOR_RADIUS: val }
 )
 export const setLinkedState = () => (
   { type: 'SET_LINKED' }
