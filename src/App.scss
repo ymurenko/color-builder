@@ -1,0 +1,11 @@
+@import "Globals.scss";
+
+.App {
+  background-color: $color-primary;
+  color: $secondary-font-color;
+  height: 100vh;
+  &.dark {
+    background-color: $color-primary-dark;
+    color: $secondary-font-color-dark
+  }
+}

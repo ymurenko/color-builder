@@ -1,6 +1,6 @@
-import React, {useLayoutEffect, useRef, useState } from "react";
+import React, {useLayoutEffect, useRef } from "react";
 import { connect } from 'react-redux';
-import Selectors from "./Selectors";
+import Selectors from "../Selectors/Selectors";
 import * as xLUT from "./xLUT.json";
 import * as yLUT from "./yLUT.json";
 
@@ -12,20 +12,21 @@ const ColorWheel_ = props => {
     canvasContext.clearRect(0, 0, 500, 500);
     for (var i = 0; i < 3600; i += 1) {
       let value = i / 10;
+      canvasContext.beginPath();
       let gradient = canvasContext.createLinearGradient(
         250,
         250,
         xLUT.default[value],
         yLUT.default[value]
       );
-
+      
       gradient.addColorStop("0", `${props.lightness > 45 ? "white" : "black"}`);
       gradient.addColorStop("0.95", `hsl(${value}, ${props.saturation}%, ${props.lightness}%)`);
       gradient.addColorStop("0.95", `${ props.darkMode ? '#262626': '#bdbdbd'}`);
       gradient.addColorStop("1", `${ props.darkMode ? '#333333': '#e3e3e3'}`);
    
       canvasContext.strokeStyle = gradient;
-      canvasContext.beginPath();
+      
       canvasContext.moveTo(250, 250);
       canvasContext.lineTo(xLUT.default[value], yLUT.default[value]);
       canvasContext.stroke();

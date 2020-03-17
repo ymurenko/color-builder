@@ -1,25 +1,4 @@
-$secondary-font-size: 1rem;
-$secondary-font-weight: 400;
-$secondary-font-color: #404040;
-$font-family: "Verdana";
-
-$secondary-font-color-dark: #bdbdbd;
-
-$color-primary: #e3e3e3;
-$color-secondary: #d4d4d4;
-
-$color-secondary-dark: #292929;
-$color-primary-dark: #333333;
-
-.App {
-  background-color: $color-primary;
-  color: $secondary-font-color;
-  height: 100vh;
-  &.dark {
-    background-color: $color-primary-dark;
-    color: $secondary-font-color-dark
-  }
-}
+@import "../../Globals.scss";
 
 .button {
   cursor: pointer;
@@ -45,91 +24,33 @@ $color-primary-dark: #333333;
 }
 
 .color-picker-container {
-  width: 1000px;
+  width: auto;
   height: auto;
   margin: auto;
   background-color: $color-primary;
   .gradient {
     float: left;
-    padding: 50px;
+    padding: 0 50px;
     .selector {
       position: absolute;
     }
   }
-  .color-picker-controls {
-    font-size: $secondary-font-size;
-    font-weight: $secondary-font-weight;
-    font-family: $font-family;
-    display: grid;
-    float: left;
-    width: 300px;
-    height: auto;
-    margin: 0 25px 10px;
-    padding: 25px;
-    background-color: $color-secondary;
-    border-radius: 25px;
-    box-shadow: 0 0px 15px 0 #a1a1a1;
-    .control-container {
-      margin:  0;
-      .button {
-        margin: 10px 10px 0;
-        &.linked-true {
-          border: solid 2px $secondary-font-color;
-          padding: 3px 0;
-          &.dark {
-            border-color: $color-primary;
-          }
-        }
-      }
-      input {
-        width: 100%;
-      }
-    }
-    .control-label {
-      margin: 0;
-    }
-    &.dark {
-      background-color: $color-secondary-dark;
-      box-shadow: 0 0px 15px 0 #111111;
-    }
-  }
+  
   &.dark {
     background-color: $color-primary-dark;
   }
 }
 
-.colors-wrapper {
-  display: grid;
-  float: left;
-  width: 300px;
-  margin: 10px 25px;
-  padding: 25px;
-  background-color: $color-secondary;
-  border-radius: 25px;
-  box-shadow: 0 0px 15px 0 #a1a1a1;
-  .colors-container {
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .color-block {
-    cursor: pointer;
-    border: none;
-    background-color: #fff;
-    width: 100%;
-    font-family: Verdana;
-    font-weight: 400;
-    font-size: 1.1rem;
-    color: filter
-  }
-  .control-container {
-    margin-top: 10px;
-  }
-  &.dark {
-    background-color: $color-secondary-dark;
-    box-shadow: 0 0px 15px 0 #111111;
-  }
-}
-
 .boxes {
   padding-top: 50px;
+}
+
+.container-h {
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
 }
