@@ -24,13 +24,13 @@
 }
 
 .color-picker-container {
-  width: 1000px;
+  width: auto;
   height: auto;
   margin: auto;
   background-color: $color-primary;
   .gradient {
     float: left;
-    padding: 50px;
+    padding: 0 50px;
     .selector {
       position: absolute;
     }
@@ -43,4 +43,14 @@
 
 .boxes {
   padding-top: 50px;
+}
+
+.container-h {
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
 }

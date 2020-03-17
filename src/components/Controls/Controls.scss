@@ -1,40 +1,43 @@
 @import "../../Globals.scss";
 
 .color-picker-controls {
-    text-align: center;
-    font-size: $secondary-font-size;
-    font-weight: $secondary-font-weight;
-    font-family: $font-family;
-    display: grid;
-    float: left;
-    width: 300px;
-    height: auto;
-    margin: 0 25px 10px;
-    padding: 25px;
-    background-color: $color-secondary;
-    border-radius: 25px;
-    box-shadow: 0 0px 15px 0 #a1a1a1;
-    .control-container {
-      margin:  0;
-      .button {
-        margin: 10px 10px 0;
-        &.linked-true {
-          border: solid 2px $secondary-font-color;
-          padding: 3px 0;
-          &.dark {
-            border-color: $color-primary;
-          }
-        }
+  display: grid;
+  float: left;
+  width: 300px;
+  height: auto;
+  margin: 0 25px 10px;
+  padding: 25px;
+  background-color: $color-secondary;
+  border-radius: 25px;
+  box-shadow: 0 0px 15px 0 #a1a1a1;
+
+  &.dark {
+    background-color: $color-secondary-dark;
+    box-shadow: 0 0px 15px 0 #111111;
+  }
+}
+
+.control-container {
+  text-align: center;
+  font-size: $secondary-font-size;
+  font-weight: $secondary-font-weight;
+  font-family: $font-family;
+  margin: 0;
+  .button {
+    margin: 10px 10px 0;
+    &.active {
+      border: solid 2px $secondary-font-color;
+      padding: 3px 0;
+      &.dark {
+        border-color: $color-primary;
       }
-      input {
-        width: 100%;
-      }
-    }
-    .control-label {
-      margin: 0;
-    }
-    &.dark {
-      background-color: $color-secondary-dark;
-      box-shadow: 0 0px 15px 0 #111111;
     }
   }
+  .slider {
+    width: 100%;
+  }
+}
+
+.control-label {
+  margin: 0;
+}

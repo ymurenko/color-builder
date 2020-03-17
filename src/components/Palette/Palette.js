@@ -1,16 +1,72 @@
 import React from "react";
+import copy from "copy-to-clipboard";
 import { connect } from "react-redux";
+import { store } from "../../redux/reducers/reducers";
 import ColorBlock from "../ColorBlock/ColorBlock";
-import "./Palette.scss"
+import { setQuotes, setHash } from "../../redux/actions/actions";
+import "./Palette.scss";
+import "../../Globals.scss";
 
 const Palette_ = props => {
+  const copyAllColors = () => {
+    let colorArr = [...store.getState().actionReducer.COLORS];
+
+    for (let i = 0; i < colorArr.length; i++) {
+      if(!props.hash){
+        colorArr[i] = colorArr[i].substr(1)
+      }
+      if(props.quotes){
+        colorArr[i] = `'${colorArr[i]}'`
+      }
+    }
+
+    copy(colorArr);
+  };
+
   const renderColorBlocks = props.colors.map((color, i) => (
     <ColorBlock color={color} key={i} />
   ));
 
   return (
-    <div className="colors-container" ref={props.paletteRef}>
-      {renderColorBlocks}
+    <div className={`colors-wrapper ${props.darkMode ? "dark" : ""}`}>
+      <div className="colors-container" ref={props.paletteRef}>
+        {renderColorBlocks}
+      </div>
+      <div className="control-container">
+        <button
+          className={`button ${props.hash ? "" : "active"} ${
+            props.darkMode ? "dark" : ""
+          }`}
+          type="button"
+          onClick={() => {
+            props.setHash();
+          }}
+        >
+          Without Hash
+        </button>
+        <button
+          className={`button ${props.quotes ? "" : "active"} ${
+            props.darkMode ? "dark" : ""
+          }`}
+          type="button"
+          onClick={() => {
+            props.setQuotes();
+          }}
+        >
+          Without Quotes
+        </button>
+      </div>
+      <div className="control-container">
+        <button
+          className={`button ${props.darkMode ? "dark" : ""}`}
+          type="button"
+          onClick={() => {
+            copyAllColors();
+          }}
+        >
+          Copy all
+        </button>
+      </div>
     </div>
   );
 };
@@ -19,10 +75,17 @@ function mapStateToProps(state) {
   return {
     selectorCount: state.actionReducer.SELECTOR_COUNT,
     lightness: state.actionReducer.LIGHTNESS,
-    colors: state.actionReducer.COLORS
+    colors: state.actionReducer.COLORS,
+    hash: state.actionReducer.HASH,
+    quotes: state.actionReducer.QUOTES
   };
 }
 
-const Palette = connect(mapStateToProps)(Palette_);
+const mapDispatchToProps = {
+  setQuotes,
+  setHash
+};
+
+const Palette = connect(mapStateToProps, mapDispatchToProps)(Palette_);
 
 export default Palette;

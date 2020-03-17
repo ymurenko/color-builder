@@ -16,7 +16,7 @@ const Controls_ = props => {
             <p className="control-label">Lightness: {props.lightness}%</p>
             <input
               type="range"
-              className="set-light"
+              className="slider"
               min={10}
               max={90}
               step={5}
@@ -30,7 +30,7 @@ const Controls_ = props => {
             <p className="control-label">Saturation: {props.saturation}%</p>
             <input
               type="range"
-              className="set-light"
+              className="slider"
               min={10}
               max={100}
               step={5}
@@ -46,7 +46,7 @@ const Controls_ = props => {
             </p>
             <input
               type="range"
-              className="set-light"
+              className="slider"
               min={1}
               max={10}
               step={1}
@@ -59,7 +59,7 @@ const Controls_ = props => {
           <div className="control-container ">
             <button
               className={`button ${
-                props.linked ? "linked-true" : "linked-false"
+                props.linked ? "active" : ""
               } ${props.darkMode ? "dark" : ""}`}
               type="button"
               onClick={() => {

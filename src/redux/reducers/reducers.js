@@ -7,6 +7,8 @@ const initialState = {
   SELECTOR_COUNT: 4,
   LINKED: false,
   DARK_MODE: false,
+  HASH: true,
+  QUOTES: true,
   RESET: 0 //for comp. rerender if init state doesnt change a prop
 };
 
@@ -38,6 +40,11 @@ export const actionReducer = (state = initialState, action) => {
         COLORS: NEW_COLORS,
         SELECTOR_COUNT: action.SELECTOR_COUNT
       };
+      case "SET_LIGHTNESS":
+      return {
+        ...state,
+        SELECTOR_SPACE: action.SELECTOR_SPACE
+      };
     case "SET_LINKED":
       return {
         ...state,
@@ -47,6 +54,21 @@ export const actionReducer = (state = initialState, action) => {
       return {
         ...state,
         DARK_MODE: !state.DARK_MODE
+      };
+      case "SET_DARK_MODE":
+      return {
+        ...state,
+        DARK_MODE: !state.DARK_MODE
+      };
+      case "SET_HASH":
+      return {
+        ...state,
+        HASH: !state.HASH
+      };
+      case "SET_QUOTES":
+      return {
+        ...state,
+        QUOTES: !state.QUOTES
       };
     case "RESET":
       return {
