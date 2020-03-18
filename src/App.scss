@@ -1,11 +1,19 @@
 @import "Globals.scss";
 
 .App {
+  width: 100vw;
+  height: 100vh;
+  background-color: $color-primary;
+  &.dark {
+    background-color: $color-primary-dark;
+  }
+}
+
+.wrapper {
   background-color: $color-primary;
   color: $secondary-font-color;
-  height: 100vh;
-  width: 100vw;
   text-align: center;
+  display: grid;
   &.dark {
     background-color: $color-primary-dark;
     color: $secondary-font-color-dark
@@ -13,13 +21,13 @@
 }
 
 .logo-container {
-  display: inline-block;
+  grid-row: 1;
   width: 1400px;
   margin:auto;
   img{
     width: 600px;
     float: left;
-    margin: 25px;
+    margin: 50px 25px;
   }
 }
 

@@ -8,13 +8,15 @@ import ColorPicker from "./components/ColorPicker/ColorPicker";
 const App_ = props => {
   return (
     <div className={`App ${props.darkMode ? "dark" : ""}`}>
-      <div className={`logo-container ${props.darkMode ? "hidden" : ""}`}>
-        <img src={logo} />
+      <div className={`wrapper ${props.darkMode ? "dark" : ""}`}>
+        <div className={`logo-container ${props.darkMode ? "hidden" : ""}`}>
+          <img src={logo} />
+        </div>
+        <div className={`logo-container ${props.darkMode ? "dark" : "hidden"}`}>
+          <img src={logoDark} />
+        </div>
+        <ColorPicker />
       </div>
-      <div className={`logo-container ${props.darkMode ? "dark" : "hidden"}`}>
-        <img src={logoDark} />
-      </div>
-      <ColorPicker />
     </div>
   );
 };

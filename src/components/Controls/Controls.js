@@ -37,7 +37,7 @@ const Controls_ = props => {
         <p className="control-label">Lightness: {props.lightness}%</p>
         <input
           type="range"
-          className="slider"
+          className={`slider ${props.darkMode ? "dark" : ""}`}
           min={10}
           max={90}
           step={5}
@@ -51,7 +51,7 @@ const Controls_ = props => {
         <p className="control-label">Saturation: {props.saturation}%</p>
         <input
           type="range"
-          className="slider"
+          className={`slider ${props.darkMode ? "dark" : ""}`}
           min={10}
           max={100}
           step={5}
@@ -65,7 +65,7 @@ const Controls_ = props => {
         <p className="control-label">Number of Points: {props.selectorCount}</p>
         <input
           type="range"
-          className="slider"
+          className={`slider ${props.darkMode ? "dark" : ""}`}
           min={1}
           max={10}
           step={1}
@@ -85,7 +85,7 @@ const Controls_ = props => {
         </p>
         <input
           type="range"
-          className="slider"
+          className={`slider ${props.darkMode ? "dark" : ""}`}
           min={10}
           max={360}
           step={1}
@@ -102,7 +102,7 @@ const Controls_ = props => {
         </p>
         <input
           type="range"
-          className="slider"
+          className={`slider ${props.darkMode ? "dark" : ""}`}
           min={1}
           max={236}
           step={1}
@@ -119,7 +119,7 @@ const Controls_ = props => {
         </p>
         <input
           type="range"
-          className="slider"
+          className={`slider ${props.darkMode ? "dark" : ""}`}
           ref={staggerSlider}
           min={-(236 - props.selectorRadius)}
           max={props.selectorRadius}

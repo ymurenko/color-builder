@@ -10,18 +10,26 @@
   padding: 5px;
   border: none;
   border-radius: 8px;
-  color: inherit;
+  color: $secondary-font-color-dark;
   background-color: $color-button;
   &.set-dark{
     margin: 0 0 20px ;
   }
+  &.active {
+    color: $color-primary-dark;
+  }
   &.dark {
     background-color: $color-button-dark;
+    color: $secondary-font-color;
+    &.active {
+      color: $secondary-font-color-dark;
+    }
   }
 }
 
 .color-picker-container {
   display: inline-flex;
+  grid-row: 2;
   margin: auto;
   text-align: center;
   background-color: $color-tertiary;
