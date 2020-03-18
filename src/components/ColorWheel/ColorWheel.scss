@@ -1,0 +1,34 @@
+@import "../../Globals.scss";
+
+.gradient {
+  z-index: 0;
+  display: inline-block;
+  .selector {
+    position: absolute;
+  }
+}
+
+.button-right {
+  z-index: 1;
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  margin: 0 10px 0;
+  &.dark {
+    border-color: $color-primary;
+  }
+}
+.button-left {
+  z-index: 1;
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  margin: 0 10px 0;
+  &.active {
+    border: solid 2px $secondary-font-color;
+    padding: 3px 0;
+    &.dark {
+      border-color: $color-primary;
+    }
+  }
+}

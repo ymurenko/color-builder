@@ -131,28 +131,6 @@ const Controls_ = props => {
           }}
         />
       </div>
-      <div className="control-container" style={{ marginTop: "25px" }}>
-        <button
-          className={`button ${props.linked ? "active" : ""} ${
-            props.darkMode ? "dark" : ""
-          }`}
-          type="button"
-          onClick={() => {
-            props.setLinkedState();
-          }}
-        >
-          {props.linked ? "Unlink" : "Link"}
-        </button>
-        <button
-          className={`button ${props.darkMode ? "dark" : ""}`}
-          type="button"
-          onClick={() => {
-            props.resetState();
-          }}
-        >
-          Reset
-        </button>
-      </div>
     </div>
   );
 };

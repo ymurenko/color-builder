@@ -11,11 +11,9 @@ const ColorPicker_ = props => {
 
   return (
     <div className={`color-picker-container ${props.darkMode ? "dark" : ""}`}>
-      <div className="boxes">
         <Controls />
         <ColorWheel colorsContainer={colorContainer} />
         <Palette paletteRef={colorContainer} />
-      </div>
     </div>
   );
 };

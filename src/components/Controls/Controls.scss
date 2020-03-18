@@ -1,8 +1,7 @@
 @import "../../Globals.scss";
 
 .controls {
-  display: grid;
-  float: left;
+  display: inline-block;
   width: 300px;
   height: 500px;
   margin: 10px 25px;
@@ -13,7 +12,7 @@
 
   &.dark {
     background-color: $color-secondary-dark;
-    box-shadow: 0 0px 15px 0 #111111;
+    box-shadow: 0 0px 15px 0 #171717;
   }
 }
 

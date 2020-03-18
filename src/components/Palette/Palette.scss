@@ -3,8 +3,7 @@
 
 .colors-wrapper {
     text-align: center;
-    display: grid;
-    float: left;
+    display: inline-block;
     width: 300px;
     margin: 10px 25px;
     padding: 25px;
@@ -18,11 +17,11 @@
       overflow: hidden;
     }
     .control-container {
-      margin-top: 10px;
+      margin-top: 20px;
     }
     &.dark {
       background-color: $color-secondary-dark;
-      box-shadow: 0 0px 15px 0 #111111;
+      box-shadow: 0 0px 15px 0 #171717;
     }
   }
 

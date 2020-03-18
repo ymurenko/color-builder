@@ -7,7 +7,8 @@ import { storeColor } from "../../redux/actions/actions";
 const Selectors_ = props => {
   const svg = useRef(null);
   let { colorsContainer, canvas } = props;
-
+  let canvasPosX = 0;
+  let canvasPosY = 0;
   let circleRefs = null;
   let circleCoordinates = [];
   let currentActiveCircle = null;
@@ -98,17 +99,17 @@ const Selectors_ = props => {
   };
 
   const isInCircle = (x, y) => {
-    if (Math.sqrt((250 - x) * (250 - x) + (250 - y) * (250 - y)) > 237) {
+  /* if (Math.sqrt((250 - x) * (250 - x) + (250 - y) * (250 - y)) > 237) {
       handleMouseUp();
       return false;
-    } else {
+    } else*/ {
       return true;
     }
   };
 
   const addMouseTrackerLinked = event => {
-    let mouseX = event.pageX - canvas.current.offsetLeft;
-    let mouseY = event.pageY - canvas.current.offsetTop;
+    let mouseX = event.pageX - canvasPosX;
+    let mouseY = event.pageY - canvasPosY;
     let x0 = circleRefs[0].getAttribute("cx");
     let y0 = circleRefs[0].getAttribute("cy");
     let d0x = x0 - 250;
@@ -146,8 +147,8 @@ const Selectors_ = props => {
   };
 
   const addMouseTracker = event => {
-    let mouseX = event.pageX - canvas.current.offsetLeft;
-    let mouseY = event.pageY - canvas.current.offsetTop;
+    let mouseX = event.pageX - canvasPosX;
+    let mouseY = event.pageY - canvasPosY;
     if (isInCircle(mouseX, mouseY)) {
       currentActiveCircle.setAttribute("cx", `${mouseX}`);
       currentActiveCircle.setAttribute("cy", `${mouseY}`);
@@ -192,6 +193,9 @@ const Selectors_ = props => {
   }, [props.selectorStagger, props.reset, props.selectorCount, props.selectorRadius,  props.selectorAngle]);
 
   useEffect(() => {
+    let rect = canvas.current.getBoundingClientRect()
+    canvasPosX = rect.left;
+    canvasPosY = rect.top;
     for (let i = 0; i < props.selectorCount; i++) {
       let x = circleRefs[i].getAttribute("cx");
       let y = circleRefs[i].getAttribute("cy");

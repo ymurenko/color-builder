@@ -5,44 +5,37 @@
   font-size: $secondary-font-size;
   font-weight: $secondary-font-weight;
   font-family: $font-family;
-  height: auto;
   width: 100px;
+  height: 29px;
   padding: 5px;
   border: none;
   border-radius: 8px;
   color: inherit;
-  background-color: $color-primary;
+  background-color: $color-button;
   &.set-dark{
     margin: 0 0 20px ;
   }
   &.dark {
-    background-color: $color-primary-dark;
+    background-color: $color-button-dark;
   }
 }
 
 .color-picker-container {
-  display: block;
-  width: 1500px;
-  height: auto;
+  display: inline-flex;
   margin: auto;
   text-align: center;
-  background-color: $color-primary;
-  .gradient {
-    float: left;
-    padding: 0 50px;
-    .selector {
-      position: absolute;
-    }
-  }
-  
+  background-color: $color-tertiary;
+  border-radius: 15px;
+  box-shadow: 0 0px 15px 0 #a1a1a1;
+  padding: 50px 0;
+
   &.dark {
-    background-color: $color-primary-dark;
+    background-color: $color-tertiary-dark;
+    box-shadow: 0 0px 15px 0 black;
   }
 }
 
-.boxes {
-  padding-top: 50px;
-}
+
 
 .container-h {
   input {
