@@ -1,11 +1,11 @@
 @import "../../Globals.scss";
 
-.color-picker-controls {
+.controls {
   display: grid;
   float: left;
   width: 300px;
-  height: auto;
-  margin: 0 25px 10px;
+  height: 500px;
+  margin: 10px 25px;
   padding: 25px;
   background-color: $color-secondary;
   border-radius: 25px;
@@ -22,7 +22,6 @@
   font-size: $secondary-font-size;
   font-weight: $secondary-font-weight;
   font-family: $font-family;
-  margin-top: 10px;
   .button {
     margin: 0 10px 0;
     &.active {
@@ -35,6 +34,7 @@
   }
   .slider {
     width: 100%;
+    margin: 10px 0 ;
   }
 }
 

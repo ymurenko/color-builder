@@ -6,7 +6,8 @@ const initialState = {
   SATURATION: 100,
   SELECTOR_COUNT: 4,
   SELECTOR_ANGLE: 180,
-  SELECTOR_RADIUS: 200,
+  SELECTOR_RADIUS: 118,
+  SELECTOR_STAGGER: 0,
   LINKED: false,
   DARK_MODE: false,
   HASH: true,
@@ -51,6 +52,11 @@ export const actionReducer = (state = initialState, action) => {
       return {
         ...state,
         SELECTOR_RADIUS: action.SELECTOR_RADIUS
+      };
+      case "SET_SELECTOR_STAGGER":
+      return {
+        ...state,
+        SELECTOR_STAGGER: action.SELECTOR_STAGGER
       };
     case "SET_LINKED":
       return {

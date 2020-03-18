@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import {
   setLightness,
@@ -8,13 +8,20 @@ import {
   setLinkedState,
   setSelectorAngle,
   setSelectorRadius,
+  setSelectorStagger,
   setDarkMode
 } from "../../redux/actions/actions";
 import "./Controls.scss";
 
 const Controls_ = props => {
+  const staggerSlider = useRef(null)
+
+  useEffect(() => {
+    props.setSelectorStagger(staggerSlider.current.value)
+  }, [props.selectorRadius]);
+
   return (
-    <div className={`color-picker-controls ${props.darkMode ? "dark" : ""}`}>
+    <div className={`controls ${props.darkMode ? "dark" : ""}`}>
       <div className="control-container">
         <button
           className={`button set-dark ${props.darkMode ? "dark" : ""}`}
@@ -55,9 +62,7 @@ const Controls_ = props => {
         />
       </div>
       <div className="control-container">
-        <p className="control-label">
-          Number of Points: {props.selectorCount}
-        </p>
+        <p className="control-label">Number of Points: {props.selectorCount}</p>
         <input
           type="range"
           className="slider"
@@ -93,9 +98,7 @@ const Controls_ = props => {
       <div className="control-container">
         <p className="control-label">
           Distance from Origin:{" "}
-          {(
-            Math.round((props.selectorRadius / 236) * 1000) / 10
-          ).toFixed(0)}
+          {(Math.round((props.selectorRadius / 236) * 1000) / 10).toFixed(0)}
         </p>
         <input
           type="range"
@@ -109,7 +112,26 @@ const Controls_ = props => {
           }}
         />
       </div>
-      <div className="control-container" style={{marginTop: '25px'}}>
+      <div className="control-container">
+        <p className="control-label">
+          Distance Stagger:{" "}
+          {(Math.round(props.selectorStagger * 10) / 10).toFixed(0)}
+        </p>
+        <input
+          type="range"
+          className="slider"
+          ref={staggerSlider}
+          min={-(236 - props.selectorRadius)}
+          max={props.selectorRadius}
+          step={1}
+          defaultValue={props.selectorStagger}
+          onChange={val => {
+            console.log("sdfds");
+            props.setSelectorStagger(val.target.value);
+          }}
+        />
+      </div>
+      <div className="control-container" style={{ marginTop: "25px" }}>
         <button
           className={`button ${props.linked ? "active" : ""} ${
             props.darkMode ? "dark" : ""
@@ -142,6 +164,7 @@ function mapStateToProps(state) {
     selectorCount: state.actionReducer.SELECTOR_COUNT,
     selectorAngle: state.actionReducer.SELECTOR_ANGLE,
     selectorRadius: state.actionReducer.SELECTOR_RADIUS,
+    selectorStagger: state.actionReducer.SELECTOR_STAGGER,
     linked: state.actionReducer.LINKED,
     darkMode: state.actionReducer.DARK_MODE
   };
@@ -155,6 +178,7 @@ const mapDispatchToProps = {
   setLinkedState,
   setSelectorAngle,
   setSelectorRadius,
+  setSelectorStagger,
   setDarkMode
 };
 

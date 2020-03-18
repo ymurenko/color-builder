@@ -115,7 +115,7 @@ const Selectors_ = props => {
     let d0y = y0 - 250;
     let radsFromMouse = Math.atan2(d0y, d0x);
     let radsOffset = 0;
-    
+
     if (isInCircle(mouseX, mouseY)) {
       circleRefs[0].setAttribute("cx", `${mouseX}`);
       circleRefs[0].setAttribute("cy", `${mouseY}`);
@@ -175,40 +175,21 @@ const Selectors_ = props => {
     circleCoordinates = getPointMath();
   };
 
+
   useEffect(() => {
     let radOffset = firstCircleAngle;
-    //createCircles();
+    let staggerOffset = 0;
     let radIncrement =
       Math.round(props.selectorAngle / props.selectorCount) * (Math.PI / 180);
     for (let i = 0; i < props.selectorCount; i++) {
-      let x = 250 + props.selectorRadius * Math.cos(radOffset);
-      let y = 250 + props.selectorRadius * Math.sin(radOffset);
+      let x = 250 + (props.selectorRadius - staggerOffset) * Math.cos(radOffset);
+      let y = 250 + (props.selectorRadius - staggerOffset) * Math.sin(radOffset);
       circleRefs[i].setAttribute("cx", `${x}`);
       circleRefs[i].setAttribute("cy", `${y}`);
       radOffset += radIncrement;
+      staggerOffset += props.selectorStagger / props.selectorCount
     }
-  }, [
-    props.reset,
-    props.selectorCount,
-    props.selectorRadius
-  ]);
-
-  useEffect(() => {
-    let radOffset = circleCoordinates[0].angle;
-    //createCircles();
-    let radIncrement =
-      Math.round(props.selectorAngle / props.selectorCount) * (Math.PI / 180);
-    for (let i = 0; i < props.selectorCount; i++) {
-      let x = 250 + circleCoordinates[0].radius * Math.cos(radOffset);
-      let y = 250 + circleCoordinates[0].radius * Math.sin(radOffset);
-      circleRefs[i].setAttribute("cx", `${x}`);
-      circleRefs[i].setAttribute("cy", `${y}`);
-      radOffset += radIncrement;
-    }
-  }, [
-    props.selectorAngle
-  ]);
-
+  }, [props.selectorStagger, props.reset, props.selectorCount, props.selectorRadius,  props.selectorAngle]);
 
   useEffect(() => {
     for (let i = 0; i < props.selectorCount; i++) {
@@ -241,6 +222,7 @@ function mapStateToProps(state) {
     selectorCount: state.actionReducer.SELECTOR_COUNT,
     selectorAngle: state.actionReducer.SELECTOR_ANGLE,
     selectorRadius: state.actionReducer.SELECTOR_RADIUS,
+    selectorStagger: state.actionReducer.SELECTOR_STAGGER,
     lightness: state.actionReducer.LIGHTNESS,
     saturation: state.actionReducer.SATURATION,
     linked: state.actionReducer.LINKED,

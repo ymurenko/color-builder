@@ -18,6 +18,9 @@ export const setSelectorAngle = (val) => (
 export const setSelectorRadius = (val) => (
   { type: 'SET_SELECTOR_RADIUS', SELECTOR_RADIUS: val }
 )
+export const setSelectorStagger = (val) => (
+  { type: 'SET_SELECTOR_STAGGER', SELECTOR_STAGGER: val }
+)
 export const setLinkedState = () => (
   { type: 'SET_LINKED' }
 )
