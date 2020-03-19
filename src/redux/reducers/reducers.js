@@ -84,8 +84,10 @@ export const actionReducer = (state = initialState, action) => {
         QUOTES: !state.QUOTES
       };
     case "RESET":
+      let darkTemp = state.DARK_MODE
       return {
         ...initialState,
+        DARK_MODE: darkTemp,
         RESET: 1 - state.RESET
       };
     default:
