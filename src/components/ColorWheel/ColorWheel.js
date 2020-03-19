@@ -4,7 +4,7 @@ import { resetState, setLinkedState } from "../../redux/actions/actions";
 import Selectors from "../Selectors/Selectors";
 import * as xLUT from "./xLUT.json";
 import * as yLUT from "./yLUT.json";
-
+import {colorWheelRadius} from "../../constants/constants"
 import "./ColorWheel.scss";
 
 const ColorWheel_ = props => {
@@ -12,15 +12,19 @@ const ColorWheel_ = props => {
 
   const generateGradient = () => {
     let canvasContext = canvas.current.getContext("2d");
-    canvasContext.clearRect(0, 0, 500, 500);
+    canvasContext.clearRect(0, 0, colorWheelRadius*2, colorWheelRadius*2);
     for (var i = 0; i < 3600; i += 1) {
       let value = i / 10;
+       let rad = ((value - 90) * Math.PI) / 180;
+       let x = colorWheelRadius + colorWheelRadius * Math.cos(-rad)
+       let y = colorWheelRadius + colorWheelRadius * Math.sin(-rad)
       canvasContext.beginPath();
       let gradient = canvasContext.createLinearGradient(
-        250,
-        250,
-        xLUT.default[value],
-        yLUT.default[value]
+        colorWheelRadius,
+        colorWheelRadius,
+        x, y
+        /*xLUT.default[value],
+        yLUT.default[value]*/
       );
 
       gradient.addColorStop("0", `${props.lightness > 45 ? "white" : "black"}`);
@@ -36,8 +40,8 @@ const ColorWheel_ = props => {
 
       canvasContext.strokeStyle = gradient;
 
-      canvasContext.moveTo(250, 250);
-      canvasContext.lineTo(xLUT.default[value], yLUT.default[value]);
+      canvasContext.moveTo(colorWheelRadius, colorWheelRadius);
+      canvasContext.lineTo(x, y);
       canvasContext.stroke();
     }
   };
@@ -47,7 +51,7 @@ const ColorWheel_ = props => {
   });
 
   return (
-    <div className={`container-block ${props.darkMode ? "dark" : ""}`}>
+    <div className={`container-block ${props.darkMode ? "dark" : ""}`} style={{height: `${colorWheelRadius*2}`, width: `${colorWheelRadius*2}`}}>
       <button
         className={`button button-left ${props.linked ? "active" : ""} ${
           props.darkMode ? "dark" : ""
@@ -61,7 +65,7 @@ const ColorWheel_ = props => {
       </button>
       <div className="gradient" >
         <Selectors colorsContainer={props.colorsContainer} canvas={canvas} />
-        <canvas width={"500"} height={"500"} ref={canvas} />
+        <canvas width={`${colorWheelRadius*2}`} height={`${colorWheelRadius*2}`} ref={canvas} />
       </div>
 
       <button

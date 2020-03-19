@@ -4,6 +4,8 @@ import useDidMountEffect from "../../util/useDidMountEffect";
 import { connect } from "react-redux";
 import { storeColor } from "../../redux/actions/actions";
 
+import {colorWheelRadius} from "../../constants/constants";
+
 const Selectors_ = props => {
   const svg = useRef(null);
   let { colorsContainer, canvas } = props;
@@ -38,8 +40,8 @@ const Selectors_ = props => {
     let radIncrement =
       Math.round(props.selectorAngle / props.selectorCount) * (Math.PI / 180);
     for (let i = 0; i < props.selectorCount; i++) {
-      let x = 250 + props.selectorRadius * Math.cos(radOffset);
-      let y = 250 + props.selectorRadius * Math.sin(radOffset);
+      let x = colorWheelRadius + props.selectorRadius * Math.cos(radOffset);
+      let y = colorWheelRadius + props.selectorRadius * Math.sin(radOffset);
       elements.push(
         <circle
           cx={x}
@@ -65,11 +67,11 @@ const Selectors_ = props => {
     let mathVars = [];
     let x0 = circleRefs[0].getAttribute("cx");
     let y0 = circleRefs[0].getAttribute("cy");
-    let radius = Math.sqrt((250 - x0) * (250 - x0) + (250 - y0) * (250 - y0));
-    let dx = 250;
+    let radius = Math.sqrt((colorWheelRadius - x0) * (colorWheelRadius - x0) + (colorWheelRadius - y0) * (colorWheelRadius - y0));
+    let dx = colorWheelRadius;
     let dy = 0;
-    let d0x = x0 - 250;
-    let d0y = y0 - 250;
+    let d0x = x0 - colorWheelRadius;
+    let d0y = y0 - colorWheelRadius;
     let angle = Math.atan2(d0y, d0x) - Math.atan2(dy, dx);
     mathVars.push({
       angle: angle,
@@ -82,12 +84,12 @@ const Selectors_ = props => {
       let x2 = circleRefs[i].getAttribute("cx");
       let y2 = circleRefs[i].getAttribute("cy");
 
-      let radius = Math.sqrt((250 - x2) * (250 - x2) + (250 - y2) * (250 - y2));
+      let radius = Math.sqrt((colorWheelRadius - x2) * (colorWheelRadius - x2) + (colorWheelRadius - y2) * (colorWheelRadius - y2));
 
-      let d1x = x1 - 250;
-      let d1y = y1 - 250;
-      let d2x = x2 - 250;
-      let d2y = y2 - 250;
+      let d1x = x1 - colorWheelRadius;
+      let d1y = y1 - colorWheelRadius;
+      let d2x = x2 - colorWheelRadius;
+      let d2y = y2 - colorWheelRadius;
 
       let angle = Math.atan2(d2y, d2x) - Math.atan2(d1y, d1x);
       mathVars.push({
@@ -99,10 +101,10 @@ const Selectors_ = props => {
   };
 
   const isInCircle = (x, y) => {
-  /* if (Math.sqrt((250 - x) * (250 - x) + (250 - y) * (250 - y)) > 237) {
+   if (Math.sqrt((colorWheelRadius - x) * (colorWheelRadius - x) + (colorWheelRadius - y) * (colorWheelRadius - y)) > (0.95*colorWheelRadius)) {
       handleMouseUp();
       return false;
-    } else*/ {
+    } else {
       return true;
     }
   };
@@ -112,8 +114,8 @@ const Selectors_ = props => {
     let mouseY = event.pageY - canvasPosY;
     let x0 = circleRefs[0].getAttribute("cx");
     let y0 = circleRefs[0].getAttribute("cy");
-    let d0x = x0 - 250;
-    let d0y = y0 - 250;
+    let d0x = x0 - colorWheelRadius;
+    let d0y = y0 - colorWheelRadius;
     let radsFromMouse = Math.atan2(d0y, d0x);
     let radsOffset = 0;
 
@@ -134,13 +136,13 @@ const Selectors_ = props => {
           circleCoordinates[i].radius -
           (circleCoordinates[0].radius -
             Math.sqrt(
-              (250 - mouseX) * (250 - mouseX) + (250 - mouseY) * (250 - mouseY)
+              (colorWheelRadius - mouseX) * (colorWheelRadius - mouseX) + (colorWheelRadius - mouseY) * (colorWheelRadius - mouseY)
             ));
 
         if (radius < 0) radius = 0;
-        if (radius > 250) radius = 250;
-        circleRefs[i].setAttribute("cx", `${250 + radius * Math.cos(angle)}`);
-        circleRefs[i].setAttribute("cy", `${250 + radius * Math.sin(angle)}`);
+        if (radius > colorWheelRadius) radius = colorWheelRadius;
+        circleRefs[i].setAttribute("cx", `${colorWheelRadius + radius * Math.cos(angle)}`);
+        circleRefs[i].setAttribute("cy", `${colorWheelRadius + radius * Math.sin(angle)}`);
         setColor(x, y, i);
       }
     }
@@ -167,6 +169,9 @@ const Selectors_ = props => {
   };
 
   const handleMouseDown = e => {
+    let rect = canvas.current.getBoundingClientRect()
+    canvasPosX = rect.left;
+    canvasPosY = rect.top;
     currentActiveCircle = e.target;
     if (!props.linked) {
       svg.current.addEventListener("mousemove", addMouseTracker);
@@ -183,8 +188,8 @@ const Selectors_ = props => {
     let radIncrement =
       Math.round(props.selectorAngle / props.selectorCount) * (Math.PI / 180);
     for (let i = 0; i < props.selectorCount; i++) {
-      let x = 250 + (props.selectorRadius - staggerOffset) * Math.cos(radOffset);
-      let y = 250 + (props.selectorRadius - staggerOffset) * Math.sin(radOffset);
+      let x = colorWheelRadius + (props.selectorRadius - staggerOffset) * Math.cos(radOffset);
+      let y = colorWheelRadius + (props.selectorRadius - staggerOffset) * Math.sin(radOffset);
       circleRefs[i].setAttribute("cx", `${x}`);
       circleRefs[i].setAttribute("cy", `${y}`);
       radOffset += radIncrement;
@@ -193,9 +198,6 @@ const Selectors_ = props => {
   }, [props.selectorStagger, props.reset, props.selectorCount, props.selectorRadius,  props.selectorAngle]);
 
   useEffect(() => {
-    let rect = canvas.current.getBoundingClientRect()
-    canvasPosX = rect.left;
-    canvasPosY = rect.top;
     for (let i = 0; i < props.selectorCount; i++) {
       let x = circleRefs[i].getAttribute("cx");
       let y = circleRefs[i].getAttribute("cy");
@@ -212,9 +214,9 @@ const Selectors_ = props => {
     <svg
       className="selector"
       ref={svg}
-      width="500"
-      height="500"
-      viewBox="0 0 500 500"
+      width={`${colorWheelRadius*2}`}
+      height={`${colorWheelRadius*2}`}
+      viewBox={`0 0 ${colorWheelRadius*2} ${colorWheelRadius*2}`}
     >
       {createCircles()}
     </svg>
