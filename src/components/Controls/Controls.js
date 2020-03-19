@@ -12,6 +12,7 @@ import {
   setDarkMode
 } from "../../redux/actions/actions";
 import "./Controls.scss";
+import "./Slider.scss";
 
 const Controls_ = props => {
   const staggerSlider = useRef(null)
@@ -34,7 +35,7 @@ const Controls_ = props => {
         </button>
       </div>
       <div className="control-container">
-        <p className="control-label">Lightness: {props.lightness}%</p>
+        <p className="slider-label">Lightness: {props.lightness}%</p>
         <input
           type="range"
           className={`slider ${props.darkMode ? "dark" : ""}`}
@@ -47,8 +48,8 @@ const Controls_ = props => {
           }}
         />
       </div>
-      <div className="control-container">
-        <p className="control-label">Saturation: {props.saturation}%</p>
+      <div className="control-container slider-container">
+        <p className="slider-label">Saturation: {props.saturation}%</p>
         <input
           type="range"
           className={`slider ${props.darkMode ? "dark" : ""}`}
@@ -61,8 +62,8 @@ const Controls_ = props => {
           }}
         />
       </div>
-      <div className="control-container">
-        <p className="control-label">Number of Points: {props.selectorCount}</p>
+      <div className="control-container slider-container">
+        <p className="slider-label">Number of Points: {props.selectorCount}</p>
         <input
           type="range"
           className={`slider ${props.darkMode ? "dark" : ""}`}
@@ -75,8 +76,8 @@ const Controls_ = props => {
           }}
         />
       </div>
-      <div className="control-container">
-        <p className="control-label">
+      <div className="control-container slider-container">
+        <p className="slider-label">
           Point Spacing Angle:{" "}
           {(
             Math.round((props.selectorAngle / props.selectorCount) * 10) / 10
@@ -95,8 +96,8 @@ const Controls_ = props => {
           }}
         />
       </div>
-      <div className="control-container">
-        <p className="control-label">
+      <div className="control-container slider-container">
+        <p className="slider-label">
           Distance from Origin:{" "}
           {(Math.round((props.selectorRadius / 236) * 1000) / 10).toFixed(0)}
         </p>
@@ -113,7 +114,7 @@ const Controls_ = props => {
         />
       </div>
       <div className="control-container">
-        <p className="control-label">
+        <p className="slider-label">
           Distance Stagger:{" "}
           {(Math.round(props.selectorStagger * 10) / 10).toFixed(0)}
         </p>

@@ -9,7 +9,7 @@ const initialState = {
   SELECTOR_RADIUS: 118,
   SELECTOR_STAGGER: 0,
   LINKED: false,
-  DARK_MODE: true,
+  DARK_MODE: false,
   HASH: true,
   QUOTES: true,
   RESET: 0 //for comp. rerender if init state doesnt change a prop

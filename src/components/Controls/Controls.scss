@@ -3,13 +3,12 @@
 .controls {
   display: inline-block;
   width: 300px;
-  height: 500px;
-  margin: 10px 25px;
+  height: 400;
+  margin: 10px 10px;
   padding: 25px;
   background-color: $color-secondary;
   border-radius: 15px;
   box-shadow: 0 0px 15px 0 #a1a1a1;
-
   &.dark {
     background-color: $color-secondary-dark;
     box-shadow: 0 0px 15px 0 #171717;
@@ -21,24 +20,32 @@
   font-size: $secondary-font-size;
   font-weight: $secondary-font-weight;
   font-family: $font-family;
+  margin: 5px;
   .button {
     margin: 0 10px 0;
     &.active {
-      border: solid 2px $secondary-font-color;
+      border: solid 2px #4d4d4d;
       padding: 3px 0;
+      color: #4d4d4d;
       &.dark {
-        border-color: $color-primary;
+        border-color: #818181;
       }
     }
   }
+  &.slider-container {
+
+    margin: 20px 5px 0 ;
+  }
   .slider {
     width: 100%;
-    margin: 10px 0 ;
+    background-color: $color-secondary;
+    &.dark {
+      background-color: $color-secondary-dark;
+    }
   }
 }
 
-.control-label {
+.slider-label {
   text-align: left;
-  margin: 0;
+  margin-bottom: 10px;
 }
-

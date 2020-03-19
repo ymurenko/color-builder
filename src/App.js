@@ -6,16 +6,11 @@ import "./App.scss";
 import ColorPicker from "./components/ColorPicker/ColorPicker";
 
 const App_ = props => {
-
   return (
     <div className={`App ${props.darkMode ? "dark" : ""}`}>
       <div className={`wrapper ${props.darkMode ? "dark" : ""}`}>
-        <div className={`logo-container ${props.darkMode ? "hidden" : ""}`}>
-          <img src={logo} />
-        </div>
-        <div className={`logo-container ${props.darkMode ? "dark" : "hidden"}`}>
-          <img src={logoDark} />
-        </div>
+        <div className={`logo-container ${props.darkMode ? "hidden" : ""}`} />
+        <div className={`logo-container ${props.darkMode ? "dark" : "hidden"}`}/>
         <ColorPicker />
       </div>
     </div>
