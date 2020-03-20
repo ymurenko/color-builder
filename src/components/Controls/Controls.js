@@ -53,7 +53,7 @@ const Controls_ = props => {
             className={`preset button ${props.darkMode ? "dark" : ""} ${props.preset === 'default' ? "active" : ""} `}
             type="button"
             onClick={() => {
-              props.setPreset('default');
+              if(!(props.preset === 'default')) props.setPreset('default');
             }}
           >
             Analogous
@@ -62,7 +62,7 @@ const Controls_ = props => {
             className={`preset button  ${props.darkMode ? "dark" : ""} ${props.preset === 'triad' ? "active" : ""}`}
             type="button"
             onClick={() => {
-              props.setPreset('triad');
+              if(!(props.preset === 'triad')) props.setPreset('triad');
             }}
           >
             Triad
@@ -71,10 +71,19 @@ const Controls_ = props => {
             className={`preset button  ${props.darkMode ? "dark" : ""} ${props.preset === 'tetrad' ? "active" : ""}`}
             type="button"
             onClick={() => {
-              props.setPreset('tetrad');
+              if(!(props.preset === 'tetrad')) props.setPreset('tetrad');
             }}
           >
             Tetrad
+          </button>
+          <button
+            className={`preset button  ${props.darkMode ? "dark" : ""} ${props.preset === 'pentad' ? "active" : ""}`}
+            type="button"
+            onClick={() => {
+              if(!(props.preset === 'pentad')) props.setPreset('pentad');
+            }}
+          >
+            Pentad
           </button>
         </div>
       </div>

@@ -85,37 +85,45 @@ export const actionReducer = (state = initialState, action) => {
         QUOTES: !state.QUOTES
       };
     case "SET_PRESET":
-      if(action.PRESET === 'default'){
+      if (action.PRESET === "default") {
+        return {
+          ...initialState,
+          DARK_MODE: state.DARK_MODE,
+          SELECTOR_COUNT: state.SELECTOR_COUNT
+        };
+      } else if (action.PRESET === "triad") {
+        return {
+          ...initialState,
+          SELECTOR_COUNT: 9,
+          SELECTOR_ANGLE: 360,
+          DARK_MODE: state.DARK_MODE,
+          PRESET: action.PRESET
+        };
+      } else if (action.PRESET === "tetrad") {
+        return {
+          ...initialState,
+          SELECTOR_COUNT: 12,
+          SELECTOR_ANGLE: 360,
+          DARK_MODE: state.DARK_MODE,
+          PRESET: action.PRESET
+        };
+      } else if (action.PRESET === "pentad") {
+        return {
+          ...initialState,
+          SELECTOR_COUNT: 10,
+          SELECTOR_ANGLE: 360,
+          DARK_MODE: state.DARK_MODE,
+          PRESET: action.PRESET
+        };
+      } else {
         return {
           ...initialState,
           SELECTOR_COUNT: state.SELECTOR_COUNT,
-        };
-      }
-      if(action.PRESET === 'triad'){
-        return {
-          ...initialState,
-          SELECTOR_COUNT: (Math.round(state.SELECTOR_COUNT/3)*3),
           SELECTOR_ANGLE: 360,
           PRESET: action.PRESET
         };
       }
-      if(action.PRESET === 'tetrad'){
-        return {
-          ...initialState,
-          SELECTOR_COUNT: (Math.round(state.SELECTOR_COUNT/4)*4),
-          SELECTOR_ANGLE: 360,
-          PRESET: action.PRESET
-        };
-      }
-      else{
-        return {
-          ...initialState,
-          SELECTOR_COUNT: state.SELECTOR_COUNT,
-          SELECTOR_ANGLE: 360,
-          PRESET: action.PRESET
-        };
-      }
-      
+
     case "RESET":
       return {
         ...initialState,

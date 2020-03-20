@@ -11,8 +11,11 @@
   display: inline-grid;
   grid-template-columns: 1fr 1fr;
   text-align: center;
+  margin-top: 15px;
   .preset {
-    margin: 20px;
+    margin: 5px;
+    height: 140px;
+    width: 140px;
   }
 }
 

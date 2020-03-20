@@ -27,12 +27,13 @@
     padding: 3px 0;
     color: #4d4d4d;
     &.dark {
-      background-color: $color-button-dark;
-      color: $secondary-font-color;
-       border-color: #818181;
-        
-      
+      border-color: #818181;
+      color: #818181
     }
+  }
+  &.dark {
+    background-color: $color-button-dark;
+    color: $secondary-font-color;
   }
   
 }
