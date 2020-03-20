@@ -7,6 +7,15 @@
   
 }
 
+.presets-grid {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  .preset {
+    margin: 20px;
+  }
+}
+
 .control-container {
   text-align: center;
   font-size: $secondary-font-size;
@@ -14,15 +23,7 @@
   font-family: $font-family;
   margin: 5px;
   .button {
-    margin: 0 10px 0;
-    &.active {
-      border: solid 2px #4d4d4d;
-      padding: 3px 0;
-      color: #4d4d4d;
-      &.dark {
-        border-color: #818181;
-      }
-    }
+    margin: 0 20px;
   }
   &.slider-container {
 

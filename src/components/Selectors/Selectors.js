@@ -34,14 +34,60 @@ const Selectors_ = props => {
     props.storeColor(pixelColor, key);
   };
 
+  const setHarmony = () => {
+    //sets the angle of the polar offset from +X-axis
+    let radOffset;
+    let harmony = {total: 0, count: 1};
+    if (props.preset === 'triad' && props.selectorCount != 3){
+      radOffset = [0,0]
+      //if there are three, points, use default calculation with a 360 degree total rotation
+      for (let i = 1; i < props.selectorCount; i++) {
+        if(harmony.count === Math.round(props.selectorCount/3)){
+          //after the last point in a group, the next point's offset is 120 degrees
+          harmony.total++
+          harmony.count = 0;
+          radOffset.push(radOffset[i] = (Math.round(props.selectorAngle / 3) * (Math.PI / 180)) * harmony.total)
+        }
+        else {
+          //put the points into even groups, with selectorCount/3 number of points in each group
+          radOffset.push(radOffset[i] += Math.round(props.selectorAngle / (props.selectorCount*3) ) * (Math.PI / 180))
+        }
+        harmony.count++;
+      }
+    }
+    else if (props.preset === 'tetrad' && props.selectorCount != 4){
+      radOffset = [0,0]
+      //if there are three, points, use default calculation with a 460 degree total rotation
+      for (let i = 1; i < props.selectorCount; i++) {
+        if(harmony.count === Math.round(props.selectorCount/4)){
+          //after the last point in a group, the next point's offset is 120 degrees
+          harmony.total++
+          harmony.count = 0;
+          radOffset.push(radOffset[i] = (Math.round(props.selectorAngle / 4) * (Math.PI / 180)) * harmony.total)
+        }
+        else {
+          //put the points into even groups, with selectorCount/4 number of points in each group
+          radOffset.push(radOffset[i] += Math.round(props.selectorAngle / (props.selectorCount*4) ) * (Math.PI / 180))
+        }
+        harmony.count++;
+      }
+    }
+    else {
+      radOffset = [firstCircleAngle]
+      for (let i = 0; i < props.selectorCount; i++) {
+        radOffset.push(radOffset[i] += Math.round(props.selectorAngle / props.selectorCount) * (Math.PI / 180))
+      }
+    }
+    return radOffset
+  }
+
   const createCircles = () => {
     let elements = [];
-    let radOffset = firstCircleAngle;
-    let radIncrement =
-      Math.round(props.selectorAngle / props.selectorCount) * (Math.PI / 180);
+    let radOffset = setHarmony()
+
     for (let i = 0; i < props.selectorCount; i++) {
-      let x = colorWheelRadius + props.selectorRadius * Math.cos(radOffset);
-      let y = colorWheelRadius + props.selectorRadius * Math.sin(radOffset);
+      let x = colorWheelRadius + props.selectorRadius * Math.cos(radOffset[i]);
+      let y = colorWheelRadius + props.selectorRadius * Math.sin(radOffset[i]);
       elements.push(
         <circle
           cx={x}
@@ -56,7 +102,6 @@ const Selectors_ = props => {
           id={`${i}`}
         />
       );
-      radOffset += radIncrement;
     }
     return elements;
   };
@@ -183,16 +228,15 @@ const Selectors_ = props => {
 
 
   useEffect(() => {
-    let radOffset = firstCircleAngle;
+    let radOffset = setHarmony();
     let staggerOffset = 0;
     let radIncrement =
       Math.round(props.selectorAngle / props.selectorCount) * (Math.PI / 180);
     for (let i = 0; i < props.selectorCount; i++) {
-      let x = colorWheelRadius + (props.selectorRadius - staggerOffset) * Math.cos(radOffset);
-      let y = colorWheelRadius + (props.selectorRadius - staggerOffset) * Math.sin(radOffset);
+      let x = colorWheelRadius + (props.selectorRadius - staggerOffset) * Math.cos(radOffset[i]);
+      let y = colorWheelRadius + (props.selectorRadius - staggerOffset) * Math.sin(radOffset[i]);
       circleRefs[i].setAttribute("cx", `${x}`);
       circleRefs[i].setAttribute("cy", `${y}`);
-      radOffset += radIncrement;
       staggerOffset += props.selectorStagger / props.selectorCount
     }
   }, [props.selectorStagger, props.reset, props.selectorCount, props.selectorRadius,  props.selectorAngle]);
@@ -232,7 +276,8 @@ function mapStateToProps(state) {
     lightness: state.actionReducer.LIGHTNESS,
     saturation: state.actionReducer.SATURATION,
     linked: state.actionReducer.LINKED,
-    reset: state.actionReducer.RESET
+    reset: state.actionReducer.RESET,
+    preset: state.actionReducer.PRESET
   };
 }
 

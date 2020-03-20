@@ -12,6 +12,7 @@ const initialState = {
   DARK_MODE: false,
   HASH: true,
   QUOTES: true,
+  PRESET: "default",
   RESET: 0 //for comp. rerender if init state doesnt change a prop
 };
 
@@ -53,7 +54,7 @@ export const actionReducer = (state = initialState, action) => {
         ...state,
         SELECTOR_RADIUS: action.SELECTOR_RADIUS
       };
-      case "SET_SELECTOR_STAGGER":
+    case "SET_SELECTOR_STAGGER":
       return {
         ...state,
         SELECTOR_STAGGER: action.SELECTOR_STAGGER
@@ -83,11 +84,42 @@ export const actionReducer = (state = initialState, action) => {
         ...state,
         QUOTES: !state.QUOTES
       };
+    case "SET_PRESET":
+      if(action.PRESET === 'default'){
+        return {
+          ...initialState,
+          SELECTOR_COUNT: state.SELECTOR_COUNT,
+        };
+      }
+      if(action.PRESET === 'triad'){
+        return {
+          ...initialState,
+          SELECTOR_COUNT: (Math.round(state.SELECTOR_COUNT/3)*3),
+          SELECTOR_ANGLE: 360,
+          PRESET: action.PRESET
+        };
+      }
+      if(action.PRESET === 'tetrad'){
+        return {
+          ...initialState,
+          SELECTOR_COUNT: (Math.round(state.SELECTOR_COUNT/4)*4),
+          SELECTOR_ANGLE: 360,
+          PRESET: action.PRESET
+        };
+      }
+      else{
+        return {
+          ...initialState,
+          SELECTOR_COUNT: state.SELECTOR_COUNT,
+          SELECTOR_ANGLE: 360,
+          PRESET: action.PRESET
+        };
+      }
+      
     case "RESET":
-      let darkTemp = state.DARK_MODE
       return {
         ...initialState,
-        DARK_MODE: darkTemp,
+        DARK_MODE: state.DARK_MODE,
         RESET: 1 - state.RESET
       };
     default:

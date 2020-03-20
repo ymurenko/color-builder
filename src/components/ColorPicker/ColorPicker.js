@@ -15,7 +15,7 @@ const ColorPicker_ = props => {
       <div className="navbar-container">
         <div
           className={`tab color-picker-tab active-tab ${props.darkMode ? "dark" : ""}`}
-        ></div>
+        >Colorpicker</div>
         <div
           className={`shadow-tab tab color-picker-tab ${
             props.darkMode ? "dark" : ""
@@ -23,7 +23,7 @@ const ColorPicker_ = props => {
         />
          <div
           className={`tab editor-tab ${props.darkMode ? "dark" : ""}`}
-        ></div>
+        >Palette editor</div>
         <div
           className={`shadow-tab tab editor-tab ${
             props.darkMode ? "dark" : ""

@@ -23,12 +23,12 @@
 .logo-container {
   grid-row: 1;
   width: 1300px;
-  height: 100px;
+  height: 90px;
   margin: auto;
   background-repeat: no-repeat;
   background-size: 35%;
   background-image: url('./logotype.png');
-  margin-top: 30px;
+  margin-top: 10px;
   &.dark {
     background-image: url('./logotype-dark.png');
   }

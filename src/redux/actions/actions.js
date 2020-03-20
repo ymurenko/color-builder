@@ -36,6 +36,9 @@ export const setQuotes = () => (
 export const setHash = () => (
   { type: 'SET_HASH' }
 )
+export const setPreset = (val) => (
+  { type: 'SET_PRESET', PRESET: val }
+)
 export const resetState = () => (
   { type: 'RESET' }
 )
