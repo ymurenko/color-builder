@@ -13,7 +13,7 @@
   color: $secondary-font-color-dark;
   background-color: $color-button;
   &.set-dark{
-    margin: 0 0 20px ;
+    margin: 10px;
   }
   &.active {
     color: $color-primary-dark;
@@ -29,15 +29,30 @@
 
 .color-picker-container {
   display: inline-flex;
-  width: 1300px;
+  position: relative;
+  width: 1320px;
+  height: 640px;
   grid-row: 2;
   margin: auto;
   text-align: center;
   background-color: $color-tertiary;
   border-radius: 15px;
   box-shadow: 0 0px 15px 0 #a1a1a1;
-  padding: 50px 10px 10px 10px;
-
+  .navbar-container {
+    position: absolute;
+    float: top;
+    width: 100%;
+    height: auto;
+  }
+  .color-picker-components{
+    position: absolute;
+    display: grid;
+    column-gap: 20px;
+    bottom: 0;
+    width: auto;
+    height: 550px;
+    padding: 15px;
+  }
   &.dark {
     background-color: $color-tertiary-dark;
     box-shadow: 0 0px 15px 0 black;
@@ -46,12 +61,3 @@
 
 
 
-.container-h {
-  input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-}

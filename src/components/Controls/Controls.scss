@@ -2,17 +2,9 @@
 
 .controls {
   display: inline-block;
+  grid-column: 1;
   width: 300px;
-  height: 400;
-  margin: 10px 10px;
-  padding: 25px;
-  background-color: $color-secondary;
-  border-radius: 15px;
-  box-shadow: 0 0px 15px 0 #a1a1a1;
-  &.dark {
-    background-color: $color-secondary-dark;
-    box-shadow: 0 0px 15px 0 #171717;
-  }
+  
 }
 
 .control-container {

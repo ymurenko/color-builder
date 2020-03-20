@@ -21,17 +21,14 @@ $color-primary-dark: #333333;
     margin: 0px 10px;
 }
 
-.container-block {
-    text-align: center;
-    display: inline-flex;
-    position:relative;
-    margin: 10px 10px;
-    padding: 25px;
-    background-color: $color-secondary;
-    border-radius: 15px;
-    box-shadow: 0 0px 15px 0 #a1a1a1;
-    &.dark {
-      background-color: $color-secondary-dark;
-      box-shadow: 0 0px 15px 0 #171717;
-    }
+.ui-block {
+  height: 500px;
+  padding: 25px;
+  background-color: $color-secondary;
+  border-radius: 15px;
+  box-shadow: 0 0px 15px 0 #a1a1a1;
+  &.dark {
+    background-color: $color-secondary-dark;
+    box-shadow: 0 0px 15px 0 #171717;
   }
+}

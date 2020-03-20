@@ -5,15 +5,29 @@ import Palette from "../Palette/Palette";
 import "./ColorPicker.scss";
 import "../Controls/Controls.scss";
 import { connect } from "react-redux";
+import { setDarkMode } from "../../redux/actions/actions";
 
 const ColorPicker_ = props => {
   const colorContainer = useRef(null);
 
   return (
     <div className={`color-picker-container ${props.darkMode ? "dark" : ""}`}>
-        <Controls />
-        <ColorWheel colorsContainer={colorContainer} />
-        <Palette paletteRef={colorContainer} />
+      <div className="navbar-container">
+        <button
+          className={`button set-dark ${props.darkMode ? "dark" : ""}`}
+          type="button"
+          onClick={() => {
+            props.setDarkMode();
+          }}
+        >
+          {props.darkMode ? "Light Mode" : "Dark Mode"}
+        </button>
+      </div>
+      <div className="color-picker-components">
+      <Controls />
+      <ColorWheel colorsContainer={colorContainer} />
+      <Palette paletteRef={colorContainer} />
+      </div>
     </div>
   );
 };
@@ -28,6 +42,10 @@ function mapStateToProps(state) {
   };
 }
 
-const ColorPicker = connect(mapStateToProps)(ColorPicker_);
+const mapDispatchToProps = {
+  setDarkMode
+};
+
+const ColorPicker = connect(mapStateToProps, mapDispatchToProps)(ColorPicker_);
 
 export default ColorPicker;

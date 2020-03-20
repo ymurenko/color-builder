@@ -1,16 +1,12 @@
 
 @import "../../Globals.scss";
 
-.colors-wrapper {
+.palette {
     text-align: center;
     display: inline-block;
+    grid-column: 3;
     width: 300px;
-    margin: 10px 10px;
-    padding: 25px;
     height: 500px;
-    background-color: $color-secondary;
-    border-radius: 15px;
-    box-shadow: 0 0px 15px 0 #a1a1a1;
     .colors-container {
       height: 400px;
       border-radius: 10px;
@@ -18,10 +14,6 @@
     }
     .control-container {
       margin-top: 20px;
-    }
-    &.dark {
-      background-color: $color-secondary-dark;
-      box-shadow: 0 0px 15px 0 #171717;
     }
   }
 

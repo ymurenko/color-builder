@@ -51,7 +51,7 @@ const ColorWheel_ = props => {
   });
 
   return (
-    <div className={`container-block ${props.darkMode ? "dark" : ""}`} style={{height: `${colorWheelRadius*2}`, width: `${colorWheelRadius*2}`}}>
+    <div className={`color-wheel ui-block ${props.darkMode ? "dark" : ""}`} style={{height: `${colorWheelRadius*2}`, width: `${colorWheelRadius*2}`}}>
       <button
         className={`button button-left ${props.linked ? "active" : ""} ${
           props.darkMode ? "dark" : ""

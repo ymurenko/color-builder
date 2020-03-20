@@ -1,8 +1,16 @@
 @import "../../Globals.scss";
 
+.color-wheel {
+  grid-column: 2;
+  text-align: center;
+  display: inline-flex;
+  position: relative;
+}
+
 .gradient {
   z-index: 0;
   display: inline-block;
+  height: 500px;
   .selector {
     position: absolute;
   }
@@ -11,17 +19,15 @@
 .button-right {
   z-index: 1;
   position: absolute;
-  bottom: 25px;
-  right: 25px;
-  margin: 0 10px 0;
+  bottom: 30px;
+  right: 30px;
 }
 
 .button-left {
   z-index: 1;
   position: absolute;
-  bottom: 25px;
-  left: 25px;
-  margin: 0 10px 0;
+  bottom: 30px;
+  left: 30px;
   &.active {
     border: solid 2px $secondary-font-color;
     padding: 3px 0;

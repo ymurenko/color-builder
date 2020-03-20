@@ -28,7 +28,7 @@ const Palette_ = props => {
   ));
 
   return (
-    <div className={`colors-wrapper ${props.darkMode ? "dark" : ""}`}>
+    <div className={`palette ui-block ${props.darkMode ? "dark" : ""}`}>
       <div className="colors-container" ref={props.paletteRef}>
         {renderColorBlocks}
       </div>

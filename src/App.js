@@ -1,7 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import logo from "./logotype.png";
-import logoDark from "./logotype-dark.png";
 import "./App.scss";
 import ColorPicker from "./components/ColorPicker/ColorPicker";
 

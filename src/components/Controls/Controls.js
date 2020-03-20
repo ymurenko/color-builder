@@ -22,18 +22,7 @@ const Controls_ = props => {
   }, [props.selectorRadius]);
 
   return (
-    <div className={`controls ${props.darkMode ? "dark" : ""}`}>
-      <div className="control-container">
-        <button
-          className={`button set-dark ${props.darkMode ? "dark" : ""}`}
-          type="button"
-          onClick={() => {
-            props.setDarkMode();
-          }}
-        >
-          {props.darkMode ? "Light Mode" : "Dark Mode"}
-        </button>
-      </div>
+    <div className={`controls ui-block ${props.darkMode ? "dark" : ""}`}>
       <div className="control-container">
         <p className="slider-label">Lightness: {props.lightness}%</p>
         <input
