@@ -6,14 +6,20 @@
   font-weight: $secondary-font-weight;
   font-family: $font-family;
   width: 100px;
-  height: 29px;
+  height: 30px;
   padding: 5px;
   border: none;
   border-radius: 8px;
   color: $secondary-font-color-dark;
   background-color: $color-button;
-  &.set-dark{
-    margin: 10px;
+  &.set-dark {
+    position: absolute;
+    margin: 10px 15px 10px;
+    right: 0;
+    box-shadow: 0 0px 15px 0 #a1a1a1;
+    &.dark {
+      box-shadow: 0 0px 15px 0 #161616;
+    }
   }
   &.active {
     color: $color-primary-dark;
@@ -31,20 +37,49 @@
   display: inline-flex;
   position: relative;
   width: 1320px;
-  height: 640px;
+  height: 630px;
   grid-row: 2;
   margin: auto;
   text-align: center;
-  background-color: $color-tertiary;
+  background-color: $color-secondary;
   border-radius: 15px;
   box-shadow: 0 0px 15px 0 #a1a1a1;
   .navbar-container {
-    position: absolute;
+    position: relative;
     float: top;
     width: 100%;
-    height: auto;
+    height: 50px;
+   
+    .tab {
+      position: absolute;
+      height: 40px;
+      width: 200px;
+      margin: 10px 10px 0 15px;
+      background-color: $color-tertiary;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      &.shadow-tab{
+        box-shadow: 0 0px 15px 0 #a1a1a1;
+        background-color: transparent;
+        &.dark {
+          box-shadow: 0 0px 15px 0 #161616;
+        }
+      }
+      &.dark {
+        background-color: $color-tertiary-dark;
+      }
+    }
+    .active-tab {
+      z-index: 2;
+      &.shadow-tab {
+        z-index: 1;
+      }
+    }
+    .editor-tab {
+      left: 230px;
+    }
   }
-  .color-picker-components{
+  .color-picker-components {
     position: absolute;
     display: grid;
     column-gap: 20px;
@@ -52,12 +87,17 @@
     width: auto;
     height: 550px;
     padding: 15px;
+    background-color: $color-tertiary;
+    border-radius: 15px;
+    box-shadow: 0 0px 15px 0 #a1a1a1;
+    &.dark {
+      background-color: $color-tertiary-dark;
+      box-shadow: 0 0px 15px 0 #161616;
+    }
+    z-index: 1;
   }
   &.dark {
-    background-color: $color-tertiary-dark;
+    background-color: $color-secondary-dark;
     box-shadow: 0 0px 15px 0 black;
   }
 }
-
-
-

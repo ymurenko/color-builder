@@ -11,8 +11,24 @@ const ColorPicker_ = props => {
   const colorContainer = useRef(null);
 
   return (
-    <div className={`color-picker-container ${props.darkMode ? "dark" : ""}`}>
+    <div className={`color-picker-container active-tab ${props.darkMode ? "dark" : ""}`}>
       <div className="navbar-container">
+        <div
+          className={`tab color-picker-tab active-tab ${props.darkMode ? "dark" : ""}`}
+        ></div>
+        <div
+          className={`shadow-tab tab color-picker-tab ${
+            props.darkMode ? "dark" : ""
+          }`}
+        />
+         <div
+          className={`tab editor-tab ${props.darkMode ? "dark" : ""}`}
+        ></div>
+        <div
+          className={`shadow-tab tab editor-tab ${
+            props.darkMode ? "dark" : ""
+          }`}
+        />
         <button
           className={`button set-dark ${props.darkMode ? "dark" : ""}`}
           type="button"
@@ -23,10 +39,12 @@ const ColorPicker_ = props => {
           {props.darkMode ? "Light Mode" : "Dark Mode"}
         </button>
       </div>
-      <div className="color-picker-components">
-      <Controls />
-      <ColorWheel colorsContainer={colorContainer} />
-      <Palette paletteRef={colorContainer} />
+      <div
+        className={`color-picker-components ${props.darkMode ? "dark" : ""}`}
+      >
+        <Controls />
+        <ColorWheel colorsContainer={colorContainer} />
+        <Palette paletteRef={colorContainer} />
       </div>
     </div>
   );
