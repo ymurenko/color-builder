@@ -26,19 +26,8 @@ const Controls_ = props => {
   }, [props.selectorRadius]);
 
   useEffect(() => {
-    switch(props.preset){
-      case 2:
-        props.setSelectorCount(6);
-        break;
-      case 3:
-        props.setSelectorCount(9);
-        break;
-      case 4:
-        props.setSelectorCount(12);
-        break;
-      case 5:
-        props.setSelectorCount(10);
-        break;
+    if(props.preset != 1) {
+      props.setSelectorCount(props.preset*3);
     }
   }, [props.preset]);
 

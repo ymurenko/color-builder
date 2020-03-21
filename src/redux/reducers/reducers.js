@@ -86,45 +86,45 @@ export const actionReducer = (state = initialState, action) => {
         QUOTES: !state.QUOTES
       };
     case "SET_PRESET":
-      if (action.PRESET === 2) {
-        return {
-          ...initialState,
-          SELECTOR_ANGLE: 360,
-          DARK_MODE: state.DARK_MODE,
-          PRESET: action.PRESET,
-          CLUSTER_ANGLE: 20
-        };
-      } else if (action.PRESET === 3) {
-        return {
-          ...initialState,
-          SELECTOR_ANGLE: 360,
-          DARK_MODE: state.DARK_MODE,
-          PRESET: action.PRESET,
-          CLUSTER_ANGLE: 16
-        };
-      } else if (action.PRESET === 4) {
-        return {
-          ...initialState,
-          SELECTOR_ANGLE: 360,
-          DARK_MODE: state.DARK_MODE,
-          PRESET: action.PRESET,
-          CLUSTER_ANGLE: 12
-        };
-      } else if (action.PRESET === 5) {
-        return {
-          ...initialState,
-          SELECTOR_ANGLE: 360,
-          DARK_MODE: state.DARK_MODE,
-          PRESET: action.PRESET,
-          CLUSTER_ANGLE: 15
-        };
-      } else {
-        return {
-          ...initialState,
-          SELECTOR_COUNT: state.SELECTOR_COUNT,
-          SELECTOR_ANGLE: 360,
-          PRESET: action.PRESET
-        };
+      switch (action.PRESET) {
+        case 2:
+          return {
+            ...initialState,
+            SELECTOR_ANGLE: 360,
+            DARK_MODE: state.DARK_MODE,
+            PRESET: action.PRESET,
+            LINKED: true,
+            CLUSTER_ANGLE: 20
+          };
+        case 3:
+          return {
+            ...initialState,
+            SELECTOR_ANGLE: 360,
+            DARK_MODE: state.DARK_MODE,
+            PRESET: action.PRESET,
+            LINKED: true,
+            CLUSTER_ANGLE: 16
+          };
+        case 4:
+          return {
+            ...initialState,
+            SELECTOR_ANGLE: 360,
+            DARK_MODE: state.DARK_MODE,
+            PRESET: action.PRESET,
+            LINKED: true,
+            CLUSTER_ANGLE: 16
+          };
+        case 5:
+          return {
+            ...initialState,
+            SELECTOR_ANGLE: 360,
+            DARK_MODE: state.DARK_MODE,
+            PRESET: action.PRESET,
+            LINKED: true,
+            CLUSTER_ANGLE: 15
+          };
+        default:
+          return state
       }
     case "SET_CLUSTER_ANGLE":
       return {
