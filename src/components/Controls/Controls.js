@@ -73,7 +73,7 @@ const Controls_ = props => {
         <div className="presets-grid">
           <button
             className={`preset dyad ${props.darkMode ? "dark" : ""} ${
-              props.preset === 1 ? "active" : ""
+              props.preset === 2 ? "active" : ""
             } `}
             type="button"
             onClick={() => {
