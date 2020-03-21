@@ -3,6 +3,12 @@
 export const storeColor = (val, index) => (
   { type: 'SET_COLOR', COLOR: val, INDEX: index }
 )
+export const storePalette = () => (
+  { type: 'STORE_PALETTE' }
+)
+export const deletePalette = (index) => (
+  { type: 'DELETE_PALETTE', INDEX: index}
+)
 export const setLightness = (val) => (
   { type: 'SET_LIGHTNESS', LIGHTNESS: val }
 )

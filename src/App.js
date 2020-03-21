@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import "./App.scss";
 import ColorPicker from "./components/ColorPicker/ColorPicker";
 
+
 const App_ = props => {
   return (
     <div className={`App ${props.darkMode ? "dark" : ""}`}>

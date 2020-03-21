@@ -1,0 +1,54 @@
+@import "../../Globals.scss";
+
+.palette {
+  grid-column: 4;
+  height: 100%;
+  width: 110px;
+  background-color: $color-secondary;
+  border-radius: $ui-block-radius;
+  box-shadow: 0 0px 15px 0 #a1a1a1;
+  font-weight: bold;
+  &.dark {
+    background-color: $color-secondary-dark;
+    box-shadow: 0 0px 15px 0 #171717;
+  }
+  .palettes-button {
+    font-size: 1.5rem;
+    line-height: 0;
+    width: 40px;
+    margin: 10px 5px 5px;
+  }
+  .palette-block {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    margin: 5px;
+    border-radius: $button-radius;
+    overflow: hidden;
+    .block-color {
+      width: 100%;
+    }
+    .icon-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 90px;
+      width: 90px;
+      background-image: url("../../img/delete-icon.png");
+      background-size: 100%;
+      display: none;
+    }
+    &.delete-mode {
+      cursor: pointer;
+      border: solid 5px $color-button;
+      height: 90px;
+      width: 90px;
+      .icon-overlay {
+        display: block;
+      }
+      &.dark {
+        border: solid 5px #818181;
+      }
+    }
+  }
+}

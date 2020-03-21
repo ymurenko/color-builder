@@ -3,7 +3,7 @@
 .controls {
   display: inline-block;
   grid-column: 1;
-  width: 300px;
+  width: $ui-block-width;
   
 }
 
@@ -13,9 +13,9 @@
   text-align: center;
   margin-top: 15px;
   .preset {
-    margin: 5px;
-    height: 140px;
-    width: 140px;
+    margin: 20px 5px;
+    height: 120px;
+    width: 120px;
     background-color: $color-secondary;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -65,7 +65,7 @@
   font-family: $font-family;
   margin: 5px;
   .button {
-    margin: 0 20px;
+    margin: 0 10px;
   }
   &.slider-container {
 

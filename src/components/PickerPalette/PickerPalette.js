@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import { store } from "../../redux/reducers/reducers";
 import ColorBlock from "../ColorBlock/ColorBlock";
 import { setQuotes, setHash } from "../../redux/actions/actions";
-import "./Palette.scss";
-import "../../Globals.scss";
+import "./PickerPalette.scss";
 
-const Palette_ = props => {
+const PickerPalette_ = props => {
   const copyAllColors = () => {
     let colorArr = [...store.getState().actionReducer.COLORS];
 
@@ -28,7 +27,7 @@ const Palette_ = props => {
   ));
 
   return (
-    <div className={`palette ui-block ${props.darkMode ? "dark" : ""}`}>
+    <div className={`picker-palette ui-block ${props.darkMode ? "dark" : ""}`}>
       <div className="colors-container" ref={props.paletteRef}>
         {renderColorBlocks}
       </div>
@@ -87,6 +86,6 @@ const mapDispatchToProps = {
   setHash
 };
 
-const Palette = connect(mapStateToProps, mapDispatchToProps)(Palette_);
+const PickerPalette = connect(mapStateToProps, mapDispatchToProps)(PickerPalette_);
 
-export default Palette;
+export default PickerPalette;

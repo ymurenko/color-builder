@@ -2,6 +2,7 @@ import { combineReducers, createStore } from "redux";
 
 const initialState = {
   COLORS: ["#FFF", "#FFF", "#FFF"],
+  PALETTES: [],
   LIGHTNESS: 50,
   SATURATION: 100,
   SELECTOR_COUNT: 4,
@@ -26,6 +27,20 @@ export const actionReducer = (state = initialState, action) => {
         ...state,
         COLORS: CURRENT_COLORS
       };
+    case "STORE_PALETTE":
+      let NEW_PALETTES = [...state.PALETTES];
+      NEW_PALETTES.push([...state.COLORS])
+      return {
+        ...state,
+        PALETTES: NEW_PALETTES
+      }
+    case "DELETE_PALETTE":
+      let CURRENT_PALETTES = [...state.PALETTES];
+      CURRENT_PALETTES.splice(action.INDEX, 1);
+      return {
+        ...state,
+        PALETTES: CURRENT_PALETTES
+      }
     case "SET_LIGHTNESS":
       return {
         ...state,
@@ -90,6 +105,7 @@ export const actionReducer = (state = initialState, action) => {
         case 2:
           return {
             ...initialState,
+            PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
             PRESET: action.PRESET,
@@ -99,6 +115,7 @@ export const actionReducer = (state = initialState, action) => {
         case 3:
           return {
             ...initialState,
+            PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
             PRESET: action.PRESET,
@@ -108,6 +125,7 @@ export const actionReducer = (state = initialState, action) => {
         case 4:
           return {
             ...initialState,
+            PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
             PRESET: action.PRESET,
@@ -117,6 +135,7 @@ export const actionReducer = (state = initialState, action) => {
         case 5:
           return {
             ...initialState,
+            PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
             PRESET: action.PRESET,
@@ -134,6 +153,7 @@ export const actionReducer = (state = initialState, action) => {
     case "RESET":
       return {
         ...initialState,
+        PALETTES: state.PALETTES,
         SELECTOR_COUNT: state.SELECTOR_COUNT,
         DARK_MODE: state.DARK_MODE,
         RESET: 1 - state.RESET
