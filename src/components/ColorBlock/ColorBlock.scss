@@ -1,7 +1,6 @@
 @import "../../Globals.scss";
 
 .color-block {
-  display: grid;
   cursor: pointer;
   border: none;
   background-color: #fff;
@@ -10,18 +9,21 @@
   font-weight: 400;
   font-size: 1.1rem;
   color: filter;
-  .edit-prompt {
-    grid-column: 1;
-    width: 80px;
-    opacity: 0;
-    &:hover {
-        opacity: 1;
-    }
-  }
   .copy-prompt {
-      padding-left: 26px;
-    text-align: left;
-    grid-column: 2;
-    width: 220px;
+    text-align: center;
+    .hover-cta {
+      margin: 0;
+    }
+    .copy-text {
+      display: none;
+    }
+    &:hover {
+      .color-text {
+        display: none;
+      }
+      .copy-text {
+        display: inline;
+      }
+    }
   }
 }
