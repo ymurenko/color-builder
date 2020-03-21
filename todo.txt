@@ -1,3 +1,5 @@
+- change pentad to three points
+    - refactor selector setting after preset is set
 - refactor contols into componenets (buttons, sliders)
 - palette editor feature
 - alternate color modes (rgb, hsl)
