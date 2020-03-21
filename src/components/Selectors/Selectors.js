@@ -38,44 +38,16 @@ const Selectors_ = props => {
     //sets the angle of the polar offset from +X-axis
     let radOffset;
     let harmony = {total: 0, count: 1};
-    if (props.preset === 'triad' && props.selectorCount != 3){
+    if (props.preset != 1 && props.selectorCount != props.preset){
       radOffset = [0,0]
       for (let i = 1; i < props.selectorCount; i++) {
-        if(harmony.count === Math.round(props.selectorCount/3)){
+        if(harmony.count === Math.round(props.selectorCount/props.preset)){
           harmony.total++
           harmony.count = 0;
-          radOffset.push(radOffset[i] = (Math.round(props.selectorAngle / 3) * (Math.PI / 180)) * harmony.total)
+          radOffset.push(radOffset[i] = (Math.round(props.selectorAngle / props.preset) * (Math.PI / 180)) * harmony.total)
         }
         else {
-          radOffset.push(radOffset[i] += Math.round(props.selectorAngle / (props.selectorCount*2.5) ) * (Math.PI / 180))
-        }
-        harmony.count++;
-      }
-    }
-    else if (props.preset === 'tetrad' && props.selectorCount != 4){
-      radOffset = [0,0]
-      for (let i = 1; i < props.selectorCount; i++) {
-        if(harmony.count === Math.round(props.selectorCount/4)){
-          harmony.total++
-          harmony.count = 0;
-          radOffset.push(radOffset[i] = (Math.round(props.selectorAngle / 4) * (Math.PI / 180)) * harmony.total)
-        }
-        else {
-          radOffset.push(radOffset[i] += Math.round(props.selectorAngle / (props.selectorCount*2.5) ) * (Math.PI / 180))
-        }
-        harmony.count++;
-      }
-    }
-    else if (props.preset === 'pentad' && props.selectorCount != 5){
-      radOffset = [0,0]
-      for (let i = 1; i < props.selectorCount; i++) {
-        if(harmony.count === Math.round(props.selectorCount/5)){
-          harmony.total++
-          harmony.count = 0;
-          radOffset.push(radOffset[i] = (Math.round(props.selectorAngle / 5) * (Math.PI / 180)) * harmony.total)
-        }
-        else {
-          radOffset.push(radOffset[i] += Math.round(props.selectorAngle / (props.selectorCount*2) ) * (Math.PI / 180))
+          radOffset.push(radOffset[i] += props.clusterAngle * (Math.PI / 180))
         }
         harmony.count++;
       }
@@ -245,7 +217,7 @@ const Selectors_ = props => {
       circleRefs[i].setAttribute("cy", `${y}`);
       staggerOffset += props.selectorStagger / props.selectorCount
     }
-  }, [props.selectorStagger, props.selectorCount, props.selectorRadius,  props.selectorAngle]);
+  }, [props.selectorStagger, props.selectorCount, props.selectorRadius,  props.selectorAngle, props.clusterAngle]);
 
   useEffect(() => {
     for (let i = 0; i < props.selectorCount; i++) {
@@ -283,7 +255,8 @@ function mapStateToProps(state) {
     saturation: state.actionReducer.SATURATION,
     linked: state.actionReducer.LINKED,
     reset: state.actionReducer.RESET,
-    preset: state.actionReducer.PRESET
+    preset: state.actionReducer.PRESET,
+    clusterAngle: state.actionReducer.CLUSTER_ANGLE
   };
 }
 

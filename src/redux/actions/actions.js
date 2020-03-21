@@ -39,6 +39,9 @@ export const setHash = () => (
 export const setPreset = (val) => (
   { type: 'SET_PRESET', PRESET: val }
 )
+export const setClusterAngle = (val) => (
+  { type: 'SET_CLUSTER_ANGLE', CLUSTER_ANGLE: val }
+)
 export const resetState = () => (
   { type: 'RESET' }
 )

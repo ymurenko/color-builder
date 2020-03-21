@@ -10,6 +10,7 @@ import {
   setSelectorRadius,
   setSelectorStagger,
   setDarkMode,
+  setClusterAngle,
   setPreset
 } from "../../redux/actions/actions";
 import "./Controls.scss";
@@ -18,10 +19,28 @@ import "./Slider.scss";
 const Controls_ = props => {
   const [tab, setTab] = useState(true);
   const staggerSlider = useRef(null);
+  const selectorCountSlider = useRef(null);
 
   useEffect(() => {
     props.setSelectorStagger(staggerSlider.current.value);
   }, [props.selectorRadius]);
+
+  useEffect(() => {
+    switch(props.preset){
+      case 1:
+        props.setSelectorCount(6);
+        break;
+      case 3:
+        props.setSelectorCount(9);
+        break;
+      case 4:
+        props.setSelectorCount(12);
+        break;
+      case 5:
+        props.setSelectorCount(10);
+        break;
+    }
+  }, [props.preset]);
 
   return (
     <div className={`controls ui-block ${props.darkMode ? "dark" : ""}`}>
@@ -50,41 +69,62 @@ const Controls_ = props => {
         </button>
       </div>
       <div className="presets" style={{ display: tab ? "none" : "" }}>
+        <div>
         <div className="presets-grid">
           <button
             className={`preset default ${props.darkMode ? "dark" : ""} ${
-              props.preset === "default" ? "active" : ""
+              props.preset === 1 ? "active" : ""
             } `}
             type="button"
             onClick={() => {
-              if (!(props.preset === "default")) props.setPreset("default");
+              if (!(props.preset === 1)) props.setPreset(1);
             }}
           />
           <button
             className={`preset triad  ${props.darkMode ? "dark" : ""} ${
-              props.preset === "triad" ? "active" : ""
+              props.preset === 3 ? "active" : ""
             }`}
             type="button"
             onClick={() => {
-              if (!(props.preset === "triad")) props.setPreset("triad");
+              if (!(props.preset === 3)) props.setPreset(3);
             }}
           />
           <button
             className={`preset tetrad  ${props.darkMode ? "dark" : ""} ${
-              props.preset === "tetrad" ? "active" : ""
+              props.preset === 4 ? "active" : ""
             }`}
             type="button"
             onClick={() => {
-              if (!(props.preset === "tetrad")) props.setPreset("tetrad");
+              if (!(props.preset === 4)) props.setPreset(4);
             }}
           />
           <button
             className={`preset pentad  ${props.darkMode ? "dark" : ""} ${
-              props.preset === "pentad" ? "active" : ""
+              props.preset === 5 ? "active" : ""
             }`}
             type="button"
             onClick={() => {
-              if (!(props.preset === "pentad")) props.setPreset("pentad");
+              if (!(props.preset === 5)) props.setPreset(5);
+            }}
+          />
+          
+        </div>
+        </div>
+        <div className="control-container slider-container" style={{marginTop: '80px'}}>
+          <p className="slider-label">Cluster Spacing Angle:{" "}
+            {(
+              Math.round((props.clusterAngle) * 10) / 10
+            ).toFixed(1)}
+            º</p>
+          <input
+            type="range"
+            className={`slider ${props.darkMode ? "dark" : ""}`}
+            min={1}
+            max={((props.selectorAngle / props.preset)/props.selectorCount)*props.preset}
+            step={1}
+            value={props.clusterAngle}
+            onChange={val => {
+              props.setClusterAngle(val.target.value);
             }}
           />
         </div>
@@ -125,9 +165,10 @@ const Controls_ = props => {
           <input
             type="range"
             className={`slider ${props.darkMode ? "dark" : ""}`}
-            min={1}
-            max={10}
-            step={1}
+            ref={selectorCountSlider}
+            min={props.preset}
+            max={15}
+            step={props.preset}
             value={props.selectorCount}
             onChange={val => {
               props.setSelectorCount(val.target.value);
@@ -156,7 +197,7 @@ const Controls_ = props => {
         </div>
         <div className="control-container slider-container">
           <p className="slider-label">
-            Distance from Origin:{" "}
+            Distance From Origin:{" "}
             {(Math.round((props.selectorRadius / 236) * 1000) / 10).toFixed(0)}
           </p>
           <input
@@ -185,7 +226,6 @@ const Controls_ = props => {
             step={1}
             defaultValue={props.selectorStagger}
             onChange={val => {
-              console.log("sdfds");
               props.setSelectorStagger(val.target.value);
             }}
           />
@@ -205,7 +245,8 @@ function mapStateToProps(state) {
     selectorStagger: state.actionReducer.SELECTOR_STAGGER,
     linked: state.actionReducer.LINKED,
     darkMode: state.actionReducer.DARK_MODE,
-    preset: state.actionReducer.PRESET
+    preset: state.actionReducer.PRESET,
+    clusterAngle: state.actionReducer.CLUSTER_ANGLE
   };
 }
 
@@ -219,6 +260,7 @@ const mapDispatchToProps = {
   setSelectorRadius,
   setSelectorStagger,
   setDarkMode,
+  setClusterAngle,
   setPreset
 };
 

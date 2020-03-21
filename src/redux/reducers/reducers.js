@@ -8,11 +8,12 @@ const initialState = {
   SELECTOR_ANGLE: 180,
   SELECTOR_RADIUS: 118,
   SELECTOR_STAGGER: 0,
+  CLUSTER_ANGLE: 30,
   LINKED: false,
   DARK_MODE: false,
   HASH: true,
   QUOTES: true,
-  PRESET: "default",
+  PRESET: 1,
   RESET: 0 //for comp. rerender if init state doesnt change a prop
 };
 
@@ -85,35 +86,35 @@ export const actionReducer = (state = initialState, action) => {
         QUOTES: !state.QUOTES
       };
     case "SET_PRESET":
-      if (action.PRESET === "default") {
+      if (action.PRESET === 1) {
         return {
           ...initialState,
           DARK_MODE: state.DARK_MODE,
           SELECTOR_COUNT: 6
         };
-      } else if (action.PRESET === "triad") {
+      } else if (action.PRESET === 3) {
         return {
           ...initialState,
-          SELECTOR_COUNT: 9,
           SELECTOR_ANGLE: 360,
           DARK_MODE: state.DARK_MODE,
-          PRESET: action.PRESET
+          PRESET: action.PRESET,
+          CLUSTER_ANGLE: 16
         };
-      } else if (action.PRESET === "tetrad") {
+      } else if (action.PRESET === 4) {
         return {
           ...initialState,
-          SELECTOR_COUNT: 12,
           SELECTOR_ANGLE: 360,
           DARK_MODE: state.DARK_MODE,
-          PRESET: action.PRESET
+          PRESET: action.PRESET,
+          CLUSTER_ANGLE: 12
         };
-      } else if (action.PRESET === "pentad") {
+      } else if (action.PRESET === 5) {
         return {
           ...initialState,
-          SELECTOR_COUNT: 10,
           SELECTOR_ANGLE: 360,
           DARK_MODE: state.DARK_MODE,
-          PRESET: action.PRESET
+          PRESET: action.PRESET,
+          CLUSTER_ANGLE: 15
         };
       } else {
         return {
@@ -123,7 +124,11 @@ export const actionReducer = (state = initialState, action) => {
           PRESET: action.PRESET
         };
       }
-
+    case "SET_CLUSTER_ANGLE":
+      return {
+        ...state,
+        CLUSTER_ANGLE: action.CLUSTER_ANGLE
+      };
     case "RESET":
       return {
         ...initialState,

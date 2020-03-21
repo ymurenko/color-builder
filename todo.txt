@@ -1,3 +1,4 @@
+- refactor contols into componenets (buttons, sliders)
 - palette editor feature
 - alternate color modes (rgb, hsl)
     - opacity support maybe?
