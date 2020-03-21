@@ -1,0 +1,9 @@
+- palette editor feature
+- alternate color modes (rgb, hsl)
+    - opacity support maybe?
+- setting distance from origin resets original position of selector 1
+- accessibility
+- refactoring CSS
+- responsive design
+    - support for pixel densities
+- write + save to photoshop .aco format https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/#50577411_pgfId-1055819
