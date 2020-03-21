@@ -21,10 +21,10 @@
     background-size: 100%;
     cursor: pointer;
     border: none;
-    &.default {
-      background-image: url('../../img/default-light.png');
+    &.dyad {
+      background-image: url('../../img/dyad-light.png');
       &.dark {
-        background-image: url('../../img/default-dark.png');
+        background-image: url('../../img/dyad-dark.png');
       }
     }
     &.triad {

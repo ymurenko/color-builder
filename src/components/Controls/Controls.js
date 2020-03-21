@@ -27,7 +27,7 @@ const Controls_ = props => {
 
   useEffect(() => {
     switch(props.preset){
-      case 1:
+      case 2:
         props.setSelectorCount(6);
         break;
       case 3:
@@ -72,12 +72,12 @@ const Controls_ = props => {
         <div>
         <div className="presets-grid">
           <button
-            className={`preset default ${props.darkMode ? "dark" : ""} ${
+            className={`preset dyad ${props.darkMode ? "dark" : ""} ${
               props.preset === 1 ? "active" : ""
             } `}
             type="button"
             onClick={() => {
-              if (!(props.preset === 1)) props.setPreset(1);
+              if (!(props.preset === 2)) props.setPreset(2);
             }}
           />
           <button

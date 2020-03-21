@@ -8,3 +8,5 @@
 - responsive design
     - support for pixel densities
 - write + save to photoshop .aco format https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/#50577411_pgfId-1055819
+- save palettes to local storage
+    - palette editor will use saved palettes

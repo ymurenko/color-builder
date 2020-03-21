@@ -86,11 +86,13 @@ export const actionReducer = (state = initialState, action) => {
         QUOTES: !state.QUOTES
       };
     case "SET_PRESET":
-      if (action.PRESET === 1) {
+      if (action.PRESET === 2) {
         return {
           ...initialState,
+          SELECTOR_ANGLE: 360,
           DARK_MODE: state.DARK_MODE,
-          SELECTOR_COUNT: 6
+          PRESET: action.PRESET,
+          CLUSTER_ANGLE: 20
         };
       } else if (action.PRESET === 3) {
         return {
@@ -132,6 +134,7 @@ export const actionReducer = (state = initialState, action) => {
     case "RESET":
       return {
         ...initialState,
+        SELECTOR_COUNT: state.SELECTOR_COUNT,
         DARK_MODE: state.DARK_MODE,
         RESET: 1 - state.RESET
       };

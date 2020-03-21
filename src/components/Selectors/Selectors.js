@@ -217,7 +217,7 @@ const Selectors_ = props => {
       circleRefs[i].setAttribute("cy", `${y}`);
       staggerOffset += props.selectorStagger / props.selectorCount
     }
-  }, [props.selectorStagger, props.selectorCount, props.selectorRadius,  props.selectorAngle, props.clusterAngle]);
+  }, [props.selectorStagger, props.selectorCount, props.selectorRadius,  props.selectorAngle, props.clusterAngle, props.reset]);
 
   useEffect(() => {
     for (let i = 0; i < props.selectorCount; i++) {
