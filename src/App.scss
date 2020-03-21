@@ -27,10 +27,10 @@
   margin: auto;
   background-repeat: no-repeat;
   background-size: 35%;
-  background-image: url('./logotype.png');
+  background-image: url('./img/logotype.png');
   margin-top: 10px;
   &.dark {
-    background-image: url('./logotype-dark.png');
+    background-image: url('./img/logotype-dark.png');
   }
 }
 

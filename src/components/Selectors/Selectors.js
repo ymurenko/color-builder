@@ -83,7 +83,7 @@ const Selectors_ = props => {
     else {
       radOffset = [firstCircleAngle]
       for (let i = 0; i < props.selectorCount; i++) {
-        radOffset.push(radOffset[i] += Math.round(props.selectorAngle / props.selectorCount) * (Math.PI / 180))
+        radOffset.push(radOffset[i] + Math.round(props.selectorAngle / props.selectorCount) * (Math.PI / 180))
       }
     }
     return radOffset

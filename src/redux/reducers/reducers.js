@@ -89,7 +89,7 @@ export const actionReducer = (state = initialState, action) => {
         return {
           ...initialState,
           DARK_MODE: state.DARK_MODE,
-          SELECTOR_COUNT: state.SELECTOR_COUNT
+          SELECTOR_COUNT: 6
         };
       } else if (action.PRESET === "triad") {
         return {

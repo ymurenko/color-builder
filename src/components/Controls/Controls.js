@@ -28,7 +28,8 @@ const Controls_ = props => {
       <div className="control-container">
         <button
           className={`button ${tab ? "active" : ""} ${
-            props.darkMode ? "dark" : "" }`}
+            props.darkMode ? "dark" : ""
+          }`}
           type="button"
           onClick={() => {
             setTab(true);
@@ -38,7 +39,8 @@ const Controls_ = props => {
         </button>
         <button
           className={`button ${tab ? "" : "active"} ${
-            props.darkMode ? "dark" : "" }`}
+            props.darkMode ? "dark" : ""
+          }`}
           type="button"
           onClick={() => {
             setTab(false);
@@ -50,41 +52,41 @@ const Controls_ = props => {
       <div className="presets" style={{ display: tab ? "none" : "" }}>
         <div className="presets-grid">
           <button
-            className={`preset button ${props.darkMode ? "dark" : ""} ${props.preset === 'default' ? "active" : ""} `}
+            className={`preset default ${props.darkMode ? "dark" : ""} ${
+              props.preset === "default" ? "active" : ""
+            } `}
             type="button"
             onClick={() => {
-              if(!(props.preset === 'default')) props.setPreset('default');
+              if (!(props.preset === "default")) props.setPreset("default");
             }}
-          >
-            Analogous
-          </button>
+          />
           <button
-            className={`preset button  ${props.darkMode ? "dark" : ""} ${props.preset === 'triad' ? "active" : ""}`}
+            className={`preset triad  ${props.darkMode ? "dark" : ""} ${
+              props.preset === "triad" ? "active" : ""
+            }`}
             type="button"
             onClick={() => {
-              if(!(props.preset === 'triad')) props.setPreset('triad');
+              if (!(props.preset === "triad")) props.setPreset("triad");
             }}
-          >
-            Triad
-          </button>
+          />
           <button
-            className={`preset button  ${props.darkMode ? "dark" : ""} ${props.preset === 'tetrad' ? "active" : ""}`}
+            className={`preset tetrad  ${props.darkMode ? "dark" : ""} ${
+              props.preset === "tetrad" ? "active" : ""
+            }`}
             type="button"
             onClick={() => {
-              if(!(props.preset === 'tetrad')) props.setPreset('tetrad');
+              if (!(props.preset === "tetrad")) props.setPreset("tetrad");
             }}
-          >
-            Tetrad
-          </button>
+          />
           <button
-            className={`preset button  ${props.darkMode ? "dark" : ""} ${props.preset === 'pentad' ? "active" : ""}`}
+            className={`preset pentad  ${props.darkMode ? "dark" : ""} ${
+              props.preset === "pentad" ? "active" : ""
+            }`}
             type="button"
             onClick={() => {
-              if(!(props.preset === 'pentad')) props.setPreset('pentad');
+              if (!(props.preset === "pentad")) props.setPreset("pentad");
             }}
-          >
-            Pentad
-          </button>
+          />
         </div>
       </div>
       <div className="settings" style={{ display: tab ? "" : "none" }}>

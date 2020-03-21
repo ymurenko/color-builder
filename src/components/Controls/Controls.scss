@@ -16,6 +16,45 @@
     margin: 5px;
     height: 140px;
     width: 140px;
+    background-color: $color-secondary;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+    border: none;
+    &.default {
+      background-image: url('../../img/default-light.png');
+      &.dark {
+        background-image: url('../../img/default-dark.png');
+      }
+    }
+    &.triad {
+      background-image: url('../../img/triad-light.png');
+      &.dark {
+        background-image: url('../../img/triad-dark.png');
+      }
+    }
+    &.tetrad {
+      background-image: url('../../img/tetrad-light.png');
+      &.dark {
+        background-image: url('../../img/tetrad-dark.png');
+      }
+    }
+    &.pentad {
+      background-image: url('../../img/pentad-light.png');
+      &.dark {
+        background-image: url('../../img/pentad-dark.png');
+      }
+    }
+    &.dark {
+      background-color: $color-secondary-dark;
+    }
+    &.active {
+      border-radius: 50%;
+      border: solid 3px #818181;
+      &.dark {
+        border: solid 3px #a1a1a1;
+      }
+    }
   }
 }
 
