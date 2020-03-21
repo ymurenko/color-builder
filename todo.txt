@@ -1,5 +1,3 @@
-- change pentad to three points
-    - refactor selector setting after preset is set
 - refactor contols into componenets (buttons, sliders)
 - palette editor feature
 - alternate color modes (rgb, hsl)
@@ -9,6 +7,11 @@
 - refactoring CSS
 - responsive design
     - support for pixel densities
-- write + save to photoshop .aco format https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/#50577411_pgfId-1055819
+- save multiple palettes
+- palette exporting
+    - write + save to photoshop .aco format https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/#50577411_pgfId-1055819
+    - save as sass variables
+    - save as .js export with object
+    - name each color
 - save palettes to local storage
     - palette editor will use saved palettes

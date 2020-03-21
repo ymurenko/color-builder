@@ -1,1 +1,1 @@
-export const colorWheelRadius = 250;
+export const colorWheelRadius = 200;
