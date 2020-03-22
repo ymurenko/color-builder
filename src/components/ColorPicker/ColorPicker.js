@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
 import ColorWheel from "../ColorWheel/ColorWheel";
 import Controls from "../Controls/Controls";
-import Palette from "../Palette/Palette";
+import PickerPalette from "../PickerPalette/PickerPalette";
 import "./ColorPicker.scss";
 import "../Controls/Controls.scss";
 import { connect } from "react-redux";
 import { setDarkMode } from "../../redux/actions/actions";
+import Palettes from "../Palettes/Palettes";
 
 const ColorPicker_ = props => {
   const colorContainer = useRef(null);
@@ -44,7 +45,8 @@ const ColorPicker_ = props => {
       >
         <Controls />
         <ColorWheel colorsContainer={colorContainer} />
-        <Palette paletteRef={colorContainer} />
+        <PickerPalette paletteRef={colorContainer} />
+        <Palettes />
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+@import "./Variables.scss";
+
 $secondary-font-size: 1rem;
 $secondary-font-weight: 400;
 $secondary-font-color: #222222;
@@ -16,21 +18,29 @@ $color-tertiary-dark: #272727;
 $color-secondary-dark: #2c2c2c;
 $color-primary-dark: #333333;
 
+$ui-block-width: scale(260);
+$ui-block-height: scale(500);
+$ui-block-padding: scale(25);
+$ui-block-radius: scale(15);
 
+$ui-block-shadow-light: 0 0 scale(15) 0 #a1a1a1;
+$ui-block-shadow-dark: 0 0 scale(15) 0 #171717;
+
+$button-radius: scale(8);
 
 .container-h {
   display: inline-block;
-  margin: 0px 10px;
+  margin: 0 scale(10);
 }
 
 .ui-block {
-  height: 500px;
-  padding: 25px;
+  height: $ui-block-height;
+  padding: $ui-block-padding;
   background-color: $color-secondary;
-  border-radius: 15px;
-  box-shadow: 0 0px 15px 0 #a1a1a1;
+  border-radius: $ui-block-radius;
+  box-shadow: $ui-block-shadow-light;
   &.dark {
     background-color: $color-secondary-dark;
-    box-shadow: 0 0px 15px 0 #171717;
+    box-shadow: $ui-block-shadow-dark;
   }
 }

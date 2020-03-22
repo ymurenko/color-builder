@@ -1,20 +1,19 @@
 
 @import "../../Globals.scss";
 
-.palette {
+.picker-palette {
     text-align: center;
     display: inline-block;
     grid-column: 3;
-    width: 300px;
-    height: 500px;
+    width: $ui-block-width;
     .colors-container {
-      height: 400px;
-      border-radius: 10px;
+      height: scale(400);
+      border-radius: scale(10);
       overflow: hidden;
       
     }
     .control-container {
-      margin-top: 20px;
+      margin-top: scale(20);
     }
   }
 
