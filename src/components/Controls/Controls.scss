@@ -72,6 +72,7 @@
     margin: scale(20) scale(5) 0 ;
   }
   .slider {
+    height: scale(3);
     width: 100%;
     background-color: $color-secondary;
     &.dark {

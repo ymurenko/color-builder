@@ -71,6 +71,12 @@ input[type="range"] {
     border-radius: $track-radius;
     border: $track-border-width;
   }
+  &::-moz-range-progress {
+    @include track();
+    background: $track-color;
+    border-radius: $track-radius;
+    border: $track-border-width;
+  }
   &::-moz-range-thumb {
     @include thumb();
   }

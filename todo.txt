@@ -14,3 +14,5 @@
     - name each color
 - save palettes to local storage
     - palette editor will use saved palettes
+- color wheel mask
+- fix ms edge error
