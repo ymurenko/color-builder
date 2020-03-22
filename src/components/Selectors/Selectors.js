@@ -6,13 +6,14 @@ import { storeColor, setSelectorLinkedRadius } from "../../redux/actions/actions
 const Selectors_ = props => {
   const svg = useRef(null);
   let initialOffsetAngle = useRef(0);
+  let lastCWRadius = useRef(0);
   let { canvas } = props;
   let canvasPosX = 0;
   let canvasPosY = 0;
   let circleRefs = null;
   let circleCoordinates = [];
   let currentActiveCircle = null;
-  let lastCWRadius = 0;
+  
 
   const setColor = (x, y, key) => {
     let pixel = canvas.current.getContext("2d").getImageData(x, y, 1, 1).data;
@@ -254,7 +255,7 @@ const Selectors_ = props => {
   useEffect(() => {
     let radOffset = setHarmony();
     let staggerOffset = 0;
-    let XYresizeOffset = props.CWRadius / lastCWRadius;
+    let XYresizeOffset = props.CWRadius / lastCWRadius.current;
     let x0 =
       props.CWRadius +
       (props.selectorRadius - staggerOffset) * Math.cos(initialOffsetAngle.current);
@@ -280,7 +281,6 @@ const Selectors_ = props => {
     props.selectorRadius,
     props.selectorAngle,
     props.clusterAngle,
-    props.reset,
     props.CWRadius
   ]);
 
@@ -294,10 +294,10 @@ const Selectors_ = props => {
 
   useLayoutEffect(() => {
     initialOffsetAngle.current = 0
-  },[props.preset])
+  },[props.preset, props.reset])
 
   useLayoutEffect(() => {
-    lastCWRadius = props.CWRadius;
+    lastCWRadius.current = props.CWRadius;
     circleRefs = svg.current.children;
     circleCoordinates = getPointMath();
   });
