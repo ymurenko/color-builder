@@ -10,6 +10,7 @@ const initialState = {
   SELECTOR_COUNT: 4,
   SELECTOR_ANGLE: 180,
   SELECTOR_RADIUS: 118,
+  SELECTOR_LINKED_RADIUS: 118,
   SELECTOR_STAGGER: 0,
   CLUSTER_ANGLE: 30,
   LINKED: false,
@@ -25,7 +26,7 @@ export const actionReducer = (state = initialState, action) => {
     case "SET_VIEWPORT_HEIGHT":
       return {
         ...state,
-        SELECTOR_RADIUS: (getViewport()* 0.325)/2,
+        SELECTOR_RADIUS: (getViewport() * 0.325) / 2,
         VIEWPORT_HEIGHT: getViewport()
       };
     case "SET_COLOR":
@@ -37,18 +38,18 @@ export const actionReducer = (state = initialState, action) => {
       };
     case "STORE_PALETTE":
       let NEW_PALETTES = [...state.PALETTES];
-      NEW_PALETTES.push([...state.COLORS])
+      NEW_PALETTES.push([...state.COLORS]);
       return {
         ...state,
         PALETTES: NEW_PALETTES
-      }
+      };
     case "DELETE_PALETTE":
       let CURRENT_PALETTES = [...state.PALETTES];
       CURRENT_PALETTES.splice(action.INDEX, 1);
       return {
         ...state,
         PALETTES: CURRENT_PALETTES
-      }
+      };
     case "SET_LIGHTNESS":
       return {
         ...state,
@@ -76,7 +77,13 @@ export const actionReducer = (state = initialState, action) => {
     case "SET_SELECTOR_RADIUS":
       return {
         ...state,
-        SELECTOR_RADIUS: action.SELECTOR_RADIUS
+        SELECTOR_RADIUS: action.SELECTOR_RADIUS,
+        SELECTOR_LINKED_RADIUS: action.SELECTOR_RADIUS
+      };
+    case "SET_SELECTOR_LINKED_RADIUS":
+      return {
+        ...state,
+        SELECTOR_LINKED_RADIUS: action.SELECTOR_LINKED_RADIUS
       };
     case "SET_SELECTOR_STAGGER":
       return {
@@ -114,7 +121,7 @@ export const actionReducer = (state = initialState, action) => {
           return {
             ...initialState,
             VIEWPORT_HEIGHT: state.VIEWPORT_HEIGHT,
-            SELECTOR_RADIUS: (getViewport()* 0.325)/2,
+            SELECTOR_RADIUS: (getViewport() * 0.325) / 2,
             PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
@@ -126,7 +133,7 @@ export const actionReducer = (state = initialState, action) => {
           return {
             ...initialState,
             VIEWPORT_HEIGHT: state.VIEWPORT_HEIGHT,
-            SELECTOR_RADIUS: (getViewport()* 0.325)/2,
+            SELECTOR_RADIUS: (getViewport() * 0.325) / 2,
             PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
@@ -138,7 +145,7 @@ export const actionReducer = (state = initialState, action) => {
           return {
             ...initialState,
             VIEWPORT_HEIGHT: state.VIEWPORT_HEIGHT,
-            SELECTOR_RADIUS: (getViewport()* 0.325)/2,
+            SELECTOR_RADIUS: (getViewport() * 0.325) / 2,
             PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
@@ -150,7 +157,7 @@ export const actionReducer = (state = initialState, action) => {
           return {
             ...initialState,
             VIEWPORT_HEIGHT: state.VIEWPORT_HEIGHT,
-            SELECTOR_RADIUS: (getViewport()* 0.325)/2,
+            SELECTOR_RADIUS: (getViewport() * 0.325) / 2,
             PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
@@ -159,7 +166,7 @@ export const actionReducer = (state = initialState, action) => {
             CLUSTER_ANGLE: 15
           };
         default:
-          return state
+          return state;
       }
     case "SET_CLUSTER_ANGLE":
       return {

@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, createRef } from "react";
 import useDidMountEffect from "../../util/useDidMountEffect";
 import { connect } from "react-redux";
-import { storeColor } from "../../redux/actions/actions";
+import { storeColor, setSelectorLinkedRadius } from "../../redux/actions/actions";
 
 const Selectors_ = props => {
   const svg = useRef(null);
@@ -235,6 +235,7 @@ const Selectors_ = props => {
     }
     circleCoordinates = getPointMath();
     initialOffsetAngle.current = getinitialOffsetAngle();
+    props.setSelectorLinkedRadius(circleCoordinates[0].radius)
   };
 
   const handleMouseDown = e => {
@@ -331,7 +332,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  storeColor
+  storeColor,
+  setSelectorLinkedRadius
 };
 
 const Selectors = connect(mapStateToProps, mapDispatchToProps)(Selectors_);

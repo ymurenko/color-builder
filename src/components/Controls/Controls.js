@@ -24,8 +24,7 @@ const Controls_ = props => {
 
   useEffect(() => {
     props.setSelectorRadius(radiusSlider.current.value);
-  }, [props.selectorAngle]);
-
+  }, [props.selectorAngle, props.selectorLinkedRadius]);
 
   return (
     <div className={`controls ui-half-block ${props.darkMode ? "dark" : ""}`}>
@@ -97,7 +96,7 @@ const Controls_ = props => {
         <div className="slider-container">
           <p className="slider-label">
             Distance From Origin:{" "}
-            {(Math.round((props.selectorRadius / (props.viewport * 0.325)) * 1000) / 10).toFixed(0)}
+            {(Math.round((props.selectorLinkedRadius / (props.viewport * 0.325)) * 1000) / 10).toFixed(0)}
           </p>
           <input
             type="range"
@@ -106,7 +105,7 @@ const Controls_ = props => {
             min={1}
             max={0.325 * props.viewport}
             step={1}
-            value={props.selectorRadius}
+            value={props.selectorLinkedRadius}
             onChange={val => {
               props.setSelectorRadius(val.target.value);
             }}
@@ -142,6 +141,7 @@ function mapStateToProps(state) {
     selectorCount: state.actionReducer.SELECTOR_COUNT,
     selectorAngle: state.actionReducer.SELECTOR_ANGLE,
     selectorRadius: state.actionReducer.SELECTOR_RADIUS,
+    selectorLinkedRadius: state.actionReducer.SELECTOR_LINKED_RADIUS,
     selectorStagger: state.actionReducer.SELECTOR_STAGGER,
     linked: state.actionReducer.LINKED,
     darkMode: state.actionReducer.DARK_MODE,
