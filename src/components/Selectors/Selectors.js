@@ -71,9 +71,8 @@ const Selectors_ = props => {
           cx={x}
           cy={y}
           r={`${props.CWRadius*0.06}`}
-          stroke="#4d4d4d"
-          stroke-width="0.5"
-          style={{ filter: "drop-shadow(0 0 4px #4d4d4d)" }}
+          stroke="#a1a1a1"
+          strokeWidth={`${props.CWRadius*0.003}`}
           onMouseDown={e => handleMouseDown(e)}
           onMouseUp={e => handleMouseUp(e)}
           key={i}
