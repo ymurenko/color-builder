@@ -25,6 +25,7 @@ export const actionReducer = (state = initialState, action) => {
     case "SET_VIEWPORT_HEIGHT":
       return {
         ...state,
+        SELECTOR_RADIUS: (getViewport()* 0.325)/2,
         VIEWPORT_HEIGHT: getViewport()
       };
     case "SET_COLOR":
@@ -113,6 +114,7 @@ export const actionReducer = (state = initialState, action) => {
           return {
             ...initialState,
             VIEWPORT_HEIGHT: state.VIEWPORT_HEIGHT,
+            SELECTOR_RADIUS: (getViewport()* 0.325)/2,
             PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
@@ -124,6 +126,7 @@ export const actionReducer = (state = initialState, action) => {
           return {
             ...initialState,
             VIEWPORT_HEIGHT: state.VIEWPORT_HEIGHT,
+            SELECTOR_RADIUS: (getViewport()* 0.325)/2,
             PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
@@ -135,6 +138,7 @@ export const actionReducer = (state = initialState, action) => {
           return {
             ...initialState,
             VIEWPORT_HEIGHT: state.VIEWPORT_HEIGHT,
+            SELECTOR_RADIUS: (getViewport()* 0.325)/2,
             PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
@@ -146,6 +150,7 @@ export const actionReducer = (state = initialState, action) => {
           return {
             ...initialState,
             VIEWPORT_HEIGHT: state.VIEWPORT_HEIGHT,
+            SELECTOR_RADIUS: (getViewport()* 0.325)/2,
             PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,

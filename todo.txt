@@ -4,7 +4,6 @@
     - opacity support maybe?
 - setting distance from origin resets original position of selector 1
 - accessibility
-- refactoring CSS
 - responsive design
 - save multiple palettes
 - palette exporting
@@ -14,5 +13,5 @@
     - name each color
 - save palettes to local storage
     - palette editor will use saved palettes
-- color wheel mask
 - fix ms edge error
+- change colorwheel stroke to svg

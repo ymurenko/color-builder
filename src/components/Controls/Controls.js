@@ -16,11 +16,16 @@ import "../Slider/Slider.scss";
 
 const Controls_ = props => {
   const staggerSlider = useRef(null);
-  const selectorCountSlider = useRef(null);
+  const radiusSlider = useRef(null);
 
   useEffect(() => {
     props.setSelectorStagger(staggerSlider.current.value);
   }, [props.selectorRadius]);
+
+  useEffect(() => {
+    props.setSelectorRadius(radiusSlider.current.value);
+  }, [props.selectorAngle]);
+
 
   return (
     <div className={`controls ui-half-block ${props.darkMode ? "dark" : ""}`}>
@@ -60,7 +65,6 @@ const Controls_ = props => {
           <input
             type="range"
             className={`slider ${props.darkMode ? "dark" : ""}`}
-            ref={selectorCountSlider}
             min={props.preset}
             max={15}
             step={props.preset}
@@ -93,13 +97,14 @@ const Controls_ = props => {
         <div className="slider-container">
           <p className="slider-label">
             Distance From Origin:{" "}
-            {(Math.round((props.selectorRadius / 236) * 1000) / 10).toFixed(0)}
+            {(Math.round((props.selectorRadius / (props.viewport * 0.325)) * 1000) / 10).toFixed(0)}
           </p>
           <input
             type="range"
             className={`slider ${props.darkMode ? "dark" : ""}`}
+            ref={radiusSlider}
             min={1}
-            max={0.295 * props.Viewport}
+            max={0.325 * props.viewport}
             step={1}
             value={props.selectorRadius}
             onChange={val => {
@@ -116,7 +121,7 @@ const Controls_ = props => {
             type="range"
             className={`slider ${props.darkMode ? "dark" : ""}`}
             ref={staggerSlider}
-            min={-(0.295 * props.Viewport - props.selectorRadius)}
+            min={-(0.325 * props.viewport - props.selectorRadius)}
             max={props.selectorRadius}
             step={1}
             defaultValue={props.selectorStagger}
@@ -141,7 +146,7 @@ function mapStateToProps(state) {
     linked: state.actionReducer.LINKED,
     darkMode: state.actionReducer.DARK_MODE,
     preset: state.actionReducer.PRESET,
-    Viewport: state.actionReducer.VIEWPORT_HEIGHT
+    viewport: state.actionReducer.VIEWPORT_HEIGHT
   };
 }
 

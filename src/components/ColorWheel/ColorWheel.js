@@ -11,20 +11,21 @@ const ColorWheel_ = props => {
 
   const generateGradient = () => {
     let canvasContext = canvas.current.getContext("2d");
-    canvasContext.clearRect(0, 0, props.CWRadius*2, props.CWRadius*2);
+    canvasContext.clearRect(0, 0, 130*2, 130*2);
     for (var i = 0; i < 3600; i += 1) {
       let value = i / 10;
        let rad = ((value - 90) * Math.PI) / 180;
-       let x = props.CWRadius + props.CWRadius * Math.cos(-rad)
-       let y = props.CWRadius + props.CWRadius * Math.sin(-rad)
+       let x = 130 + 130 * Math.cos(-rad)
+       let y = 130 + 130 * Math.sin(-rad)
       canvasContext.beginPath();
       let gradient = canvasContext.createLinearGradient(
-        props.CWRadius,
-        props.CWRadius,
+        130,
+        130,
         x, y
         /*xLUT.default[value],
         yLUT.default[value]*/
       );
+      
 
       gradient.addColorStop("0", `${props.lightness > 45 ? "white" : "black"}`);
       gradient.addColorStop(
@@ -39,15 +40,22 @@ const ColorWheel_ = props => {
 
       canvasContext.strokeStyle = gradient;
 
-      canvasContext.moveTo(props.CWRadius, props.CWRadius);
+      canvasContext.moveTo(130, 130);
       canvasContext.lineTo(x, y);
       canvasContext.stroke();
     }
   };
 
   useLayoutEffect(() => {
+    let canvasContext = canvas.current.getContext("2d");
+    canvasContext.scale(props.CWRadius/130,props.CWRadius/130)
+  },[props.CWRadius])
+
+  useLayoutEffect(() => {
     generateGradient();
   });
+
+
 
   return (
     <div className={`color-wheel ui-block ${props.darkMode ? "dark" : ""}`} style={{height: `${props.CWRadius*2}`, width: `${props.CWRadius*2}`}}>

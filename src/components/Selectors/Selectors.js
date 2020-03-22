@@ -5,13 +5,13 @@ import { storeColor } from "../../redux/actions/actions";
 
 const Selectors_ = props => {
   const svg = useRef(null);
+  let initialOffsetAngle = useRef(0);
   let { canvas } = props;
   let canvasPosX = 0;
   let canvasPosY = 0;
   let circleRefs = null;
   let circleCoordinates = [];
   let currentActiveCircle = null;
-  let firstCircleAngle = 0;
   let lastCWRadius = 0;
 
   const setColor = (x, y, key) => {
@@ -28,51 +28,74 @@ const Selectors_ = props => {
     } else {
       circleRefs[key].style.stroke = "#4d4d4d";
     }
-
     props.storeColor(pixelColor, key);
   };
 
   const setHarmony = () => {
     //sets the angle of the polar offset from +X-axis
     let radOffset;
-    let harmony = {total: 0, count: 1};
-    if (props.preset != 1 && props.selectorCount != props.preset){
-      radOffset = [0,0]
+    let harmony = { total: 0, count: 1 };
+    if (props.preset != 1 && props.selectorCount != props.preset) {
+      radOffset = [initialOffsetAngle.current, initialOffsetAngle.current];
       for (let i = 1; i < props.selectorCount; i++) {
-        if(harmony.count === Math.round(props.selectorCount/props.preset)){
-          harmony.total++
+        if (harmony.count === Math.round(props.selectorCount / props.preset)) {
+          harmony.total++;
           harmony.count = 0;
-          radOffset.push(radOffset[i] = (Math.round(props.selectorAngle / props.preset) * (Math.PI / 180)) * harmony.total)
-        }
-        else {
-          radOffset.push(radOffset[i] += props.clusterAngle * (Math.PI / 180))
+          radOffset.push(
+            (radOffset[i] =
+              Math.round((props.selectorAngle) / props.preset) *
+              (Math.PI / 180) *
+              harmony.total + initialOffsetAngle.current )
+          );
+        } else {
+          radOffset.push(
+            (radOffset[i] += props.clusterAngle * (Math.PI / 180))
+          );
         }
         harmony.count++;
       }
-    }
-    else {
-      radOffset = [firstCircleAngle]
+    } else {
+      radOffset = [initialOffsetAngle.current];
       for (let i = 0; i < props.selectorCount; i++) {
-        radOffset.push(radOffset[i] + Math.round(props.selectorAngle / props.selectorCount) * (Math.PI / 180))
+        radOffset.push(
+          radOffset[i] +
+            Math.round((props.selectorAngle) / props.selectorCount) *
+              (Math.PI / 180)
+        );
       }
     }
-    return radOffset
-  }
+    return radOffset;
+  };
 
   const createCircles = () => {
     let elements = [];
-    let radOffset = setHarmony()
-
-    for (let i = 0; i < props.selectorCount; i++) {
+    let radOffset = setHarmony();
+    console.log(radOffset[0])
+    let x = props.CWRadius + props.selectorRadius * Math.cos(initialOffsetAngle.current);
+    let y = props.CWRadius + props.selectorRadius * Math.sin(initialOffsetAngle.current);
+    elements.push(
+      <circle
+        cx={x}
+        cy={y}
+        r={`${props.CWRadius * 0.06}`}
+        stroke="#a1a1a1"
+        strokeWidth={`${props.CWRadius * 0.003}`}
+        onMouseDown={e => handleMouseDown(e)}
+        onMouseUp={e => handleMouseUp(e)}
+        key={0}
+        id={`${0}`}
+      />
+    );
+    for (let i = 1; i < props.selectorCount; i++) {
       let x = props.CWRadius + props.selectorRadius * Math.cos(radOffset[i]);
       let y = props.CWRadius + props.selectorRadius * Math.sin(radOffset[i]);
       elements.push(
         <circle
           cx={x}
           cy={y}
-          r={`${props.CWRadius*0.06}`}
+          r={`${props.CWRadius * 0.06}`}
           stroke="#a1a1a1"
-          strokeWidth={`${props.CWRadius*0.003}`}
+          strokeWidth={`${props.CWRadius * 0.003}`}
           onMouseDown={e => handleMouseDown(e)}
           onMouseUp={e => handleMouseUp(e)}
           key={i}
@@ -83,30 +106,40 @@ const Selectors_ = props => {
     return elements;
   };
 
+  const getinitialOffsetAngle = () => {
+    let x0 = circleRefs[0].getAttribute("cx");
+    let y0 = circleRefs[0].getAttribute("cy");
+    let dx = props.CWRadius;
+    let dy = 0;
+    let d0x = x0 - props.CWRadius;
+    let d0y = y0 - props.CWRadius;
+    return Math.atan2(d0y, d0x) - Math.atan2(dy, dx);
+  };
+
   const getPointMath = () => {
     //gets the current angles and radii of the points
     //(called once after points are linked)
     let mathVars = [];
     let x0 = circleRefs[0].getAttribute("cx");
     let y0 = circleRefs[0].getAttribute("cy");
-    let radius = Math.sqrt((props.CWRadius - x0) * (props.CWRadius - x0) + (props.CWRadius - y0) * (props.CWRadius - y0));
-    let dx = props.CWRadius;
-    let dy = 0;
-    let d0x = x0 - props.CWRadius;
-    let d0y = y0 - props.CWRadius;
-    let angle = Math.atan2(d0y, d0x) - Math.atan2(dy, dx);
+    let radius = Math.sqrt(
+      (props.CWRadius - x0) * (props.CWRadius - x0) +
+        (props.CWRadius - y0) * (props.CWRadius - y0)
+    );
     mathVars.push({
-      angle: angle,
+      angle: getinitialOffsetAngle(),
       radius: radius
     });
-    firstCircleAngle = angle;
     for (let i = 1; i < props.selectorCount; i++) {
       let x1 = circleRefs[i - 1].getAttribute("cx");
       let y1 = circleRefs[i - 1].getAttribute("cy");
       let x2 = circleRefs[i].getAttribute("cx");
       let y2 = circleRefs[i].getAttribute("cy");
 
-      let radius = Math.sqrt((props.CWRadius - x2) * (props.CWRadius - x2) + (props.CWRadius - y2) * (props.CWRadius - y2));
+      let radius = Math.sqrt(
+        (props.CWRadius - x2) * (props.CWRadius - x2) +
+          (props.CWRadius - y2) * (props.CWRadius - y2)
+      );
 
       let d1x = x1 - props.CWRadius;
       let d1y = y1 - props.CWRadius;
@@ -123,7 +156,13 @@ const Selectors_ = props => {
   };
 
   const isInCircle = (x, y) => {
-   if (Math.sqrt((props.CWRadius - x) * (props.CWRadius - x) + (props.CWRadius - y) * (props.CWRadius - y)) > (0.95*props.CWRadius)) {
+    if (
+      Math.sqrt(
+        (props.CWRadius - x) * (props.CWRadius - x) +
+          (props.CWRadius - y) * (props.CWRadius - y)
+      ) >
+      0.95 * props.CWRadius
+    ) {
       handleMouseUp();
       return false;
     } else {
@@ -158,13 +197,20 @@ const Selectors_ = props => {
           circleCoordinates[i].radius -
           (circleCoordinates[0].radius -
             Math.sqrt(
-              (props.CWRadius - mouseX) * (props.CWRadius - mouseX) + (props.CWRadius - mouseY) * (props.CWRadius - mouseY)
+              (props.CWRadius - mouseX) * (props.CWRadius - mouseX) +
+                (props.CWRadius - mouseY) * (props.CWRadius - mouseY)
             ));
 
         if (radius < 0) radius = 0;
         if (radius > props.CWRadius) radius = props.CWRadius;
-        circleRefs[i].setAttribute("cx", `${props.CWRadius + radius * Math.cos(angle)}`);
-        circleRefs[i].setAttribute("cy", `${props.CWRadius + radius * Math.sin(angle)}`);
+        circleRefs[i].setAttribute(
+          "cx",
+          `${props.CWRadius + radius * Math.cos(angle)}`
+        );
+        circleRefs[i].setAttribute(
+          "cy",
+          `${props.CWRadius + radius * Math.sin(angle)}`
+        );
         setColor(x, y, i);
       }
     }
@@ -188,10 +234,11 @@ const Selectors_ = props => {
       svg.current.removeEventListener("mousemove", addMouseTrackerLinked);
     }
     circleCoordinates = getPointMath();
+    initialOffsetAngle.current = getinitialOffsetAngle();
   };
 
   const handleMouseDown = e => {
-    let rect = canvas.current.getBoundingClientRect()
+    let rect = canvas.current.getBoundingClientRect();
     canvasPosX = rect.left;
     canvasPosY = rect.top;
     currentActiveCircle = e.target;
@@ -203,19 +250,38 @@ const Selectors_ = props => {
     circleCoordinates = getPointMath();
   };
 
-
   useEffect(() => {
     let radOffset = setHarmony();
     let staggerOffset = 0;
     let XYresizeOffset = props.CWRadius / lastCWRadius;
-    for (let i = 0; i < props.selectorCount; i++) {
-      let x = props.CWRadius + (props.selectorRadius - staggerOffset) * Math.cos(radOffset[i]);
-      let y = props.CWRadius + (props.selectorRadius - staggerOffset) * Math.sin(radOffset[i]);
-      circleRefs[i].setAttribute("cx", `${x*XYresizeOffset}`);
-      circleRefs[i].setAttribute("cy", `${y*XYresizeOffset}`);
-      staggerOffset += props.selectorStagger / props.selectorCount
+    let x0 =
+      props.CWRadius +
+      (props.selectorRadius - staggerOffset) * Math.cos(initialOffsetAngle.current);
+    let y0 =
+      props.CWRadius +
+      (props.selectorRadius - staggerOffset) * Math.sin(initialOffsetAngle.current);
+    circleRefs[0].setAttribute("cx", `${x0 * XYresizeOffset}`);
+    circleRefs[0].setAttribute("cy", `${y0 * XYresizeOffset}`);
+    for (let i = 1; i < props.selectorCount; i++) {
+      let x =
+        props.CWRadius +
+        (props.selectorRadius - staggerOffset) * Math.cos(radOffset[i]);
+      let y =
+        props.CWRadius +
+        (props.selectorRadius - staggerOffset) * Math.sin(radOffset[i]);
+      circleRefs[i].setAttribute("cx", `${x * XYresizeOffset}`);
+      circleRefs[i].setAttribute("cy", `${y * XYresizeOffset}`);
+      staggerOffset += props.selectorStagger / props.selectorCount;
     }
-  }, [props.selectorStagger, props.selectorCount, props.selectorRadius,  props.selectorAngle, props.clusterAngle, props.reset, props.CWRadius]);
+  }, [
+    props.selectorStagger,
+    props.selectorCount,
+    props.selectorRadius,
+    props.selectorAngle,
+    props.clusterAngle,
+    props.reset,
+    props.CWRadius
+  ]);
 
   useEffect(() => {
     for (let i = 0; i < props.selectorCount; i++) {
@@ -225,9 +291,12 @@ const Selectors_ = props => {
     }
   });
 
+  useLayoutEffect(() => {
+    initialOffsetAngle.current = 0
+  },[props.preset])
 
   useLayoutEffect(() => {
-    lastCWRadius = props.CWRadius
+    lastCWRadius = props.CWRadius;
     circleRefs = svg.current.children;
     circleCoordinates = getPointMath();
   });
@@ -236,9 +305,9 @@ const Selectors_ = props => {
     <svg
       className="selector"
       ref={svg}
-      width={`${props.CWRadius*2}`}
-      height={`${props.CWRadius*2}`}
-      viewBox={`0 0 ${props.CWRadius*2} ${props.CWRadius*2}`}
+      width={`${props.CWRadius * 2}`}
+      height={`${props.CWRadius * 2}`}
+      viewBox={`0 0 ${props.CWRadius * 2} ${props.CWRadius * 2}`}
     >
       {createCircles()}
     </svg>
