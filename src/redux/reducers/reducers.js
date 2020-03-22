@@ -1,6 +1,8 @@
 import { combineReducers, createStore } from "redux";
+import { getVH } from "../../util/viewport-height";
 
 const initialState = {
+  VIEWPORT_HEIGHT: getVH(),
   COLORS: ["#FFF", "#FFF", "#FFF"],
   PALETTES: [],
   LIGHTNESS: 50,
@@ -20,6 +22,11 @@ const initialState = {
 
 export const actionReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "SET_VIEWPORT_HEIGHT":
+      return {
+        ...state,
+        VIEWPORT_HEIGHT: getVH()
+      };
     case "SET_COLOR":
       let CURRENT_COLORS = [...state.COLORS];
       CURRENT_COLORS[action.INDEX] = action.COLOR;
@@ -105,6 +112,7 @@ export const actionReducer = (state = initialState, action) => {
         case 2:
           return {
             ...initialState,
+            VIEWPORT_HEIGHT: state.VIEWPORT_HEIGHT,
             PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
@@ -115,6 +123,7 @@ export const actionReducer = (state = initialState, action) => {
         case 3:
           return {
             ...initialState,
+            VIEWPORT_HEIGHT: state.VIEWPORT_HEIGHT,
             PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
@@ -125,6 +134,7 @@ export const actionReducer = (state = initialState, action) => {
         case 4:
           return {
             ...initialState,
+            VIEWPORT_HEIGHT: state.VIEWPORT_HEIGHT,
             PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
@@ -135,6 +145,7 @@ export const actionReducer = (state = initialState, action) => {
         case 5:
           return {
             ...initialState,
+            VIEWPORT_HEIGHT: state.VIEWPORT_HEIGHT,
             PALETTES: state.PALETTES,
             SELECTOR_ANGLE: 360,
             DARK_MODE: state.DARK_MODE,
@@ -153,6 +164,7 @@ export const actionReducer = (state = initialState, action) => {
     case "RESET":
       return {
         ...initialState,
+        VIEWPORT_HEIGHT: state.VIEWPORT_HEIGHT,
         PALETTES: state.PALETTES,
         SELECTOR_COUNT: state.SELECTOR_COUNT,
         DARK_MODE: state.DARK_MODE,

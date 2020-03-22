@@ -99,7 +99,7 @@ const Controls_ = props => {
           
         </div>
         </div>
-        <div className="control-container slider-container" style={{marginTop: '80px'}}>
+        <div className="control-container slider-container" style={{marginTop: `${props.VH*0.1}`}}>
           <p className="slider-label">Cluster Spacing Angle:{" "}
             {(
               Math.round((props.clusterAngle) * 10) / 10
@@ -193,7 +193,7 @@ const Controls_ = props => {
             type="range"
             className={`slider ${props.darkMode ? "dark" : ""}`}
             min={1}
-            max={236}
+            max={0.295*props.VH}
             step={1}
             value={props.selectorRadius}
             onChange={val => {
@@ -210,7 +210,7 @@ const Controls_ = props => {
             type="range"
             className={`slider ${props.darkMode ? "dark" : ""}`}
             ref={staggerSlider}
-            min={-(236 - props.selectorRadius)}
+            min={-((0.295*props.VH) - props.selectorRadius)}
             max={props.selectorRadius}
             step={1}
             defaultValue={props.selectorStagger}
@@ -235,7 +235,8 @@ function mapStateToProps(state) {
     linked: state.actionReducer.LINKED,
     darkMode: state.actionReducer.DARK_MODE,
     preset: state.actionReducer.PRESET,
-    clusterAngle: state.actionReducer.CLUSTER_ANGLE
+    clusterAngle: state.actionReducer.CLUSTER_ANGLE,
+    VH: state.actionReducer.VIEWPORT_HEIGHT
   };
 }
 

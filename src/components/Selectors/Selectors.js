@@ -1,20 +1,18 @@
 import React, { useEffect, useLayoutEffect, useRef, createRef } from "react";
 import useDidMountEffect from "../../util/useDidMountEffect";
-
 import { connect } from "react-redux";
 import { storeColor } from "../../redux/actions/actions";
 
-import {colorWheelRadius} from "../../constants/constants";
-
 const Selectors_ = props => {
   const svg = useRef(null);
-  let { colorsContainer, canvas } = props;
+  let { canvas } = props;
   let canvasPosX = 0;
   let canvasPosY = 0;
   let circleRefs = null;
   let circleCoordinates = [];
   let currentActiveCircle = null;
   let firstCircleAngle = 0;
+  let lastCWRadius = 0;
 
   const setColor = (x, y, key) => {
     let pixel = canvas.current.getContext("2d").getImageData(x, y, 1, 1).data;
@@ -66,13 +64,13 @@ const Selectors_ = props => {
     let radOffset = setHarmony()
 
     for (let i = 0; i < props.selectorCount; i++) {
-      let x = colorWheelRadius + props.selectorRadius * Math.cos(radOffset[i]);
-      let y = colorWheelRadius + props.selectorRadius * Math.sin(radOffset[i]);
+      let x = props.CWRadius + props.selectorRadius * Math.cos(radOffset[i]);
+      let y = props.CWRadius + props.selectorRadius * Math.sin(radOffset[i]);
       elements.push(
         <circle
           cx={x}
           cy={y}
-          r="15"
+          r={`${props.CWRadius*0.06}`}
           stroke="#4d4d4d"
           stroke-width="0.5"
           style={{ filter: "drop-shadow(0 0 4px #4d4d4d)" }}
@@ -92,11 +90,11 @@ const Selectors_ = props => {
     let mathVars = [];
     let x0 = circleRefs[0].getAttribute("cx");
     let y0 = circleRefs[0].getAttribute("cy");
-    let radius = Math.sqrt((colorWheelRadius - x0) * (colorWheelRadius - x0) + (colorWheelRadius - y0) * (colorWheelRadius - y0));
-    let dx = colorWheelRadius;
+    let radius = Math.sqrt((props.CWRadius - x0) * (props.CWRadius - x0) + (props.CWRadius - y0) * (props.CWRadius - y0));
+    let dx = props.CWRadius;
     let dy = 0;
-    let d0x = x0 - colorWheelRadius;
-    let d0y = y0 - colorWheelRadius;
+    let d0x = x0 - props.CWRadius;
+    let d0y = y0 - props.CWRadius;
     let angle = Math.atan2(d0y, d0x) - Math.atan2(dy, dx);
     mathVars.push({
       angle: angle,
@@ -109,12 +107,12 @@ const Selectors_ = props => {
       let x2 = circleRefs[i].getAttribute("cx");
       let y2 = circleRefs[i].getAttribute("cy");
 
-      let radius = Math.sqrt((colorWheelRadius - x2) * (colorWheelRadius - x2) + (colorWheelRadius - y2) * (colorWheelRadius - y2));
+      let radius = Math.sqrt((props.CWRadius - x2) * (props.CWRadius - x2) + (props.CWRadius - y2) * (props.CWRadius - y2));
 
-      let d1x = x1 - colorWheelRadius;
-      let d1y = y1 - colorWheelRadius;
-      let d2x = x2 - colorWheelRadius;
-      let d2y = y2 - colorWheelRadius;
+      let d1x = x1 - props.CWRadius;
+      let d1y = y1 - props.CWRadius;
+      let d2x = x2 - props.CWRadius;
+      let d2y = y2 - props.CWRadius;
 
       let angle = Math.atan2(d2y, d2x) - Math.atan2(d1y, d1x);
       mathVars.push({
@@ -126,7 +124,7 @@ const Selectors_ = props => {
   };
 
   const isInCircle = (x, y) => {
-   if (Math.sqrt((colorWheelRadius - x) * (colorWheelRadius - x) + (colorWheelRadius - y) * (colorWheelRadius - y)) > (0.95*colorWheelRadius)) {
+   if (Math.sqrt((props.CWRadius - x) * (props.CWRadius - x) + (props.CWRadius - y) * (props.CWRadius - y)) > (0.95*props.CWRadius)) {
       handleMouseUp();
       return false;
     } else {
@@ -139,8 +137,8 @@ const Selectors_ = props => {
     let mouseY = event.pageY - canvasPosY;
     let x0 = circleRefs[0].getAttribute("cx");
     let y0 = circleRefs[0].getAttribute("cy");
-    let d0x = x0 - colorWheelRadius;
-    let d0y = y0 - colorWheelRadius;
+    let d0x = x0 - props.CWRadius;
+    let d0y = y0 - props.CWRadius;
     let radsFromMouse = Math.atan2(d0y, d0x);
     let radsOffset = 0;
 
@@ -161,13 +159,13 @@ const Selectors_ = props => {
           circleCoordinates[i].radius -
           (circleCoordinates[0].radius -
             Math.sqrt(
-              (colorWheelRadius - mouseX) * (colorWheelRadius - mouseX) + (colorWheelRadius - mouseY) * (colorWheelRadius - mouseY)
+              (props.CWRadius - mouseX) * (props.CWRadius - mouseX) + (props.CWRadius - mouseY) * (props.CWRadius - mouseY)
             ));
 
         if (radius < 0) radius = 0;
-        if (radius > colorWheelRadius) radius = colorWheelRadius;
-        circleRefs[i].setAttribute("cx", `${colorWheelRadius + radius * Math.cos(angle)}`);
-        circleRefs[i].setAttribute("cy", `${colorWheelRadius + radius * Math.sin(angle)}`);
+        if (radius > props.CWRadius) radius = props.CWRadius;
+        circleRefs[i].setAttribute("cx", `${props.CWRadius + radius * Math.cos(angle)}`);
+        circleRefs[i].setAttribute("cy", `${props.CWRadius + radius * Math.sin(angle)}`);
         setColor(x, y, i);
       }
     }
@@ -210,14 +208,15 @@ const Selectors_ = props => {
   useEffect(() => {
     let radOffset = setHarmony();
     let staggerOffset = 0;
+    let XYresizeOffset = props.CWRadius / lastCWRadius;
     for (let i = 0; i < props.selectorCount; i++) {
-      let x = colorWheelRadius + (props.selectorRadius - staggerOffset) * Math.cos(radOffset[i]);
-      let y = colorWheelRadius + (props.selectorRadius - staggerOffset) * Math.sin(radOffset[i]);
-      circleRefs[i].setAttribute("cx", `${x}`);
-      circleRefs[i].setAttribute("cy", `${y}`);
+      let x = props.CWRadius + (props.selectorRadius - staggerOffset) * Math.cos(radOffset[i]);
+      let y = props.CWRadius + (props.selectorRadius - staggerOffset) * Math.sin(radOffset[i]);
+      circleRefs[i].setAttribute("cx", `${x*XYresizeOffset}`);
+      circleRefs[i].setAttribute("cy", `${y*XYresizeOffset}`);
       staggerOffset += props.selectorStagger / props.selectorCount
     }
-  }, [props.selectorStagger, props.selectorCount, props.selectorRadius,  props.selectorAngle, props.clusterAngle, props.reset]);
+  }, [props.selectorStagger, props.selectorCount, props.selectorRadius,  props.selectorAngle, props.clusterAngle, props.reset, props.CWRadius]);
 
   useEffect(() => {
     for (let i = 0; i < props.selectorCount; i++) {
@@ -227,7 +226,9 @@ const Selectors_ = props => {
     }
   });
 
+
   useLayoutEffect(() => {
+    lastCWRadius = props.CWRadius
     circleRefs = svg.current.children;
     circleCoordinates = getPointMath();
   });
@@ -236,9 +237,9 @@ const Selectors_ = props => {
     <svg
       className="selector"
       ref={svg}
-      width={`${colorWheelRadius*2}`}
-      height={`${colorWheelRadius*2}`}
-      viewBox={`0 0 ${colorWheelRadius*2} ${colorWheelRadius*2}`}
+      width={`${props.CWRadius*2}`}
+      height={`${props.CWRadius*2}`}
+      viewBox={`0 0 ${props.CWRadius*2} ${props.CWRadius*2}`}
     >
       {createCircles()}
     </svg>
@@ -256,7 +257,8 @@ function mapStateToProps(state) {
     linked: state.actionReducer.LINKED,
     reset: state.actionReducer.RESET,
     preset: state.actionReducer.PRESET,
-    clusterAngle: state.actionReducer.CLUSTER_ANGLE
+    clusterAngle: state.actionReducer.CLUSTER_ANGLE,
+    CWRadius: state.actionReducer.VIEWPORT_HEIGHT * 0.3125
   };
 }
 

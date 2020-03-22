@@ -1,28 +1,29 @@
 @import "../../Globals.scss";
+@import "../../Variables.scss";
 
 .palette {
   grid-column: 4;
   height: 100%;
-  width: 110px;
+  width: scale(110);
   background-color: $color-secondary;
   border-radius: $ui-block-radius;
-  box-shadow: 0 0px 15px 0 #a1a1a1;
+  box-shadow: 0 0 scale(15) 0 #a1a1a1;
   font-weight: bold;
   &.dark {
     background-color: $color-secondary-dark;
-    box-shadow: 0 0px 15px 0 #171717;
+    box-shadow: 0 0 scale(15) 0 #171717;
   }
   .palettes-button {
     font-size: 1.5rem;
     line-height: 0;
-    width: 40px;
-    margin: 10px 5px 5px;
+    width: scale(40);
+    margin: scale(10) scale(5) scale(5);
   }
   .palette-block {
     position: relative;
-    height: 100px;
-    width: 100px;
-    margin: 5px;
+    height: auto;
+    width: scale(100);
+    margin: scale(5);
     border-radius: $button-radius;
     overflow: hidden;
     .block-color {
@@ -32,22 +33,22 @@
       position: absolute;
       left: 0;
       top: 0;
-      height: 90px;
-      width: 90px;
+      height: scale(90);
+      width: scale(90);
       background-image: url("../../img/delete-icon.png");
       background-size: 100%;
       display: none;
     }
     &.delete-mode {
       cursor: pointer;
-      border: solid 5px $color-button;
-      height: 90px;
-      width: 90px;
+      border: solid scale(5) $color-button;
+      height: scale(90);
+      width: scale(90);
       .icon-overlay {
         display: block;
       }
       &.dark {
-        border: solid 5px #818181;
+        border: solid scale(5) #818181;
       }
     }
   }

@@ -1,36 +1,36 @@
 @import "../../Globals.scss";
+@import "../../Variables.scss";
 
 $track-color: #696969;
 $thumb-color: #bbbbbb;
 
-$thumb-radius: 20px;
-$thumb-shadow-size: 1px;
-$thumb-shadow-blur: 1px;
+$thumb-radius: scale(20);
+$thumb-shadow-size: scale(1);
+$thumb-shadow-blur: scale(1);
 $thumb-shadow-color: #111;
 $thumb-shadow-color: #111;
-$thumb-border-width: 1.5px;
+$thumb-border-width: scale(1.5);
 $thumb-border-color: #696969;
 
 $track-width: 100%;
-$track-height: 3px;
-$track-shadow-size: 2px;
-$track-shadow-blur: 2px;
+$track-height: scale(3);
+$track-shadow-size: scale(2);
+$track-shadow-blur: scale(2);
 $track-shadow-color: #222;
-$track-border-width: 1px;
+$track-border-width: scale(1);
 $track-border-color: black;
 
-$track-radius: 5px;
+$track-radius: scale(5);
 $contrast: 5%;
 
-
-@mixin track(){
+@mixin track() {
   width: $track-width;
   height: $track-height;
   cursor: pointer;
   animate: 0.2s;
 }
 
-@mixin thumb(){
+@mixin thumb() {
   height: $thumb-radius;
   width: $thumb-radius;
   border: $thumb-border-width solid $thumb-border-color;
@@ -39,7 +39,7 @@ $contrast: 5%;
   cursor: pointer;
 }
 
-input[type=range] {
+input[type="range"] {
   -webkit-appearance: none;
   width: $track-width;
 
@@ -53,11 +53,12 @@ input[type=range] {
     border-radius: $track-radius;
     border: $track-border-width;
   }
-  
+
   &::-webkit-slider-thumb {
     @include thumb();
     -webkit-appearance: none;
-    margin-top: ((-$track-border-width * 2 + $track-height) / 2) - ($thumb-radius / 2);
+    margin-top: ((-$track-border-width * 2 + $track-height) / 2) -
+      ($thumb-radius / 2);
   }
 
   &:focus::-webkit-slider-runnable-track {
@@ -71,11 +72,11 @@ input[type=range] {
     border: $track-border-width;
   }
   &::-moz-range-thumb {
-     @include thumb();
+    @include thumb();
   }
 
   &::-ms-track {
-    @include track(); 
+    @include track();
     background: transparent;
     border-color: transparent;
     border-width: $thumb-radius 0;
@@ -85,12 +86,12 @@ input[type=range] {
   &::-ms-fill-lower {
     background: darken($track-color, $contrast);
     border: $track-border-width;
-    border-radius: $track-radius*2;
+    border-radius: $track-radius * 2;
   }
   &::-ms-fill-upper {
     background: $track-color;
     border: $track-border-width;
-    border-radius: $track-radius*2;
+    border-radius: $track-radius * 2;
   }
   &::-ms-thumb {
     @include thumb();

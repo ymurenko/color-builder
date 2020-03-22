@@ -1,5 +1,8 @@
 //import { SET_COLOR } from "./action-types";
 
+export const setVH = () => (
+  { type: 'SET_VIEWPORT_HEIGHT' }
+)
 export const storeColor = (val, index) => (
   { type: 'SET_COLOR', COLOR: val, INDEX: index }
 )

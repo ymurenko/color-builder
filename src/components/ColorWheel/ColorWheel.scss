@@ -1,4 +1,5 @@
 @import "../../Globals.scss";
+@import "../../Variables.scss";
 
 .color-wheel {
   grid-column: 2;
@@ -10,7 +11,7 @@
 .gradient {
   z-index: 0;
   display: inline-block;
-  height: 500px;
+  height: scale(500);
   .selector {
     position: absolute;
   }
@@ -19,18 +20,18 @@
 .button-right {
   z-index: 1;
   position: absolute;
-  bottom: 30px;
-  right: 30px;
+  bottom: scale(30);
+  right: scale(30);
 }
 
 .button-left {
   z-index: 1;
   position: absolute;
-  bottom: 30px;
-  left: 30px;
+  bottom: scale(30);
+  left: scale(30);
   &.active {
-    border: solid 2px $secondary-font-color;
-    padding: 3px 0;
+    border: solid scale(2) $secondary-font-color;
+    padding: scale(3) 0;
     &.dark {
       border-color: #818181;
     }

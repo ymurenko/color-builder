@@ -1,4 +1,5 @@
-@import "Globals.scss";
+@import "./Variables.scss";
+@import "./Globals.scss";
 
 .App {
   width: 100vw;
@@ -23,13 +24,13 @@
 
 .logo-container {
   grid-row: 1;
-  width: 1300px;
-  height: 90px;
+  width: scale(1300);
+  height: scale(90);
   margin: auto;
   background-repeat: no-repeat;
   background-size: 35%;
   background-image: url('./img/logotype.png');
-  margin-top: 10px;
+  margin-top: scale(10);
   &.dark {
     background-image: url('./img/logotype-dark.png');
   }

@@ -16,15 +16,9 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-const colorReducer = function(state = 0, action) {
-  switch (action.type) {
-    case "INCREMENT":
-      return state + 1;
-    case "DECREMENT":
-      return state - 1;
-    default:
-      return state;
-  }
-};
+
+const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+console.log(vw, vh)
 
 serviceWorker.unregister();
