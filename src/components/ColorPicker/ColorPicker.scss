@@ -38,79 +38,25 @@
   }
 }
 
-.color-picker-container {
-  display: inline-flex;
-  position: relative;
-  width: scale(1370);
-  height: scale(660);
-  grid-row: 2;
-  margin: auto;
-  text-align: center;
-  background-color: $color-secondary;
+
+.color-picker-components {
+  position: absolute;
+  display: grid;
+  column-gap: scale(10);
+  bottom: 0;
+  width: auto;
+  height: scale(600);
+  padding: scale(10);
+  background-color: $color-tertiary;
   border-radius: scale(15);
-  box-shadow: 0 0px scale(15) 0 #a1a1a1;
-  .navbar-container {
-    position: relative;
-    float: top;
-    width: 100%;
-    height: scale(50);
-    .tab {
-      z-index: 1;
-      position: absolute;
-      height: scale(30);
-      width: scale(200);
-      margin: scale(10) scale(10) 0 scale(15);
-      background-color: $color-tertiary;
-      border-top-left-radius: scale(15);
-      border-top-right-radius: scale(15);
-      font-size: 1.15rem;
-      font-weight: lighter;
-      line-height: scale(25);
-      &.shadow-tab {
-        z-index: 0;
-        box-shadow: 0 scale(0) scale(15) 0 #a1a1a1;
-        background-color: transparent;
-        &.dark {
-          box-shadow: 0 scale(0) scale(15) 0 #161616;
-        }
-      }
-      &.dark {
-        background-color: $color-tertiary-dark;
-      }
-    }
-    .active-tab {
-      z-index: 2;
-      &.shadow-tab {
-        z-index: 1;
-      }
-    }
-    .editor-tab {
-      left: scale(230);
-    }
-  }
-  .color-picker-components {
-    position: absolute;
+  box-shadow: 0 0 scale(15) 0 #a1a1a1;
+  .settings-wrapper {
     display: grid;
-    column-gap: scale(10);
-    bottom: 0;
-    width: auto;
-    height: scale(600);
-    padding: scale(10);
-    background-color: $color-tertiary;
-    border-radius: scale(15);
-    box-shadow: 0 0 scale(15) 0 #a1a1a1;
-    .settings-wrapper {
-      display: grid;
-      row-gap: scale(10);
-    }
-    &.dark {
-      background-color: $color-tertiary-dark;
-      box-shadow: 0 0 scale(15) 0 #161616;
-    }
-    z-index: 1;
+    row-gap: scale(10);
   }
   &.dark {
-    background-color: $color-secondary-dark;
-    box-shadow: 0 0 scale(15) 0 black;
+    background-color: $color-tertiary-dark;
+    box-shadow: 0 0 scale(15) 0 #161616;
   }
+  z-index: 1;
 }

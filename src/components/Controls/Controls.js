@@ -120,10 +120,10 @@ const Controls_ = props => {
             type="range"
             className={`slider ${props.darkMode ? "dark" : ""}`}
             ref={staggerSlider}
-            min={-(0.325 * props.viewport - props.selectorRadius)}
+            min={-(0.315 * props.viewport - props.selectorRadius)}
             max={props.selectorRadius}
             step={1}
-            defaultValue={props.selectorStagger}
+            value={props.selectorStagger}
             onChange={val => {
               props.setSelectorStagger(val.target.value);
             }}

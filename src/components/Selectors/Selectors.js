@@ -233,10 +233,10 @@ const Selectors_ = props => {
       svg.current.removeEventListener("mousemove", addMouseTracker);
     } else {
       svg.current.removeEventListener("mousemove", addMouseTrackerLinked);
+      initialOffsetAngle.current = getinitialOffsetAngle();
+      props.setSelectorLinkedRadius(circleCoordinates[0].radius)
     }
     circleCoordinates = getPointMath();
-    initialOffsetAngle.current = getinitialOffsetAngle();
-    props.setSelectorLinkedRadius(circleCoordinates[0].radius)
   };
 
   const handleMouseDown = e => {
@@ -254,14 +254,15 @@ const Selectors_ = props => {
 
   useEffect(() => {
     let radOffset = setHarmony();
-    let staggerOffset = 0;
+    let staggerIncrement = props.selectorStagger / props.selectorCount;
+    let staggerOffset = staggerIncrement;
     let XYresizeOffset = props.CWRadius / lastCWRadius.current;
     let x0 =
       props.CWRadius +
-      (props.selectorRadius - staggerOffset) * Math.cos(initialOffsetAngle.current);
+      props.selectorRadius * Math.cos(initialOffsetAngle.current);
     let y0 =
       props.CWRadius +
-      (props.selectorRadius - staggerOffset) * Math.sin(initialOffsetAngle.current);
+      props.selectorRadius * Math.sin(initialOffsetAngle.current);
     circleRefs[0].setAttribute("cx", `${x0 * XYresizeOffset}`);
     circleRefs[0].setAttribute("cy", `${y0 * XYresizeOffset}`);
     for (let i = 1; i < props.selectorCount; i++) {
@@ -273,7 +274,7 @@ const Selectors_ = props => {
         (props.selectorRadius - staggerOffset) * Math.sin(radOffset[i]);
       circleRefs[i].setAttribute("cx", `${x * XYresizeOffset}`);
       circleRefs[i].setAttribute("cy", `${y * XYresizeOffset}`);
-      staggerOffset += props.selectorStagger / props.selectorCount;
+      staggerOffset += staggerIncrement;
     }
   }, [
     props.selectorStagger,
