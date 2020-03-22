@@ -1,12 +1,12 @@
 import React, {useLayoutEffect} from "react";
 import { connect } from "react-redux";
-import { setVH } from "./redux/actions/actions";
+import { setViewport } from "./redux/actions/actions";
 import "./App.scss";
 import ColorPicker from "./components/ColorPicker/ColorPicker";
 
 const App_ = props => {
   useLayoutEffect(() => {
-    window.addEventListener('resize', () => props.setVH())
+    window.addEventListener('resize', () => props.setViewport())
   })
 
   return (
@@ -27,7 +27,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  setVH
+  setViewport
 };
 
 const App = connect(mapStateToProps, mapDispatchToProps)(App_);

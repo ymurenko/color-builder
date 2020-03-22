@@ -4,12 +4,12 @@ import { deletePalette } from "../../redux/actions/actions";
 import "./Palettes.scss";
 
 const PaletteBlock_ = props => {
-  let height = (0.125*props.VH) / props.palette.length;
+  let width = (0.1623*props.Viewport) / props.palette.length;
 
   const renderColors = props.palette.map((color, i) => (
     <div
       className="block-color"
-      style={{ backgroundColor: color, height: `${height}px` }}
+      style={{ backgroundColor: color, width: `${width}px` }}
       key={i}
     ></div>
   ));
@@ -34,7 +34,7 @@ const PaletteBlock_ = props => {
 function mapStateToProps(state) {
   return {
     darkMode: state.actionReducer.DARK_MODE,
-    VH: state.actionReducer.VIEWPORT_HEIGHT
+    Viewport: state.actionReducer.VIEWPORT_HEIGHT
   };
 }
 

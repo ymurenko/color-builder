@@ -5,7 +5,7 @@ import "./ColorBlock.scss";
 
 const ColorBlock_ = props => {
   const colorBlock = useRef(null);
-  let height = (0.5*props.VH) / props.selectorCount;
+  let height = (0.575*props.Viewport) / props.selectorCount;
   let textColor = props.lightness < 50 ? "#bdbdbd" : "#404040";
 
   const copyColor = event => {
@@ -32,7 +32,7 @@ const ColorBlock_ = props => {
     >
       <div
         className="copy-prompt"
-        style={{ height: height, paddingTop: `${(height - (0.025*props.VH)) / 2}px` }}
+        style={{ height: height, paddingTop: `${(height - (0.025*props.Viewport)) / 2}px` }}
       >
         <p className="color-text hover-cta">{props.color}</p>
         <p className="copy-text hover-cta">Click to copy</p>
@@ -47,7 +47,7 @@ function mapStateToProps(state) {
     selectorCount: state.actionReducer.SELECTOR_COUNT,
     hash: state.actionReducer.HASH,
     quotes: state.actionReducer.QUOTES,
-    VH: state.actionReducer.VIEWPORT_HEIGHT
+    Viewport: state.actionReducer.VIEWPORT_HEIGHT
   };
 }
 

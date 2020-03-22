@@ -257,7 +257,7 @@ function mapStateToProps(state) {
     reset: state.actionReducer.RESET,
     preset: state.actionReducer.PRESET,
     clusterAngle: state.actionReducer.CLUSTER_ANGLE,
-    CWRadius: state.actionReducer.VIEWPORT_HEIGHT * 0.3125
+    CWRadius: state.actionReducer.VIEWPORT_HEIGHT * 0.325
   };
 }
 

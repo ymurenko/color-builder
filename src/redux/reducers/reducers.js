@@ -1,8 +1,8 @@
 import { combineReducers, createStore } from "redux";
-import { getVH } from "../../util/viewport-height";
+import { getViewport } from "../../util/viewport-height";
 
 const initialState = {
-  VIEWPORT_HEIGHT: getVH(),
+  VIEWPORT_HEIGHT: getViewport(),
   COLORS: ["#FFF", "#FFF", "#FFF"],
   PALETTES: [],
   LIGHTNESS: 50,
@@ -25,7 +25,7 @@ export const actionReducer = (state = initialState, action) => {
     case "SET_VIEWPORT_HEIGHT":
       return {
         ...state,
-        VIEWPORT_HEIGHT: getVH()
+        VIEWPORT_HEIGHT: getViewport()
       };
     case "SET_COLOR":
       let CURRENT_COLORS = [...state.COLORS];

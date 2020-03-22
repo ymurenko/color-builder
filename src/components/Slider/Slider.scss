@@ -4,16 +4,16 @@
 $track-color: #696969;
 $thumb-color: #bbbbbb;
 
-$thumb-radius: scale(20);
+$thumb-radius: scale(13);
 $thumb-shadow-size: scale(1);
 $thumb-shadow-blur: scale(1);
 $thumb-shadow-color: #111;
 $thumb-shadow-color: #111;
-$thumb-border-width: scale(1.5);
+$thumb-border-width: scale(1);
 $thumb-border-color: #696969;
 
 $track-width: 100%;
-$track-height: scale(3);
+$track-height: scale(2);
 $track-shadow-size: scale(2);
 $track-shadow-blur: scale(2);
 $track-shadow-color: #222;
@@ -22,6 +22,25 @@ $track-border-color: black;
 
 $track-radius: scale(5);
 $contrast: 5%;
+
+.slider-container {
+  .slider {
+    height: $thumb-radius;
+    width: 100%;
+    background-color: $color-secondary;
+    margin: 0;
+    &.dark {
+      background-color: $color-secondary-dark;
+    }
+  }
+  .slider-label {
+    text-align: left;
+    margin-bottom: scale(3);
+    margin-top: 0;
+    line-height: scale(8);
+    font-size: 0.9rem;
+  }
+}
 
 @mixin track() {
   width: $track-width;

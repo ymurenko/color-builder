@@ -86,7 +86,7 @@ function mapStateToProps(state) {
     saturation: state.actionReducer.SATURATION,
     darkMode: state.actionReducer.DARK_MODE,
     linked: state.actionReducer.LINKED,
-    CWRadius: state.actionReducer.VIEWPORT_HEIGHT * 0.3125
+    CWRadius: state.actionReducer.VIEWPORT_HEIGHT * 0.325
   };
 }
 

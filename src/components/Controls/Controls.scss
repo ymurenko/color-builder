@@ -2,60 +2,13 @@
 @import "../../Variables.scss";
 
 .controls {
-  display: inline-block;
   grid-column: 1;
-  width: $ui-block-width;
-  
-}
-
-.presets-grid {
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr;
-  text-align: center;
-  margin-top: scale(15);
-  .preset {
-    margin: scale(20) scale(5);
-    height: scale(120);
-    width: scale(120);
-    background-color: $color-secondary;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    cursor: pointer;
-    border: none;
-    &.dyad {
-      background-image: url('../../img/dyad-light.png');
-      &.dark {
-        background-image: url('../../img/dyad-dark.png');
-      }
-    }
-    &.triad {
-      background-image: url('../../img/triad-light.png');
-      &.dark {
-        background-image: url('../../img/triad-dark.png');
-      }
-    }
-    &.tetrad {
-      background-image: url('../../img/tetrad-light.png');
-      &.dark {
-        background-image: url('../../img/tetrad-dark.png');
-      }
-    }
-    &.pentad {
-      background-image: url('../../img/pentad-light.png');
-      &.dark {
-        background-image: url('../../img/pentad-dark.png');
-      }
-    }
-    &.dark {
-      background-color: $color-secondary-dark;
-    }
-    &.active {
-      border-radius: 50%;
-      border: solid scale(3) #818181;
-      &.dark {
-        border: solid scale(3) #a1a1a1;
-      }
-    }
+  grid-row: 1;
+  .controls-wrapper {
+    display: grid;
+    grid-gap: scale(12);
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    margin-top: scale(14)
   }
 }
 
@@ -65,23 +18,11 @@
   font-weight: $secondary-font-weight;
   font-family: $font-family;
   margin: scale(5);
+  height: scale(28);
   .button {
     margin: 0 scale(10);
   }
-  &.slider-container {
-    margin: scale(20) scale(5) 0 ;
-  }
-  .slider {
-    height: scale(3);
-    width: 100%;
-    background-color: $color-secondary;
-    &.dark {
-      background-color: $color-secondary-dark;
-    }
-  }
+  
 }
 
-.slider-label {
-  text-align: left;
-  margin-bottom: scale(10);
-}
+

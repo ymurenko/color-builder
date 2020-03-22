@@ -19,7 +19,7 @@ $color-secondary-dark: #2c2c2c;
 $color-primary-dark: #333333;
 
 $ui-block-width: scale(260);
-$ui-block-height: scale(500);
+$ui-block-height: scale(550);
 $ui-block-padding: scale(25);
 $ui-block-radius: scale(15);
 
@@ -34,8 +34,19 @@ $button-radius: scale(8);
 }
 
 .ui-block {
-  height: $ui-block-height;
-  padding: $ui-block-padding;
+  background-color: $color-secondary;
+  border-radius: $ui-block-radius;
+  box-shadow: $ui-block-shadow-light;
+  &.dark {
+    background-color: $color-secondary-dark;
+    box-shadow: $ui-block-shadow-dark;
+  }
+}
+
+.ui-half-block {
+  height: scale(275);
+  width: scale(240);
+  padding: scale(10) $ui-block-padding;
   background-color: $color-secondary;
   border-radius: $ui-block-radius;
   box-shadow: $ui-block-shadow-light;

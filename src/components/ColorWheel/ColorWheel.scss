@@ -6,6 +6,7 @@
   text-align: center;
   display: inline-flex;
   position: relative;
+  padding: $ui-block-padding;
 }
 
 .gradient {
@@ -31,7 +32,7 @@
   left: scale(30);
   &.active {
     border: solid scale(2) $secondary-font-color;
-    padding: scale(3) 0;
+    bottom: scale(28);
     &.dark {
       border-color: #818181;
     }

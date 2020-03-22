@@ -1,4 +1,3 @@
-
 @import "../../Globals.scss";
 
 .picker-palette {
@@ -6,11 +5,12 @@
     display: inline-block;
     grid-column: 3;
     width: $ui-block-width;
+    height: scale(560);
+    padding: scale(20);
     .colors-container {
-      height: scale(400);
       border-radius: scale(10);
+      height: scale(460);
       overflow: hidden;
-      
     }
     .control-container {
       margin-top: scale(20);

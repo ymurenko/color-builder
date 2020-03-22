@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import ColorWheel from "../ColorWheel/ColorWheel";
 import Controls from "../Controls/Controls";
+import Presets from "../Presets/Presets";
 import PickerPalette from "../PickerPalette/PickerPalette";
 import "./ColorPicker.scss";
 import "../Controls/Controls.scss";
@@ -12,19 +13,27 @@ const ColorPicker_ = props => {
   const colorContainer = useRef(null);
 
   return (
-    <div className={`color-picker-container active-tab ${props.darkMode ? "dark" : ""}`}>
+    <div
+      className={`color-picker-container active-tab ${
+        props.darkMode ? "dark" : ""
+      }`}
+    >
       <div className="navbar-container">
         <div
-          className={`tab color-picker-tab active-tab ${props.darkMode ? "dark" : ""}`}
-        >Colorpicker</div>
+          className={`tab color-picker-tab active-tab ${
+            props.darkMode ? "dark" : ""
+          }`}
+        >
+          Colorpicker
+        </div>
         <div
           className={`shadow-tab tab color-picker-tab ${
             props.darkMode ? "dark" : ""
           }`}
         />
-         <div
-          className={`tab editor-tab ${props.darkMode ? "dark" : ""}`}
-        >Palette editor</div>
+        <div className={`tab editor-tab ${props.darkMode ? "dark" : ""}`}>
+          Palette editor
+        </div>
         <div
           className={`shadow-tab tab editor-tab ${
             props.darkMode ? "dark" : ""
@@ -43,7 +52,10 @@ const ColorPicker_ = props => {
       <div
         className={`color-picker-components ${props.darkMode ? "dark" : ""}`}
       >
-        <Controls />
+        <div className="settings-wrapper">
+          <Presets />
+          <Controls />
+        </div>
         <ColorWheel colorsContainer={colorContainer} />
         <PickerPalette paletteRef={colorContainer} />
         <Palettes />

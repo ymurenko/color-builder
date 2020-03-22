@@ -2,20 +2,21 @@
 
 .button {
   cursor: pointer;
-  font-size: $secondary-font-size;
+  font-size: 0.9rem;
   font-weight: $secondary-font-weight;
   font-family: $font-family;
-  width: scale(100);
-  height: scale(30);
-  padding: scale(5);
+  width: scale(80);
+  height: scale(25);
+  line-height: scale(16);
   border: none;
   border-radius: $button-radius;
   color: $secondary-font-color-dark;
   background-color: $color-button;
   &.set-dark {
     position: absolute;
-    margin: scale(10) scale(20) scale(10);
+    margin: scale(8) scale(35) scale(8);
     right: 0;
+    width: scale(100);
     box-shadow: 0 scale(0) scale(15) 0 #a1a1a1;
     &.dark {
       box-shadow: 0 scale(0) scale(15) 0 #161616;
@@ -24,7 +25,7 @@
   &.active {
     color: $color-primary-dark;
     border: solid scale(2) #4d4d4d;
-    padding: scale(3) 0;
+    height: scale(27);
     color: #4d4d4d;
     &.dark {
       border-color: #818181;
@@ -41,7 +42,7 @@
   display: inline-flex;
   position: relative;
   width: scale(1370);
-  height: scale(630);
+  height: scale(660);
   grid-row: 2;
   margin: auto;
   text-align: center;
@@ -56,15 +57,15 @@
     .tab {
       z-index: 1;
       position: absolute;
-      height: scale(40);
+      height: scale(30);
       width: scale(200);
       margin: scale(10) scale(10) 0 scale(15);
       background-color: $color-tertiary;
       border-top-left-radius: scale(15);
       border-top-right-radius: scale(15);
-      font-size: 1.3rem;
+      font-size: 1.15rem;
       font-weight: lighter;
-      line-height: scale(35);
+      line-height: scale(25);
       &.shadow-tab {
         z-index: 0;
         box-shadow: 0 scale(0) scale(15) 0 #a1a1a1;
@@ -90,14 +91,18 @@
   .color-picker-components {
     position: absolute;
     display: grid;
-    column-gap: scale(20);
+    column-gap: scale(10);
     bottom: 0;
     width: auto;
-    height: scale(550);
-    padding: scale(15);
+    height: scale(600);
+    padding: scale(10);
     background-color: $color-tertiary;
     border-radius: scale(15);
     box-shadow: 0 0 scale(15) 0 #a1a1a1;
+    .settings-wrapper {
+      display: grid;
+      row-gap: scale(10);
+    }
     &.dark {
       background-color: $color-tertiary-dark;
       box-shadow: 0 0 scale(15) 0 #161616;

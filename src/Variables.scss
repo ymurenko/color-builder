@@ -1,4 +1,4 @@
-
 @function scale($px) {
-    @return ($px/800)*100vh
- }
+    @return ($px/800) * 100vh;
+}
+

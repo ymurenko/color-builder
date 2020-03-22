@@ -2,7 +2,7 @@
 @import "./Globals.scss";
 
 .App {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background-color: $color-primary;
   &.dark {
@@ -25,12 +25,12 @@
 .logo-container {
   grid-row: 1;
   width: scale(1300);
-  height: scale(90);
+  height: scale(65);
   margin: auto;
   background-repeat: no-repeat;
-  background-size: 35%;
+  background-size: 25%;
   background-image: url('./img/logotype.png');
-  margin-top: scale(10);
+  margin-top: scale(12);
   &.dark {
     background-image: url('./img/logotype-dark.png');
   }

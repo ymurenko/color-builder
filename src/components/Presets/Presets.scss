@@ -1,0 +1,59 @@
+@import "../../Globals.scss";
+@import "../../Variables.scss";
+
+.presets {
+  grid-column: 1;
+  grid-row: 2;
+  .presets-wrapper {
+    margin-bottom: scale(10);
+    .presets-grid {
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: scale(15);
+      text-align: center;
+      .preset {
+        height: scale(110);
+        width: scale(110);
+        background-color: $color-secondary;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        cursor: pointer;
+        border: none;
+        &.dyad {
+          background-image: url("../../img/dyad-light.png");
+          &.dark {
+            background-image: url("../../img/dyad-dark.png");
+          }
+        }
+        &.triad {
+          background-image: url("../../img/triad-light.png");
+          &.dark {
+            background-image: url("../../img/triad-dark.png");
+          }
+        }
+        &.tetrad {
+          background-image: url("../../img/tetrad-light.png");
+          &.dark {
+            background-image: url("../../img/tetrad-dark.png");
+          }
+        }
+        &.pentad {
+          background-image: url("../../img/pentad-light.png");
+          &.dark {
+            background-image: url("../../img/pentad-dark.png");
+          }
+        }
+        &.dark {
+          background-color: $color-secondary-dark;
+        }
+        &.active {
+          border-radius: 50%;
+          border: solid scale(3) #818181;
+          &.dark {
+            border: solid scale(3) #a1a1a1;
+          }
+        }
+      }
+    }
+  }
+}

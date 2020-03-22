@@ -25,7 +25,7 @@ const Palettes_ = props => {
           props.storePalette();
         }}
       >
-        +
+        Add
       </button>
       <button
         className={`button palettes-button ${props.darkMode ? "dark" : ""} ${
@@ -36,9 +36,9 @@ const Palettes_ = props => {
           setDeleteMode(!deleteMode);
         }}
       >
-        -
+        Delete
       </button>
-      <div className="palette-blocks">{renderPaletteBlocks}</div>
+      <div className="palette-blocks-wrapper">{renderPaletteBlocks}</div>
     </div>
   );
 };
