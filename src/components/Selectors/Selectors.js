@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, createRef } from "react";
 import useDidMountEffect from "../../util/useDidMountEffect";
 import { connect } from "react-redux";
 import { storeColor, setSelectorLinkedRadius } from "../../redux/actions/actions";
+import { store } from "../../redux/reducers/reducers";
 
 const Selectors_ = props => {
   const svg = useRef(null);
@@ -106,6 +107,10 @@ const Selectors_ = props => {
     }
     return elements;
   };
+
+  const getLinkedState = () => {
+    return store.getState().actionReducer.LINKED
+  }
 
   const getinitialOffsetAngle = () => {
     let x0 = circleRefs[0].getAttribute("cx");
@@ -229,14 +234,14 @@ const Selectors_ = props => {
 
   const handleMouseUp = e => {
     currentActiveCircle = null;
-    if (!props.linked) {
+    if (!getLinkedState()) {
       svg.current.removeEventListener("mousemove", addMouseTracker);
     } else {
       svg.current.removeEventListener("mousemove", addMouseTrackerLinked);
-      initialOffsetAngle.current = getinitialOffsetAngle();
-      props.setSelectorLinkedRadius(circleCoordinates[0].radius)
     }
     circleCoordinates = getPointMath();
+    initialOffsetAngle.current = getinitialOffsetAngle();
+    props.setSelectorLinkedRadius(circleCoordinates[0].radius)
   };
 
   const handleMouseDown = e => {
@@ -244,7 +249,7 @@ const Selectors_ = props => {
     canvasPosX = rect.left;
     canvasPosY = rect.top;
     currentActiveCircle = e.target;
-    if (!props.linked) {
+    if (!getLinkedState()) {
       svg.current.addEventListener("mousemove", addMouseTracker);
     } else {
       svg.current.addEventListener("mousemove", addMouseTrackerLinked);
@@ -324,7 +329,6 @@ function mapStateToProps(state) {
     selectorStagger: state.actionReducer.SELECTOR_STAGGER,
     lightness: state.actionReducer.LIGHTNESS,
     saturation: state.actionReducer.SATURATION,
-    linked: state.actionReducer.LINKED,
     reset: state.actionReducer.RESET,
     preset: state.actionReducer.PRESET,
     clusterAngle: state.actionReducer.CLUSTER_ANGLE,

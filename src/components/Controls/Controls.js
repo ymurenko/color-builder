@@ -24,7 +24,7 @@ const Controls_ = props => {
 
   useEffect(() => {
     props.setSelectorRadius(radiusSlider.current.value);
-  }, [props.selectorAngle, props.selectorLinkedRadius]);
+  }, [props.selectorAngle]);
 
   return (
     <div className={`controls ui-half-block ${props.darkMode ? "dark" : ""}`}>
@@ -143,7 +143,6 @@ function mapStateToProps(state) {
     selectorRadius: state.actionReducer.SELECTOR_RADIUS,
     selectorLinkedRadius: state.actionReducer.SELECTOR_LINKED_RADIUS,
     selectorStagger: state.actionReducer.SELECTOR_STAGGER,
-    linked: state.actionReducer.LINKED,
     darkMode: state.actionReducer.DARK_MODE,
     preset: state.actionReducer.PRESET,
     viewport: state.actionReducer.VIEWPORT_HEIGHT
