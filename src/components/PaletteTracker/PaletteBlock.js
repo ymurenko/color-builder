@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { connect } from "react-redux";
 import { deletePalette } from "../../redux/actions/actions";
-import "./Palettes.scss";
+import "./PaletteTracker.scss";
 
 const PaletteBlock_ = props => {
   let width = (0.1623*props.Viewport) / props.palette.length;

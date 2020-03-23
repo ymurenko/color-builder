@@ -6,7 +6,7 @@ import CurrentColors from "../CurrentColors/CurrentColors";
 import "./ColorPicker.scss";
 import "../Controls/Controls.scss";
 import { connect } from "react-redux";
-import Palettes from "../Palettes/Palettes";
+import PaletteTracker from "../PaletteTracker/PaletteTracker";
 
 const ColorPicker_ = props => {
   const colorContainer = useRef(null);
@@ -19,7 +19,7 @@ const ColorPicker_ = props => {
       </div>
       <ColorWheel colorsContainer={colorContainer} />
       <CurrentColors paletteRef={colorContainer} />
-      <Palettes />
+      <PaletteTracker />
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { storePalette } from "../../redux/actions/actions";
-import "./Palettes.scss";
+import "./PaletteTracker.scss";
 import PaletteBlock from "./PaletteBlock";
 
-const Palettes_ = props => {
+const PaletteTracker_ = props => {
   const [deleteMode, setDeleteMode] = useState(false);
  
   const renderPaletteBlocks = props.palettes.map((palette, i) => (
@@ -17,7 +17,7 @@ const Palettes_ = props => {
   ));
   
   return (
-    <div className={`palette ${props.darkMode ? "dark" : ""}`}>
+    <div className={`palette-tracker ${props.darkMode ? "dark" : ""}`}>
       <button
         className={`button palettes-button ${props.darkMode ? "dark" : ""}`}
         type="button"
@@ -54,6 +54,6 @@ const mapDispatchToProps = {
   storePalette,
 };
 
-const Palettes = connect(mapStateToProps, mapDispatchToProps)(Palettes_);
+const PaletteTracker = connect(mapStateToProps, mapDispatchToProps)(PaletteTracker_);
 
-export default Palettes;
+export default PaletteTracker;
