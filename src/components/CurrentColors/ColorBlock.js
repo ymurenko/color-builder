@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { connect } from "react-redux";
 import copy from "copy-to-clipboard";
-import "./ColorBlock.scss";
 
 const ColorBlock_ = props => {
   const colorBlock = useRef(null);

@@ -38,7 +38,6 @@
   }
 }
 
-
 .color-picker-components {
   position: absolute;
   display: grid;
@@ -59,4 +58,32 @@
     box-shadow: 0 0 scale(15) 0 #161616;
   }
   z-index: 1;
+}
+
+.color-block {
+  cursor: pointer;
+  border: none;
+  background-color: #fff;
+  width: 100%;
+  font-family: Verdana;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: filter;
+  .copy-prompt {
+    text-align: center;
+    .hover-cta {
+      margin: 0;
+    }
+    .copy-text {
+      display: none;
+    }
+    &:hover {
+      .color-text {
+        display: none;
+      }
+      .copy-text {
+        display: inline;
+      }
+    }
+  }
 }
