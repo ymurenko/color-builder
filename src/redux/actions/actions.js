@@ -6,6 +6,9 @@ export const setViewport = () => (
 export const storeColor = (val, index) => (
   { type: 'SET_COLOR', COLOR: val, INDEX: index }
 )
+export const setCurrentPalette = (index) => (
+  { type: 'SET_CURRENT_PALETTE', INDEX: index}
+)
 export const storePalette = () => (
   { type: 'STORE_PALETTE' }
 )

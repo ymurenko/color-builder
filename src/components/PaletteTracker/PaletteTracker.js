@@ -13,6 +13,7 @@ const PaletteTracker_ = props => {
       key={i}
       deleteMode={deleteMode}
       index={i}
+      editor={props.editor}
     />
   ));
   

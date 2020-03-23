@@ -5,6 +5,7 @@ const initialState = {
   VIEWPORT_HEIGHT: getViewport(),
   COLORS: ["#FFF", "#FFF", "#FFF"],
   PALETTES: [],
+  ACTIVE_PALETTE: {index: -1, palette: []},
   LIGHTNESS: 50,
   SATURATION: 100,
   SELECTOR_COUNT: 4,
@@ -23,6 +24,7 @@ const initialState = {
 };
 
 export const actionReducer = (state = initialState, action) => {
+  let CURRENT_PALETTES = [...state.PALETTES];
   switch (action.type) {
     case "SET_VIEWPORT_HEIGHT":
       return {
@@ -38,14 +40,18 @@ export const actionReducer = (state = initialState, action) => {
         COLORS: CURRENT_COLORS
       };
     case "STORE_PALETTE":
-      let NEW_PALETTES = [...state.PALETTES];
-      NEW_PALETTES.push([...state.COLORS]);
+      CURRENT_PALETTES.push([...state.COLORS]);
       return {
         ...state,
-        PALETTES: NEW_PALETTES
+        PALETTES: CURRENT_PALETTES
       };
+    case "SET_CURRENT_PALETTE":
+      let SELECTED_PALETTE = CURRENT_PALETTES[action.INDEX]
+      return {
+        ...state,
+        ACTIVE_PALETTE: {index: action.INDEX, palette: SELECTED_PALETTE}
+      }
     case "DELETE_PALETTE":
-      let CURRENT_PALETTES = [...state.PALETTES];
       CURRENT_PALETTES.splice(action.INDEX, 1);
       return {
         ...state,
@@ -185,12 +191,14 @@ export const actionReducer = (state = initialState, action) => {
         SELECTOR_RADIUS: (state.VIEWPORT_HEIGHT * 0.325) / 2,
         SELECTOR_LINKED_RADIUS: (state.VIEWPORT_HEIGHT * 0.325) / 2,
         PALETTES: state.PALETTES,
+        ACTIVE_PALETTE: state.ACTIVE_PALETTE,
         DARK_MODE: state.DARK_MODE,
         RESET: 1 - state.RESET
       };
     case "SET_MODE":
       return {
         ...state,
+        ACTIVE_PALETTE: initialState.ACTIVE_PALETTE,
         MODE: action.MODE
       }
     default:

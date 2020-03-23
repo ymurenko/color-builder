@@ -18,7 +18,7 @@ const ColorPicker_ = props => {
       </div>
       <ColorWheel colorsContainer={colorContainer} />
       <CurrentColors paletteRef={colorContainer} />
-      <PaletteTracker />
+      <PaletteTracker editor={false}/>
     </div>
   );
 };

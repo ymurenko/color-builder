@@ -45,6 +45,18 @@
       background-repeat: no-repeat;
       display: none;
     }
+    &.editor-mode {
+      cursor: pointer;
+    }
+    &.active-palette {
+      border: solid scale(5) $color-button;
+      border-radius: scale(10);
+      height: scale(97);
+      margin: scale(5) scale(10);
+      &.dark {
+        border: solid scale(5) #818181;
+      }
+    }
     &.delete-mode {
       cursor: pointer;
       border: solid scale(5) $color-button;

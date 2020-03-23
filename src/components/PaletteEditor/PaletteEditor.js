@@ -8,7 +8,7 @@ const ColorPicker_ = props => {
 
   return (
     <div className={`palette-editor-interface ${props.darkMode ? "dark" : ""}`}>
-      <PaletteTracker />
+      <PaletteTracker editor={true}/>
     </div>
   );
 };
