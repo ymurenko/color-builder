@@ -25,7 +25,7 @@ const App_ = props => {
                 props.darkMode ? "dark" : ""
               }`}
             >
-              Colorpicker
+              Color Picker
             </div>
             <div
               className={`shadow-tab tab color-picker-tab ${
@@ -33,7 +33,7 @@ const App_ = props => {
               }`}
             />
             <div className={`tab editor-tab ${props.darkMode ? "dark" : ""}`}>
-              Palette editor
+              Palette Editor
             </div>
             <div
               className={`shadow-tab tab editor-tab ${

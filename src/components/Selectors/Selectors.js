@@ -72,7 +72,6 @@ const Selectors_ = props => {
   const createCircles = () => {
     let elements = [];
     let radOffset = setHarmony();
-    console.log(radOffset[0])
     let x = props.CWRadius + props.selectorRadius * Math.cos(initialOffsetAngle.current);
     let y = props.CWRadius + props.selectorRadius * Math.sin(initialOffsetAngle.current);
     elements.push(

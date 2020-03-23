@@ -29,15 +29,10 @@ const ColorWheel_ = props => {
 
       gradient.addColorStop("0", `${props.lightness > 45 ? "white" : "black"}`);
       gradient.addColorStop(
-        "0.95",
+        "1",
         `hsl(${value}, ${props.saturation}%, ${props.lightness}%)`
       );
-      gradient.addColorStop(
-        "0.95",
-        `${props.darkMode ? "#212121" : "#b5b5b5"}`
-      );
-      gradient.addColorStop("1", `${props.darkMode ? "#212121" : "#b5b5b5"}`);
-
+      
       canvasContext.strokeStyle = gradient;
 
       canvasContext.moveTo(130, 130);
