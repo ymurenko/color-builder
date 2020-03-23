@@ -10,9 +10,9 @@ import {
   setSelectorRadius,
   setSelectorStagger,
   setDarkMode
-} from "../../redux/actions/actions";
+} from "../../../redux/actions/actions";
 import "./Controls.scss";
-import "../Slider/Slider.scss";
+import "../../Slider/Slider.scss";
 
 const Controls_ = props => {
   const staggerSlider = useRef(null);

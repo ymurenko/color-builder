@@ -18,6 +18,8 @@ $color-tertiary-dark: #272727;
 $color-secondary-dark: #2c2c2c;
 $color-primary-dark: #333333;
 
+$ui-width: scale(1370);
+
 $ui-block-width: scale(260);
 $ui-block-height: scale(550);
 $ui-block-padding: scale(25);
@@ -27,6 +29,46 @@ $ui-block-shadow-light: 0 0 scale(15) 0 #a1a1a1;
 $ui-block-shadow-dark: 0 0 scale(15) 0 #171717;
 
 $button-radius: scale(8);
+
+
+.button {
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: $secondary-font-weight;
+  font-family: $font-family;
+  width: scale(80);
+  height: scale(25);
+  line-height: scale(16);
+  border: none;
+  border-radius: $button-radius;
+  color: $secondary-font-color-dark;
+  background-color: $color-button;
+  &.set-dark {
+    position: absolute;
+    margin: scale(8) scale(35) scale(8);
+    right: 0;
+    width: scale(100);
+    box-shadow: 0 scale(0) scale(15) 0 #a1a1a1;
+    &.dark {
+      box-shadow: 0 scale(0) scale(15) 0 #161616;
+    }
+  }
+  &.active {
+    color: $color-primary-dark;
+    border: solid scale(2) #4d4d4d;
+    height: scale(27);
+    color: #4d4d4d;
+    &.dark {
+      border-color: #818181;
+      color: #818181;
+    }
+  }
+  &.dark {
+    background-color: $color-button-dark;
+    color: $secondary-font-color;
+  }
+}
+
 
 .container-h {
   display: inline-block;
@@ -55,3 +97,4 @@ $button-radius: scale(8);
     box-shadow: $ui-block-shadow-dark;
   }
 }
+

@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { resetState, setLinkedState } from "../../redux/actions/actions";
-import Selectors from "../Selectors/Selectors";
+import { resetState, setLinkedState } from "../../../redux/actions/actions";
+import Selectors from "../../Selectors/Selectors";
 import * as xLUT from "./xLUT.json";
 import * as yLUT from "./yLUT.json";
 import "./ColorWheel.scss";

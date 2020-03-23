@@ -23,7 +23,7 @@
   .ui-container {
     display: inline-flex;
     position: relative;
-    width: scale(1370);
+    width: $ui-width;
     height: scale(660);
     grid-row: 2;
     margin: auto;
@@ -37,6 +37,7 @@
       width: 100%;
       height: scale(50);
       .tab {
+        cursor: pointer;
         z-index: 1;
         position: absolute;
         height: scale(30);

@@ -5,9 +5,9 @@ import {
   setDarkMode,
   setClusterAngle,
   setPreset
-} from "../../redux/actions/actions";
+} from "../../../redux/actions/actions";
 import "./Presets.scss";
-import "../Slider/Slider.scss";
+import "../../Slider/Slider.scss";
 
 const Presets_ = props => {
 

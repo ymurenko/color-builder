@@ -1,0 +1,23 @@
+@import "../../Globals.scss";
+
+.palette-editor-interface {
+    position: absolute;
+    display: grid;
+    column-gap: scale(10);
+    bottom: 0;
+    width: auto;
+    height: scale(600);
+    padding: scale(10);
+    background-color: $color-tertiary;
+    border-radius: scale(15);
+    box-shadow: 0 0 scale(15) 0 #a1a1a1;
+    .settings-wrapper {
+      display: grid;
+      row-gap: scale(10);
+    }
+    &.dark {
+      background-color: $color-tertiary-dark;
+      box-shadow: 0 0 scale(15) 0 #161616;
+    }
+    z-index: 1;
+  }

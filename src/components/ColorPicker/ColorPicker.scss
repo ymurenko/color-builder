@@ -1,44 +1,6 @@
 @import "../../Globals.scss";
 
-.button {
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: $secondary-font-weight;
-  font-family: $font-family;
-  width: scale(80);
-  height: scale(25);
-  line-height: scale(16);
-  border: none;
-  border-radius: $button-radius;
-  color: $secondary-font-color-dark;
-  background-color: $color-button;
-  &.set-dark {
-    position: absolute;
-    margin: scale(8) scale(35) scale(8);
-    right: 0;
-    width: scale(100);
-    box-shadow: 0 scale(0) scale(15) 0 #a1a1a1;
-    &.dark {
-      box-shadow: 0 scale(0) scale(15) 0 #161616;
-    }
-  }
-  &.active {
-    color: $color-primary-dark;
-    border: solid scale(2) #4d4d4d;
-    height: scale(27);
-    color: #4d4d4d;
-    &.dark {
-      border-color: #818181;
-      color: #818181;
-    }
-  }
-  &.dark {
-    background-color: $color-button-dark;
-    color: $secondary-font-color;
-  }
-}
-
-.color-picker-components {
+.color-picker-interface {
   position: absolute;
   display: grid;
   column-gap: scale(10);
