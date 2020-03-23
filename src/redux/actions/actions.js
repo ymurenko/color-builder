@@ -57,3 +57,6 @@ export const setClusterAngle = (val) => (
 export const resetState = () => (
   { type: 'RESET' }
 )
+export const setMode = (val) => (
+  { type: 'SET_MODE', MODE: val }
+)

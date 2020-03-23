@@ -1,9 +1,9 @@
 import React from "react";
 import copy from "copy-to-clipboard";
 import { connect } from "react-redux";
-import { store } from "../../redux/reducers/reducers";
+import { store } from "../../../redux/reducers/reducers";
 import ColorBlock from "./ColorBlock";
-import { setQuotes, setHash } from "../../redux/actions/actions";
+import { setQuotes, setHash } from "../../../redux/actions/actions";
 import "./CurrentColors.scss";
 
 const CurrentColors_ = props => {

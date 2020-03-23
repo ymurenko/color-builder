@@ -14,11 +14,12 @@ const initialState = {
   SELECTOR_STAGGER: 0,
   CLUSTER_ANGLE: 30,
   LINKED: false,
-  DARK_MODE: false,
+  DARK_MODE: true,
   HASH: true,
   QUOTES: true,
   PRESET: 1,
-  RESET: 0 //for comp. rerender if init state doesnt change a prop
+  RESET: 0, //for comp. rerender if init state doesnt change a prop
+  MODE: 0
 };
 
 export const actionReducer = (state = initialState, action) => {
@@ -187,6 +188,11 @@ export const actionReducer = (state = initialState, action) => {
         DARK_MODE: state.DARK_MODE,
         RESET: 1 - state.RESET
       };
+    case "SET_MODE":
+      return {
+        ...state,
+        MODE: action.MODE
+      }
     default:
       return state;
   }
