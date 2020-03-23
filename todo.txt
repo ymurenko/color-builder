@@ -1,11 +1,6 @@
 - refactor contols into componenets (buttons, sliders)
-- palette editor feature
-- alternate color modes (rgb, hsl)
-    - opacity support maybe?
-- setting distance from origin resets original position of selector 1
 - accessibility
 - responsive design
-- save multiple palettes
 - palette exporting
     - write + save to photoshop .aco format https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/#50577411_pgfId-1055819
     - save as sass variables
@@ -15,3 +10,4 @@
     - palette editor will use saved palettes
 - fix ms edge error
 - change colorwheel stroke to svg
+- use filters for lightness/saturation scaling

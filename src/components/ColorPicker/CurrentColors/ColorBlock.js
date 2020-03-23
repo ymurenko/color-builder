@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { connect } from "react-redux";
 import copy from "copy-to-clipboard";
+import { stringToColorIntegers, colorIntegersToHSL } from "../../../util/color-utility"
 
 const ColorBlock_ = props => {
   const colorBlock = useRef(null);
@@ -8,6 +9,7 @@ const ColorBlock_ = props => {
   let textColor = props.lightness < 50 ? "#bdbdbd" : "#404040";
 
   const copyColor = event => {
+   colorIntegersToHSL(stringToColorIntegers(props.color))
     let color = props.color;
     if (!props.hash) {
       color = color.substr(1);

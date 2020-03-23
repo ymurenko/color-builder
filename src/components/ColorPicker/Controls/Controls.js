@@ -36,7 +36,7 @@ const Controls_ = props => {
             className={`slider ${props.darkMode ? "dark" : ""}`}
             min={10}
             max={90}
-            step={5}
+            step={1}
             value={props.lightness}
             onChange={val => {
               props.setLightness(val.target.value);
@@ -50,7 +50,7 @@ const Controls_ = props => {
             className={`slider ${props.darkMode ? "dark" : ""}`}
             min={10}
             max={100}
-            step={5}
+            step={1}
             value={props.saturation}
             onChange={val => {
               props.setSaturation(val.target.value);
