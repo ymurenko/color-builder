@@ -32,6 +32,11 @@ $contrast: 5%;
     &.dark {
       background-color: $color-secondary-dark;
     }
+    &.short {
+      display: inline-block;
+      width: scale(250);
+      vertical-align: middle;
+    }
   }
   .slider-label {
     text-align: left;
@@ -39,6 +44,10 @@ $contrast: 5%;
     margin-top: 0;
     line-height: scale(8);
     font-size: 0.9rem;
+    &.short {
+      display: inline;
+      margin: scale(25);
+    }
   }
 }
 

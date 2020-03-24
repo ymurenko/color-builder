@@ -3,10 +3,15 @@ import { getViewport } from "../../util/viewport-height";
 
 const initialState = {
   VIEWPORT_HEIGHT: getViewport(),
-  COLORS: [[255,255,255], [255,255,255], [255,255,255], [255,255,255]],
+  COLORS: [
+    [255, 255, 255],
+    [255, 255, 255],
+    [255, 255, 255],
+    [255, 255, 255]
+  ],
   COLOR_MODE: 1,
   PALETTES: [],
-  ACTIVE_PALETTE: {index: -1, palette: []},
+  ACTIVE_PALETTE: { index: -1, palette: [] },
   LIGHTNESS: 50,
   SATURATION: 100,
   SELECTOR_COUNT: 4,
@@ -19,11 +24,13 @@ const initialState = {
   DARK_MODE: false,
   PRESET: 1,
   RESET: 0, //for comp. rerender if init state doesnt change a prop
-  MODE: 0
+  MODE: 0,
+  EDIT_SETTING: 3,
+  EDIT_INCREMENT: 5
 };
 
 export const actionReducer = (state = initialState, action) => {
-  let CURRENT_PALETTES = [...state.PALETTES];
+  let CURRENT_PALETTES_COPY = [...state.PALETTES];
   switch (action.type) {
     case "SET_VIEWPORT_HEIGHT":
       return {
@@ -32,34 +39,35 @@ export const actionReducer = (state = initialState, action) => {
         VIEWPORT_HEIGHT: getViewport()
       };
     case "SET_COLOR":
+      //mutating state by reference
       let CURRENT_COLORS = state.COLORS;
       CURRENT_COLORS[action.INDEX] = action.COLOR;
       return {
         ...state,
         COLORS: CURRENT_COLORS
       };
-    case 'SET_COLOR_MODE':
+    case "SET_COLOR_MODE":
       return {
         ...state,
         COLOR_MODE: action.COLOR_MODE
-      }
+      };
     case "STORE_PALETTE":
-      CURRENT_PALETTES.push([...state.COLORS]);
+      CURRENT_PALETTES_COPY.push([...state.COLORS]);
       return {
         ...state,
-        PALETTES: CURRENT_PALETTES
+        PALETTES: CURRENT_PALETTES_COPY
       };
     case "SET_CURRENT_PALETTE":
-      let SELECTED_PALETTE = CURRENT_PALETTES[action.INDEX]
+      let SELECTED_PALETTE = CURRENT_PALETTES_COPY[action.INDEX];
       return {
         ...state,
-        ACTIVE_PALETTE: {index: action.INDEX, palette: SELECTED_PALETTE}
-      }
+        ACTIVE_PALETTE: { index: action.INDEX, palette: SELECTED_PALETTE }
+      };
     case "DELETE_PALETTE":
-      CURRENT_PALETTES.splice(action.INDEX, 1);
+      CURRENT_PALETTES_COPY.splice(action.INDEX, 1);
       return {
         ...state,
-        PALETTES: CURRENT_PALETTES
+        PALETTES: CURRENT_PALETTES_COPY
       };
     case "SET_LIGHTNESS":
       return {
@@ -74,7 +82,7 @@ export const actionReducer = (state = initialState, action) => {
     case "SET_SELECTOR_COUNT":
       let NEW_COLORS = [];
       NEW_COLORS.length = action.SELECTOR_COUNT;
-      NEW_COLORS.fill([255,255,255]);
+      NEW_COLORS.fill([255, 255, 255]);
       return {
         ...state,
         COLORS: NEW_COLORS,
@@ -194,7 +202,27 @@ export const actionReducer = (state = initialState, action) => {
         ...state,
         ACTIVE_PALETTE: initialState.ACTIVE_PALETTE,
         MODE: action.MODE
-      }
+      };
+    case "SET_EDIT":
+      return {
+        ...state,
+        EDIT_SETTING: action.EDIT_SETTING
+      };
+    case "SET_EDIT_INCREMENT":
+      return {
+        ...state,
+        EDIT_INCREMENT: action.EDIT_INCREMENT
+      };
+    case "UPDATE_ACTIVE_PALETTE":
+      let ACTIVE_PALETTE_COPY = [...state.ACTIVE_PALETTE];
+      ACTIVE_PALETTE_COPY.palette[action.INDEX] = action.NEW_COLOR;
+      CURRENT_PALETTES_COPY[ACTIVE_PALETTE_COPY.index] =
+        ACTIVE_PALETTE_COPY.palette;
+      return {
+        ...state,
+        ACTIVE_PALETTE: ACTIVE_PALETTE_COPY,
+        PALETTES: CURRENT_PALETTES_COPY
+      };
     default:
       return state;
   }

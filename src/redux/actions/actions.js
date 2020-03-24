@@ -60,3 +60,12 @@ export const resetState = () => (
 export const setMode = (val) => (
   { type: 'SET_MODE', MODE: val }
 )
+export const setEditSetting = (val) => (
+  { type: 'SET_EDIT', EDIT_SETTING: val}
+)
+export const setEditIncrement = (val) => (
+  { type: 'SET_EDIT_INCREMENT', EDIT_INCREMENT: val}
+)
+export const updateActivePlaette = (val, index) => (
+  { type: 'UPDATE_ACTIVE_PALETTE', NEW_COLOR: val, INDEX: val }
+)

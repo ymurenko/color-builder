@@ -39,7 +39,7 @@ const Controls_ = props => {
             step={1}
             value={props.lightness}
             onChange={val => {
-              props.setLightness(val.target.value);
+              props.setLightness(parseInt(val.target.value));
             }}
           />
         </div>
@@ -53,7 +53,7 @@ const Controls_ = props => {
             step={1}
             value={props.saturation}
             onChange={val => {
-              props.setSaturation(val.target.value);
+              props.setSaturation(parseInt(val.target.value));
             }}
           />
         </div>
@@ -69,7 +69,7 @@ const Controls_ = props => {
             step={props.preset}
             value={props.selectorCount}
             onChange={val => {
-              props.setSelectorCount(val.target.value);
+              props.setSelectorCount(parseInt(val.target.value));
             }}
           />
         </div>
@@ -89,7 +89,7 @@ const Controls_ = props => {
             step={1}
             value={props.selectorAngle}
             onChange={val => {
-              props.setSelectorAngle(val.target.value);
+              props.setSelectorAngle(parseInt(val.target.value));
             }}
           />
         </div>
@@ -107,7 +107,7 @@ const Controls_ = props => {
             step={1}
             value={props.selectorLinkedRadius}
             onChange={val => {
-              props.setSelectorRadius(val.target.value);
+              props.setSelectorRadius(parseInt(val.target.value));
             }}
           />
         </div>
@@ -125,7 +125,7 @@ const Controls_ = props => {
             step={1}
             value={props.selectorStagger}
             onChange={val => {
-              props.setSelectorStagger(val.target.value);
+              props.setSelectorStagger(parseInt(val.target.value));
             }}
           />
         </div>

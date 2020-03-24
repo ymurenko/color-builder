@@ -1,0 +1,76 @@
+@import "../../../Globals.scss";
+
+.editor-settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: scale(1160);
+  height: scale(25);
+  padding: scale(10);
+  background-color: $color-secondary;
+  border-radius: $ui-block-radius;
+  box-shadow: $ui-block-shadow-light;
+  &.dark {
+    background-color: $color-secondary-dark;
+    box-shadow: $ui-block-shadow-dark;
+  }
+  .controls-left {
+    width: scale(386);
+    .mode-selector-container {
+      display: grid;
+      width: scale(180);
+      
+
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: scale(15);
+
+      margin: 0;
+      .color-mode {
+          
+        line-height: 0;
+        margin: 0;
+        padding: scale(3);
+        width: scale(100);
+        font-size: 0.8rem;
+      }
+    }
+  }
+  .controls-center {
+    width: scale(472);
+    .mode-selector-container {
+      display: grid;
+      width: scale(180);
+      
+
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: scale(15);
+
+      margin: 0;
+      .color-mode {
+          
+        line-height: 0;
+        margin: 0;
+        padding: scale(3);
+        width: scale(50);
+        font-size: 0.8rem;
+      }
+    }
+  }
+  .controls-right {
+    width: scale(300);
+    .mode-selector-container {
+      display: grid;
+      float: right;
+      width: scale(180);
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: scale(15);
+      margin: 0;
+      .color-mode {
+        line-height: 0;
+        margin: 0;
+        padding: scale(3);
+        width: scale(50);
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
