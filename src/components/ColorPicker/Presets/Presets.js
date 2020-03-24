@@ -78,7 +78,7 @@ const Presets_ = props => {
           step={1}
           value={props.clusterAngle}
           onChange={val => {
-            props.setClusterAngle(val.target.value);
+            props.setClusterAngle(parseInt(val.target.value));
           }}
         />
       </div>

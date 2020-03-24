@@ -65,7 +65,7 @@ const EditorSettings_ = props => {
             step={1}
             value={props.editIncrement}
             onChange={val => {
-              props.setEditIncrement(val.target.value);
+              props.setEditIncrement(parseInt(val.target.value));
             }}
           />
         </div>
