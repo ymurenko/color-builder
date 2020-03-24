@@ -1,0 +1,20 @@
+@import "../../../Globals.scss";
+
+.current-palette {
+  position: relative;
+  text-align: left;
+  height: scale(515);
+  padding: scale(15);
+  background-color: $color-secondary;
+  border-radius: $ui-block-radius;
+  box-shadow: $ui-block-shadow-light;
+  &.dark {
+    background-color: $color-secondary-dark;
+    box-shadow: $ui-block-shadow-dark;
+  }
+  .editor-color-blocks-wrapper {
+    border-radius: $ui-block-radius;
+    height: 100%;
+    overflow: hidden;
+  }
+}

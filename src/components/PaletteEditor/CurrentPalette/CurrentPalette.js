@@ -1,32 +1,18 @@
 import React, { useRef } from "react";
 import { connect } from "react-redux";
-import { deletePalette } from "../../../redux/actions/actions";
-import "./PaletteTracker.scss";
+import EditorColorBlock from "../EditorColorBlock/EditorColorBlock";
+import "./CurrentPalette.scss";
 
-const PaletteBlock_ = props => {
-  let width = (0.1623*props.Viewport) / props.palette.length;
-
-  const renderColors = props.palette.map((color, i) => (
-    <div
-      className="block-color"
-      style={{ backgroundColor: color, width: `${width}px` }}
-      key={i}
-    ></div>
-  ));
+const CurrentPalette_ = props => {
+  const renderEditorColorBlocks = props.activePalette.palette.map(
+    (color, i) => <EditorColorBlock className="block-color" key={i} index={i} />
+  );
 
   return (
-    <div
-      className={`palette-block ${props.darkMode ? "dark" : ""} ${
-        props.deleteMode ? "delete-mode" : ""
-      }`}
-      onClick={() => {
-        if (props.deleteMode) {
-          props.deletePalette(props.index);
-        }
-      }}
-    >
-      <div className={`icon-overlay`} />
-      {renderColors}
+    <div className={`current-palette ${props.darkMode ? "dark" : ""}`}>
+      <div className="editor-color-blocks-wrapper">
+        {renderEditorColorBlocks}
+      </div>
     </div>
   );
 };
@@ -34,15 +20,11 @@ const PaletteBlock_ = props => {
 function mapStateToProps(state) {
   return {
     darkMode: state.actionReducer.DARK_MODE,
-    Viewport: state.actionReducer.VIEWPORT_HEIGHT
+    viewport: state.actionReducer.VIEWPORT_HEIGHT,
+    activePalette: state.actionReducer.ACTIVE_PALETTE
   };
 }
 
-const mapDispatchToProps = {
-    deletePalette,
-  };
-  
+const CurrentPalette = connect(mapStateToProps)(CurrentPalette_);
 
-const PaletteBlock = connect(mapStateToProps, mapDispatchToProps)(PaletteBlock_);
-
-export default PaletteBlock;
+export default CurrentPalette;

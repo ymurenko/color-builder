@@ -1,0 +1,18 @@
+@import "../../../Globals.scss";
+
+.editor-color-block {
+    display: inline-block;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    text-align: left;
+    .greater-color {
+        height: 15%;
+    }
+    .current-color {
+        height: 70%;
+    }
+    .lesser-color {
+        height: 15%;
+    }
+  }

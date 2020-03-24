@@ -15,12 +15,13 @@
     }
     .control-container {
       margin-top: scale(15);
-      &.mode-selector {
+      &.mode-selector-container {
         margin-bottom: scale(10);
         margin-top: scale(10);
         .color-mode {
           line-height: 0;
           margin: 0 scale(15);
+          padding: scale(3);
           width: scale(50);
           font-size: 0.8rem;
         }

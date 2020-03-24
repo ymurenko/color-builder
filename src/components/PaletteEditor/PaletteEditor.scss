@@ -5,13 +5,14 @@
     display: grid;
     column-gap: scale(10);
     bottom: 0;
-    width: auto;
+    width: scale(1350);
     height: scale(600);
     padding: scale(10);
     background-color: $color-tertiary;
     border-radius: scale(15);
     box-shadow: 0 0 scale(15) 0 #a1a1a1;
-    .settings-wrapper {
+    .palette-components-wrapper {
+        width: scale(1160);
       display: grid;
       row-gap: scale(10);
     }

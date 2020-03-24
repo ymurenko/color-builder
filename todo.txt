@@ -11,3 +11,4 @@
 - fix ms edge error
 - change colorwheel stroke to svg
 - use filters for lightness/saturation scaling
+- refactor redux states into respective cections (colorpicker: {}, editor: {}, etc...)
