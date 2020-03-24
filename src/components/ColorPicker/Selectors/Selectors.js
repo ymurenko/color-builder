@@ -1,8 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, createRef } from "react";
-import useDidMountEffect from "../../util/useDidMountEffect";
 import { connect } from "react-redux";
-import { storeColor, setSelectorLinkedRadius } from "../../redux/actions/actions";
-import { store } from "../../redux/reducers/reducers";
+import { storeColor, setSelectorLinkedRadius } from "../../../redux/actions/actions";
+import { store } from "../../../redux/reducers/reducers";
 import { colorIntegersToString } from "../../../util/color-utility"
 
 const Selectors_ = props => {
@@ -19,14 +18,14 @@ const Selectors_ = props => {
 
   const setColor = (x, y, key) => {
     let pixel = canvas.current.getContext("2d").getImageData(x, y, 1, 1).data;
-    let pixelColor = colorIntegersToString(pixel, 'hex')
+    let pixelColor = colorIntegersToString(pixel, 'rgb')
     circleRefs[key].style.fill = pixelColor;
     if (props.lightness < 50) {
       circleRefs[key].style.stroke = "#d4d4d4";
     } else {
       circleRefs[key].style.stroke = "#4d4d4d";
     }
-    props.storeColor(pixelColor, key);
+    props.storeColor(pixel, key);
   };
 
   const setHarmony = () => {

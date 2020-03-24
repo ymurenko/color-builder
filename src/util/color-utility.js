@@ -1,3 +1,7 @@
+const mod = (a, b) => {
+  return ((a % b) + b) % b
+}
+
 export const hexToRgb = color => {
   let convert = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
   let result = `rgb(${parseInt(convert[1], 16)}, ${parseInt(convert[2],16)}, ${parseInt(convert[3], 16)})`;
@@ -24,41 +28,90 @@ export const colorIntegersToHSL = ( rgb ) => {
   let min = rgb[0] < rgb[1] ? (rgb[0] < rgb[2] ? 0 : 2) : (rgb[1] < rgb[2] ? 1 : 2);
   let value = rgb[max];
   let chroma = rgb[max] - rgb[min];
-  let lightness = (rgb[max]+rgb[min])/2
-  let hue;
-  let saturation = 
-    lightness === 0 || lightness === 1 ? 0 : (value - lightness)/Math.min(lightness, (1 - lightness));
+  let L = (rgb[max]+rgb[min])/2
+  let H;
+  let S = 
+    L === 0 || L === 1 ? 0 : (value - L)/Math.min(L, (1 - L));
 
   switch (value) {
     case rgb[0]:
-      hue = 60 * (((rgb[1]-rgb[2])/chroma))
+      H = 60 * (((rgb[1]-rgb[2])/chroma))
       break;
     case rgb[1]:
-      hue = 60 * (2+(rgb[2]-rgb[0])/chroma)
+      H = 60 * (2+(rgb[2]-rgb[0])/chroma)
       break;
     case rgb[2]:
-      hue = 60 * (4+(rgb[0]-rgb[1])/chroma)
+      H = 60 * (4+(rgb[0]-rgb[1])/chroma)
       break;
   }
-  hue = chroma === 0 ? 0 : (hue < 1 ? Math.round(hue+360) :  Math.round(hue))
-  saturation = Math.round(saturation*100);
-  lightness = Math.round(lightness*100);
+  H = chroma === 0 ? 0 : (H < 1 ? Math.round(H+360) :  Math.round(H))
+  S = Math.round(S*100);
+  L = Math.round(L*100);
   
-  console.log(hue+`, `+saturation+`, `+lightness)
+  return [H, S, L]
 }
 
-export const colorIntegersToString = (rgb, mode) => {
+export const HSLToColorIntegers = ( hsl ) => {
+  let H = hsl[0], S = hsl[1]/100, L = hsl[2]/100
+  let C = (1 - Math.abs(2 * L - 1)) * S;
+  let dH = H/60
+  let X = C * (1 - Math.abs(mod(dH, 2) - 1))
+  let R1, G1, B1;
+  switch (Math.ceil(dH)) {
+    case 1:
+      R1 = C
+      G1 = X
+      B1 = 0
+      break;
+    case 2:
+      R1 = X
+      G1 = C
+      B1 = 0
+      break;
+    case 3:
+      R1 = 0
+      G1 = C
+      B1 = X
+      break;
+    case 4:
+      R1 = 0
+      G1 = X
+      B1 = C
+      break;
+    case 5:
+      R1 = X
+      G1 = 0
+      B1 = C
+      break;
+    case 6:
+      R1 = C
+      G1 = 0
+      B1 = X
+      break;
+    default:
+      R1 = 0
+      G1 = 0
+      B1 = 0
+  }
+  let m = L - (C/2)
+  return [Math.round((R1+m)*255), Math.round((G1+m)*255), Math.round((B1+m)*255)]
+}
+
+export const colorIntegersToString = (ints, mode) => {
     let result;
     if (mode === 'hex') {
         result =     "#" +
-        ((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2])
+        ((1 << 24) + (ints[0] << 16) + (ints[1] << 8) + ints[2])
           .toString(16)
           .toUpperCase()
           .slice(1);
     }
     else if (mode === 'rgb') {
-        result = `rgb(${rgb[1]},${rgb[2]},${rgb[3]})`;
+        result = `rgb(${ints[0]},${ints[1]},${ints[2]})`;
     }
+    else if (mode === 'hsl') {
+      result = `hsl(${ints[0]},${ints[1]}%,${ints[2]}%)`;
+  }
     return result;
 }
 
@@ -77,28 +130,3 @@ export const stringToColorIntegers = color => {
   }
   return result
 };
-
-export const incrementLightness = ( rgb, amount ) => {
-  rgb.forEach(channel => {
-    channel += amount;
-    if (channel === 0) {
-      return 0
-    }
-  })
-  return rgb;
-}
-
-/*
-export const incrementSaturation = ( rgb ) => {
-  let dominantChannel = rgb[0] > rgb[1] ? (rgb[0] > rgb[2] ? 0 : 2) : (rgb[1] > rgb[2] ? 1 : 2)
-
-
-  rgb.forEach(channel, i => {
-    channel + amount;
-    if (channel === 0) {
-      return 0
-    }
-  })
-  return rgb;
-}
-*/

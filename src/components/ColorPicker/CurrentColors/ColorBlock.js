@@ -1,23 +1,38 @@
-import React, { useRef } from "react";
+import React, { useRef, useLayoutEffect } from "react";
 import { connect } from "react-redux";
 import copy from "copy-to-clipboard";
-import { stringToColorIntegers, colorIntegersToHSL } from "../../../util/color-utility"
+import { colorIntegersToString, colorIntegersToHSL } from "../../../util/color-utility";
 
 const ColorBlock_ = props => {
   const colorBlock = useRef(null);
-  let height = (0.575*props.Viewport) / props.selectorCount;
+  let height = (0.55 * props.viewport) / props.selectorCount;
   let textColor = props.lightness < 50 ? "#bdbdbd" : "#404040";
 
   const copyColor = event => {
-   colorIntegersToHSL(stringToColorIntegers(props.color))
-    let color = props.color;
-    if (!props.hash) {
-      color = color.substr(1);
+    let color = getColorString();
+    if (!props.prefix) {
+      if (props.colorMode === 1) {
+        color = color.substr(1);
+      } else if (props.colorMode === 2 || 3) {
+        color = color.replace(/[^\d,]+/g, '')
+      }
     }
     if (props.quotes) {
       color = `'${color}'`;
     }
     copy(color);
+  };
+
+  useLayoutEffect(() => {}, [props.colorMode]);
+
+  const getColorString = () => {
+    if (props.colorMode === 1) {
+      return colorIntegersToString(props.colorInts, "hex");
+    } else if (props.colorMode === 2) {
+      return colorIntegersToString(props.colorInts, "rgb");
+    } else if (props.colorMode === 3) {
+      return colorIntegersToString(colorIntegersToHSL(props.colorInts), "hsl");
+    }
   };
 
   return (
@@ -27,28 +42,31 @@ const ColorBlock_ = props => {
       style={{
         height: height,
         color: textColor,
-        backgroundColor: props.color
+        backgroundColor: getColorString()
       }}
       onClick={event => copyColor(event)}
     >
       <div
         className="copy-prompt"
-        style={{ height: height, paddingTop: `${(height - (0.025*props.Viewport)) / 2}px` }}
+        style={{
+          height: height,
+          paddingTop: `${(height - 0.025 * props.viewport) / 2}px`
+        }}
       >
-        <p className="color-text hover-cta">{props.color}</p>
+        <p className="color-text hover-cta">{getColorString()}</p>
         <p className="copy-text hover-cta">Click to copy</p>
       </div>
     </div>
   );
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     lightness: state.actionReducer.LIGHTNESS,
     selectorCount: state.actionReducer.SELECTOR_COUNT,
-    hash: state.actionReducer.HASH,
-    quotes: state.actionReducer.QUOTES,
-    Viewport: state.actionReducer.VIEWPORT_HEIGHT
+    viewport: state.actionReducer.VIEWPORT_HEIGHT,
+    colorInts: state.actionReducer.COLORS[ownProps.index],
+    colorMode: state.actionReducer.COLOR_MODE
   };
 }
 

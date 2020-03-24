@@ -3,7 +3,8 @@ import { getViewport } from "../../util/viewport-height";
 
 const initialState = {
   VIEWPORT_HEIGHT: getViewport(),
-  COLORS: ["#FFF", "#FFF", "#FFF"],
+  COLORS: [[255,255,255], [255,255,255], [255,255,255], [255,255,255]],
+  COLOR_MODE: 1,
   PALETTES: [],
   ACTIVE_PALETTE: {index: -1, palette: []},
   LIGHTNESS: 50,
@@ -15,9 +16,7 @@ const initialState = {
   SELECTOR_STAGGER: 0,
   CLUSTER_ANGLE: 30,
   LINKED: false,
-  DARK_MODE: true,
-  HASH: true,
-  QUOTES: true,
+  DARK_MODE: false,
   PRESET: 1,
   RESET: 0, //for comp. rerender if init state doesnt change a prop
   MODE: 0
@@ -33,12 +32,17 @@ export const actionReducer = (state = initialState, action) => {
         VIEWPORT_HEIGHT: getViewport()
       };
     case "SET_COLOR":
-      let CURRENT_COLORS = [...state.COLORS];
+      let CURRENT_COLORS = state.COLORS;
       CURRENT_COLORS[action.INDEX] = action.COLOR;
       return {
         ...state,
         COLORS: CURRENT_COLORS
       };
+    case 'SET_COLOR_MODE':
+      return {
+        ...state,
+        COLOR_MODE: action.COLOR_MODE
+      }
     case "STORE_PALETTE":
       CURRENT_PALETTES.push([...state.COLORS]);
       return {
@@ -70,7 +74,7 @@ export const actionReducer = (state = initialState, action) => {
     case "SET_SELECTOR_COUNT":
       let NEW_COLORS = [];
       NEW_COLORS.length = action.SELECTOR_COUNT;
-      NEW_COLORS.fill("#FFF");
+      NEW_COLORS.fill([255,255,255]);
       return {
         ...state,
         COLORS: NEW_COLORS,
@@ -111,16 +115,6 @@ export const actionReducer = (state = initialState, action) => {
       return {
         ...state,
         DARK_MODE: !state.DARK_MODE
-      };
-    case "SET_HASH":
-      return {
-        ...state,
-        HASH: !state.HASH
-      };
-    case "SET_QUOTES":
-      return {
-        ...state,
-        QUOTES: !state.QUOTES
       };
     case "SET_PRESET":
       switch (action.PRESET) {

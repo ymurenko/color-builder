@@ -1,55 +1,107 @@
-import React from "react";
+import React, { useLayoutEffect, useState } from "react";
 import copy from "copy-to-clipboard";
 import { connect } from "react-redux";
 import { store } from "../../../redux/reducers/reducers";
 import ColorBlock from "./ColorBlock";
-import { setQuotes, setHash } from "../../../redux/actions/actions";
+import {
+  setColorMode
+} from "../../../redux/actions/actions";
 import "./CurrentColors.scss";
+import {
+  colorIntegersToString,
+  colorIntegersToHSL
+} from "../../../util/color-utility";
 
 const CurrentColors_ = props => {
+  const [ prefix, setPrefix ] = useState(true)
+  const [ quotes, setQuotes ] = useState(true)
   const copyAllColors = () => {
     let colorArr = [...store.getState().actionReducer.COLORS];
 
     for (let i = 0; i < colorArr.length; i++) {
-      if(!props.hash){
-        colorArr[i] = colorArr[i].substr(1)
+      if (!props.hash) {
+        colorArr[i] = colorArr[i].substr(1);
       }
-      if(props.quotes){
-        colorArr[i] = `'${colorArr[i]}'`
+      if (props.quotes) {
+        colorArr[i] = `'${colorArr[i]}'`;
       }
     }
-
     copy(colorArr);
   };
 
-  const renderColorBlocks = props.colors.map((color, i) => (
-    <ColorBlock color={color} key={i} />
-  ));
+  const renderColorBlocks = () => {
+    let colorBlockArray = []
+    for (let i = 0; i <props.selectorCount; i++){
+      colorBlockArray.push(<ColorBlock index={i} key={i} quotes={quotes} prefix={prefix}/>)
+    }
+    return colorBlockArray
+  }
 
   return (
     <div className={`current-colors ui-block ${props.darkMode ? "dark" : ""}`}>
+      <div className="control-container mode-selector">
+        <button
+          className={`button color-mode ${
+            props.colorMode === 1 ? "active" : ""
+          } ${props.darkMode ? "dark" : ""}`}
+          type="button"
+          onClick={() => {
+            if (props.colorMode != 1) {
+              props.setColorMode(1);
+            }
+          }}
+        >
+          HEX
+        </button>
+        <button
+          className={`button color-mode ${
+            props.colorMode === 2 ? "active" : ""
+          } ${props.darkMode ? "dark" : ""}`}
+          type="button"
+          onClick={() => {
+            if (props.colorMode != 2) {
+              props.setColorMode(2);
+            }
+          }}
+        >
+          RGB
+        </button>
+        <button
+          className={`button color-mode ${
+            props.colorMode === 3 ? "active" : ""
+          } ${props.darkMode ? "dark" : ""}`}
+          type="button"
+          onClick={() => {
+            if (props.colorMode != 3) {
+              props.setColorMode(3);
+            }
+          }}
+        >
+          HSL
+        </button>
+      </div>
       <div className="colors-container" ref={props.paletteRef}>
-        {renderColorBlocks}
+        {renderColorBlocks()}
       </div>
       <div className="control-container">
         <button
-          className={`button ${props.hash ? "active" : ""} ${
+          className={`button ${prefix ? "active" : ""} ${
             props.darkMode ? "dark" : ""
           }`}
           type="button"
           onClick={() => {
-            props.setHash();
+            setPrefix(!prefix);
           }}
         >
-          Hash
+          {props.colorMode === 1 ? '#...' : (props.colorMode === 2 ? 'rgb(...)' : 'hsl(...)')}
         </button>
         <button
-          className={`button ${props.quotes ? "active" : ""} ${
+          className={`button ${quotes ? "active" : ""} ${
             props.darkMode ? "dark" : ""
           }`}
           type="button"
           onClick={() => {
-            props.setQuotes();
+            setQuotes(!quotes);
           }}
         >
           Quotes
@@ -74,18 +126,18 @@ function mapStateToProps(state) {
   return {
     selectorCount: state.actionReducer.SELECTOR_COUNT,
     lightness: state.actionReducer.LIGHTNESS,
-    colors: state.actionReducer.COLORS,
-    hash: state.actionReducer.HASH,
-    quotes: state.actionReducer.QUOTES,
-    darkMode: state.actionReducer.DARK_MODE
+    darkMode: state.actionReducer.DARK_MODE,
+    colorMode: state.actionReducer.COLOR_MODE
   };
 }
 
 const mapDispatchToProps = {
-  setQuotes,
-  setHash
+  setColorMode
 };
 
-const CurrentColors = connect(mapStateToProps, mapDispatchToProps)(CurrentColors_);
+const CurrentColors = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CurrentColors_);
 
 export default CurrentColors;

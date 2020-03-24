@@ -6,6 +6,9 @@ export const setViewport = () => (
 export const storeColor = (val, index) => (
   { type: 'SET_COLOR', COLOR: val, INDEX: index }
 )
+export const setColorMode = (val) => (
+  { type: 'SET_COLOR_MODE', COLOR_MODE: val }
+)
 export const setCurrentPalette = (index) => (
   { type: 'SET_CURRENT_PALETTE', INDEX: index}
 )
@@ -44,12 +47,6 @@ export const setDarkMode = () => (
 )
 export const setCopyType = () => (
   { type: 'SET_COPY_TYPE' }
-)
-export const setQuotes = () => (
-  { type: 'SET_QUOTES' }
-)
-export const setHash = () => (
-  { type: 'SET_HASH' }
 )
 export const setPreset = (val) => (
   { type: 'SET_PRESET', PRESET: val }

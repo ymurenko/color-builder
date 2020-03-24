@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { connect } from "react-redux";
 import { deletePalette, setCurrentPalette } from "../../redux/actions/actions";
+import { colorIntegersToString } from "../../util/color-utility"
 import "./PaletteTracker.scss";
 
 const PaletteBlock_ = props => {
@@ -9,7 +10,7 @@ const PaletteBlock_ = props => {
   const renderColors = props.palette.map((color, i) => (
     <div
       className="block-color"
-      style={{ backgroundColor: color, width: `${width}px` }}
+      style={{ backgroundColor: colorIntegersToString(color, 'hex'), width: `${width}px` }}
       key={i}
     ></div>
   ));

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { storePalette } from "../../redux/actions/actions";
 import "./PaletteTracker.scss";
 import PaletteBlock from "./PaletteBlock";
-import { colorIntegersToString } from "../../util/color-utility"
+
 
 
 const PaletteTracker_ = props => {

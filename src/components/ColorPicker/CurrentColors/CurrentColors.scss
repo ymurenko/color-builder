@@ -4,16 +4,27 @@
     text-align: center;
     display: inline-block;
     grid-column: 3;
-    width: $ui-block-width;
-    height: scale(560);
-    padding: scale(20);
+    height: scale(595);
+    width: scale(290);
+    padding: 0 scale(5) scale(5);
     .colors-container {
       border-radius: scale(10);
-      height: scale(460);
+      height: scale(440);
       overflow: hidden;
+      margin: scale(0) scale(10)
     }
     .control-container {
-      margin-top: scale(20);
+      margin-top: scale(15);
+      &.mode-selector {
+        margin-bottom: scale(10);
+        margin-top: scale(10);
+        .color-mode {
+          line-height: 0;
+          margin: 0 scale(15);
+          width: scale(50);
+          font-size: 0.8rem;
+        }
+      } 
     }
   }
 
