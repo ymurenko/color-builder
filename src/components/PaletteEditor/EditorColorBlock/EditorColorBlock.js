@@ -1,17 +1,20 @@
-import React, { useRef } from "react";
+import React, { useLayoutEffect } from "react";
 import { connect } from "react-redux";
 import {
   colorIntegersToString,
   colorIntegersToHSL,
   HSLToColorIntegers
 } from "../../../util/color-utility";
+import { updateActivePalette } from "../../../redux/actions/actions";
+import { store } from "../../../redux/reducers/reducers";
 import "./EditorColorBlock.scss";
 
 const EditorColorBlock_ = props => {
-  let width = (1.437 * props.Viewport) / props.activePalette.palette.length;
+  let width = (1.437 * props.Viewport) / store.getState().actionReducer.ACTIVE_PALETTE.palette.length;
+
 
   const getColorString = (
-    colorInts = props.activePalette.palette[props.index]
+    colorInts = props.activePalette
   ) => {
     if (props.colorMode === 1) {
       return colorIntegersToString(colorInts, "hex");
@@ -23,7 +26,7 @@ const EditorColorBlock_ = props => {
   };
 
   const getGreaterColor = () => {
-    let colorInts = props.activePalette.palette[props.index];
+    let colorInts = props.activePalette;
     colorInts = colorIntegersToHSL(colorInts);
     let greaterColor;
     if (props.editSetting[0] === true) {
@@ -54,7 +57,7 @@ const EditorColorBlock_ = props => {
   };
 
   const getLesserColor = () => {
-    let colorInts = props.activePalette.palette[props.index];
+    let colorInts = props.activePalette;
     colorInts = colorIntegersToHSL(colorInts);
     let lesserColor;
     if (props.editSetting[0] === true) {
@@ -93,31 +96,54 @@ const EditorColorBlock_ = props => {
     >
       <div
         className="greater-color"
-        style={{ backgroundColor: getColorString(getGreaterColor()) }}
-      ></div>
+        style={{
+          backgroundColor: getColorString(getGreaterColor()),
+          color: getColorString(getGreaterColor())
+        }}
+        onClick={() => {
+          props.updateActivePalette(getGreaterColor(), props.index);
+        }}
+      >
+        +
+      </div>
       <div
         className="current-color"
-        style={{ backgroundColor: getColorString() }}
+        style={{ backgroundColor: getColorString(), color: getColorString() }}
       ></div>
       <div
         className="lesser-color"
-        style={{ backgroundColor: getColorString(getLesserColor()) }}
-      ></div>
+        style={{
+          backgroundColor: getColorString(getLesserColor()),
+          color: getColorString(getLesserColor())
+        }}
+        onClick={() => {
+          props.updateActivePalette(getLesserColor(), props.index)
+        }}
+      >
+        -
+      </div>
     </div>
   );
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     darkMode: state.actionReducer.DARK_MODE,
     Viewport: state.actionReducer.VIEWPORT_HEIGHT,
-    activePalette: state.actionReducer.ACTIVE_PALETTE,
+    activePalette: state.actionReducer.ACTIVE_PALETTE.palette[ownProps.index],
     colorMode: state.actionReducer.COLOR_MODE,
     editSetting: state.actionReducer.EDIT_SETTING,
     increment: state.actionReducer.EDIT_INCREMENT
   };
 }
 
-const EditorColorBlock = connect(mapStateToProps)(EditorColorBlock_);
+const mapDispatchToProps = {
+  updateActivePalette
+};
+
+const EditorColorBlock = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditorColorBlock_);
 
 export default EditorColorBlock;

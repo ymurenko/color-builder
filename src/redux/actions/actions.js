@@ -66,6 +66,6 @@ export const setEditSetting = (index) => (
 export const setEditIncrement = (val) => (
   { type: 'SET_EDIT_INCREMENT', EDIT_INCREMENT: val}
 )
-export const updateActivePlaette = (val, index) => (
-  { type: 'UPDATE_ACTIVE_PALETTE', NEW_COLOR: val, INDEX: val }
+export const updateActivePalette = (val, index) => (
+  { type: 'UPDATE_ACTIVE_PALETTE', NEW_COLOR: val, INDEX: index }
 )

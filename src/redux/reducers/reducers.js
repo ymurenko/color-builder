@@ -21,7 +21,7 @@ const initialState = {
   SELECTOR_STAGGER: 0,
   CLUSTER_ANGLE: 30,
   LINKED: false,
-  DARK_MODE: false,
+  DARK_MODE: true,
   PRESET: 1,
   RESET: 0, //for comp. rerender if init state doesnt change a prop
   MODE: 0,
@@ -216,10 +216,12 @@ export const actionReducer = (state = initialState, action) => {
         EDIT_INCREMENT: action.EDIT_INCREMENT
       };
     case "UPDATE_ACTIVE_PALETTE":
-      let ACTIVE_PALETTE_COPY = [...state.ACTIVE_PALETTE];
+      
+      let ACTIVE_PALETTE_COPY = state.ACTIVE_PALETTE;
       ACTIVE_PALETTE_COPY.palette[action.INDEX] = action.NEW_COLOR;
       CURRENT_PALETTES_COPY[ACTIVE_PALETTE_COPY.index] =
         ACTIVE_PALETTE_COPY.palette;
+        console.log(state.ACTIVE_PALETTE)
       return {
         ...state,
         ACTIVE_PALETTE: ACTIVE_PALETTE_COPY,
