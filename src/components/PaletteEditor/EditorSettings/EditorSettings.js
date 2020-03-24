@@ -15,39 +15,33 @@ const EditorSettings_ = props => {
         <div className="control-container mode-selector-container">
           <button
             className={`button color-mode ${
-              props.editMode === 1 ? "active" : ""
+              props.editMode[0] ? "active" : ""
             } ${props.darkMode ? "dark" : ""}`}
             type="button"
             onClick={() => {
-              if (props.editMode != 1) {
-                props.setEditSetting(1);
-              }
+              props.setEditSetting(0);
             }}
           >
             Hue
           </button>
           <button
             className={`button color-mode ${
-              props.editMode === 2 ? "active" : ""
+              props.editMode[1] ? "active" : ""
             } ${props.darkMode ? "dark" : ""}`}
             type="button"
             onClick={() => {
-              if (props.editMode != 2) {
-                props.setEditSetting(2);
-              }
+              props.setEditSetting(1);
             }}
           >
             Saturation
           </button>
           <button
             className={`button color-mode ${
-              props.editMode === 3 ? "active" : ""
+              props.editMode[2] ? "active" : ""
             } ${props.darkMode ? "dark" : ""}`}
             type="button"
             onClick={() => {
-              if (props.editMode != 3) {
-                props.setEditSetting(3);
-              }
+              props.setEditSetting(2);
             }}
           >
             Lightness
@@ -55,13 +49,13 @@ const EditorSettings_ = props => {
         </div>
       </div>
       <div className="controls-center">
-      <div className="slider-container">
+        <div className="slider-container">
           <p className="slider-label short">Increment: {props.editIncrement}</p>
           <input
             type="range"
-            className={`slider short${props.darkMode ? "dark" : ""}`}
+            className={`slider short ${props.darkMode ? "dark" : ""}`}
             min={1}
-            max={10}
+            max={25}
             step={1}
             value={props.editIncrement}
             onChange={val => {

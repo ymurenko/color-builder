@@ -25,8 +25,8 @@ const initialState = {
   PRESET: 1,
   RESET: 0, //for comp. rerender if init state doesnt change a prop
   MODE: 0,
-  EDIT_SETTING: 3,
-  EDIT_INCREMENT: 5
+  EDIT_SETTING: [false, false, true],
+  EDIT_INCREMENT: 10
 };
 
 export const actionReducer = (state = initialState, action) => {
@@ -203,10 +203,12 @@ export const actionReducer = (state = initialState, action) => {
         ACTIVE_PALETTE: initialState.ACTIVE_PALETTE,
         MODE: action.MODE
       };
-    case "SET_EDIT":
+    case "SET_EDIT_SETTING":
+      let EDIT_SETTING_COPY = [...state.EDIT_SETTING]
+      EDIT_SETTING_COPY[action.INDEX] = !EDIT_SETTING_COPY[action.INDEX]
       return {
         ...state,
-        EDIT_SETTING: action.EDIT_SETTING
+        EDIT_SETTING: EDIT_SETTING_COPY
       };
     case "SET_EDIT_INCREMENT":
       return {

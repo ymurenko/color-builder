@@ -60,8 +60,8 @@ export const resetState = () => (
 export const setMode = (val) => (
   { type: 'SET_MODE', MODE: val }
 )
-export const setEditSetting = (val) => (
-  { type: 'SET_EDIT', EDIT_SETTING: val}
+export const setEditSetting = (index) => (
+  { type: 'SET_EDIT_SETTING', INDEX: index}
 )
 export const setEditIncrement = (val) => (
   { type: 'SET_EDIT_INCREMENT', EDIT_INCREMENT: val}

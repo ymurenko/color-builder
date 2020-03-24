@@ -26,21 +26,23 @@ const EditorColorBlock_ = props => {
     let colorInts = props.activePalette.palette[props.index];
     colorInts = colorIntegersToHSL(colorInts);
     let greaterColor;
-    if (props.editSetting === 1) {
+    if (props.editSetting[0] === true) {
       greaterColor = colorInts[0] + props.increment;
       if (greaterColor < 360) {
         colorInts[0] = greaterColor;
       } else {
         colorInts[0] = 360;
       }
-    } else if (props.editSetting === 2) {
+    }
+    if (props.editSetting[1] === true) {
       greaterColor = colorInts[1] + props.increment;
       if (greaterColor < 100) {
         colorInts[1] = greaterColor;
       } else {
         colorInts[1] = 100;
       }
-    } else if (props.editSetting === 3) {
+    }
+    if (props.editSetting[2] === true) {
       greaterColor = colorInts[2] + props.increment;
       if (greaterColor < 100) {
         colorInts[2] = greaterColor;
@@ -55,21 +57,23 @@ const EditorColorBlock_ = props => {
     let colorInts = props.activePalette.palette[props.index];
     colorInts = colorIntegersToHSL(colorInts);
     let lesserColor;
-    if (props.editSetting === 1) {
+    if (props.editSetting[0] === true) {
       lesserColor = colorInts[0] - props.increment;
       if (lesserColor > 0) {
         colorInts[0] = lesserColor;
       } else {
         colorInts[0] = 0;
       }
-    } else if (props.editSetting === 2) {
+    }
+    if (props.editSetting[1] === true) {
       lesserColor = colorInts[1] - props.increment;
       if (lesserColor > 0) {
         colorInts[1] = lesserColor;
       } else {
         colorInts[1] = 0;
       }
-    } else if (props.editSetting === 3) {
+    }
+    if (props.editSetting[2] === true) {
       lesserColor = colorInts[2] - props.increment;
       if (lesserColor > 0) {
         colorInts[2] = lesserColor;

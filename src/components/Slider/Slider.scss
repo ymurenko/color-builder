@@ -29,13 +29,13 @@ $contrast: 5%;
     width: 100%;
     background-color: $color-secondary;
     margin: 0;
-    &.dark {
-      background-color: $color-secondary-dark;
-    }
     &.short {
       display: inline-block;
       width: scale(250);
       vertical-align: middle;
+    }
+    &.dark {
+      background-color: $color-secondary-dark;
     }
   }
   .slider-label {
