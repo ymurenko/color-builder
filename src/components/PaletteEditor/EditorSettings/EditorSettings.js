@@ -61,7 +61,7 @@ const EditorSettings_ = props => {
             type="range"
             className={`slider short${props.darkMode ? "dark" : ""}`}
             min={1}
-            max={50}
+            max={10}
             step={1}
             value={props.editIncrement}
             onChange={val => {

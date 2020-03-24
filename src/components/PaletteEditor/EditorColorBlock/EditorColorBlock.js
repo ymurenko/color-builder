@@ -30,20 +30,24 @@ const EditorColorBlock_ = props => {
       greaterColor = colorInts[0] + props.increment;
       if (greaterColor < 360) {
         colorInts[0] = greaterColor;
+      } else {
+        colorInts[0] = 360;
       }
     } else if (props.editSetting === 2) {
       greaterColor = colorInts[1] + props.increment;
-     // if (greaterColor < 100) {
+      if (greaterColor < 100) {
         colorInts[1] = greaterColor;
-     // }
+      } else {
+        colorInts[1] = 100;
+      }
     } else if (props.editSetting === 3) {
       greaterColor = colorInts[2] + props.increment;
       if (greaterColor < 100) {
         colorInts[2] = greaterColor;
+      } else {
+        colorInts[2] = 100;
       }
     }
-    console.log(typeof props.increment)
-    console.log(colorInts)
     return HSLToColorIntegers(colorInts);
   };
 
@@ -55,16 +59,22 @@ const EditorColorBlock_ = props => {
       lesserColor = colorInts[0] - props.increment;
       if (lesserColor > 0) {
         colorInts[0] = lesserColor;
+      } else {
+        colorInts[0] = 0;
       }
     } else if (props.editSetting === 2) {
       lesserColor = colorInts[1] - props.increment;
       if (lesserColor > 0) {
         colorInts[1] = lesserColor;
+      } else {
+        colorInts[1] = 0;
       }
     } else if (props.editSetting === 3) {
       lesserColor = colorInts[2] - props.increment;
       if (lesserColor > 0) {
         colorInts[2] = lesserColor;
+      } else {
+        colorInts[2] = 0;
       }
     }
     return HSLToColorIntegers(colorInts);
