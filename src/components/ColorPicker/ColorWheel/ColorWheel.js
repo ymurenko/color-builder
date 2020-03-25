@@ -2,8 +2,8 @@ import React, { useLayoutEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { resetState, setLinkedState } from "../../../redux/actions/actions";
 import Selectors from "../Selectors/Selectors";
-import * as xLUT from "./xLUT.json";
-import * as yLUT from "./yLUT.json";
+import * as xLUT2 from "./xLUT2.json";
+import * as yLUT2 from "./yLUT2.json";
 import "./ColorWheel.scss";
 
 const ColorWheel_ = props => {
@@ -11,49 +11,45 @@ const ColorWheel_ = props => {
 
   const generateGradient = () => {
     let canvasContext = canvas.current.getContext("2d");
-    canvasContext.clearRect(0, 0, 130*2, 130*2);
-    for (var i = 0; i < 3600; i += 1) {
+    for (let i = 0; i < 3600; i += 1) {
       let value = i / 10;
-       let rad = ((value - 90) * Math.PI) / 180;
-       let x = 130 + 130 * Math.cos(-rad)
-       let y = 130 + 130 * Math.sin(-rad)
       canvasContext.beginPath();
-      let gradient = canvasContext.createLinearGradient(
-        130,
-        130,
-        x, y
-        /*xLUT.default[value],
-        yLUT.default[value]*/
-      );
-      
-
-      gradient.addColorStop("0", `${props.lightness > 45 ? "white" : "black"}`);
-      gradient.addColorStop(
-        "1",
-        `hsl(${value}, ${props.saturation}%, ${props.lightness}%)`
-      );
-      
-      canvasContext.strokeStyle = gradient;
-
+      canvasContext.strokeStyle = `hsl(${value}, ${props.saturation}%, ${props.lightness}%)`;
       canvasContext.moveTo(130, 130);
-      canvasContext.lineTo(x, y);
+      canvasContext.lineTo(xLUT2.default[value], yLUT2.default[value]);
       canvasContext.stroke();
     }
   };
 
+  const addGradient = () => {
+    let canvasContext = canvas.current.getContext("2d");
+    let gradient = canvasContext.createRadialGradient(130, 130, 0, 130, 130, 128);
+
+    gradient.addColorStop(0, `${props.lightness > 45 ? "white" : "black"}`);
+    gradient.addColorStop(1, "hsla(0,0%,0%,0)");
+
+    canvasContext.fillStyle = gradient;
+    canvasContext.fillRect(0, 0, 260, 260);
+  };
+
   useLayoutEffect(() => {
     let canvasContext = canvas.current.getContext("2d");
-    canvasContext.scale(props.CWRadius/130,props.CWRadius/130)
-  },[props.CWRadius])
+    canvasContext.scale(props.CWRadius / 130, props.CWRadius / 130);
+  }, [props.CWRadius]);
 
   useLayoutEffect(() => {
     generateGradient();
+    addGradient();
   });
 
-
-
   return (
-    <div className={`color-wheel ui-block ${props.darkMode ? "dark" : ""}`} style={{height: `${props.CWRadius*2}`, width: `${props.CWRadius*2}`}}>
+    <div
+      className={`color-wheel ui-block ${props.darkMode ? "dark" : ""}`}
+      style={{
+        height: `${props.CWRadius * 2}`,
+        width: `${props.CWRadius * 2}`
+      }}
+    >
       <button
         className={`button button-left ${props.linked ? "active" : ""} ${
           props.darkMode ? "dark" : ""
@@ -65,9 +61,29 @@ const ColorWheel_ = props => {
       >
         {props.linked ? "Unlink" : "Link"}
       </button>
-      <div className="gradient" >
+      <div className="gradient">
+        <svg
+          className="edge-wrapper"
+          width={`${props.CWRadius * 2}`}
+          height={`${props.CWRadius * 2}`}
+          viewBox={`0 0 ${props.CWRadius * 2} ${props.CWRadius * 2}`}
+          version="1.1"
+        >
+          <circle
+            cx={`${props.CWRadius}`}
+            cy={`${props.CWRadius}`}
+            r={`${props.CWRadius}`}
+            stroke={props.darkMode ? '#2c2c2c' : '#dbdbdb'}
+            stroke-width="2"
+            fill="none"
+          />
+        </svg>
         <Selectors colorsContainer={props.colorsContainer} canvas={canvas} />
-        <canvas width={`${props.CWRadius*2}`} height={`${props.CWRadius*2}`} ref={canvas} />
+        <canvas
+          width={`${props.CWRadius * 2}`}
+          height={`${props.CWRadius * 2}`}
+          ref={canvas}
+        />
       </div>
 
       <button
