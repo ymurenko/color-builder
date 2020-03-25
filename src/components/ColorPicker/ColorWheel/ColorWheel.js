@@ -74,7 +74,7 @@ const ColorWheel_ = props => {
             cy={`${props.CWRadius}`}
             r={`${props.CWRadius}`}
             stroke={props.darkMode ? '#2c2c2c' : '#dbdbdb'}
-            stroke-width="2"
+            stroke-width="3"
             fill="none"
           />
         </svg>
