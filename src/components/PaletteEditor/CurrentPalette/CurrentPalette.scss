@@ -12,9 +12,89 @@
     background-color: $color-secondary-dark;
     box-shadow: $ui-block-shadow-dark;
   }
+  
   .editor-color-blocks-wrapper {
     border-radius: $ui-block-radius;
     height: 100%;
+    overflow: hidden;
+    background-color: $color-tertiary;
+    &.dark {
+      background-color: $color-quaternary-dark;
+    }
+    
+    
+  }
+}
+
+.editor-color-block {
+  display: inline-block;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  text-align: left;
+  user-select: none;
+  &.master-block {
+    width: scale(100);
+    background-color: $color-tertiary;
+    color: $secondary-font-color-dark;
+    &.dark {
+      background-color:  $color-quaternary-dark;
+      color: #131313;
+    }
+    &.inactive {
+      display: none;
+    }
+  }
+  .greater-color {
+    cursor: pointer;
+    height: 15%;
+    float: middle;
+    text-align: center;
+    font-size: 3rem;
+    line-height: 100%;
+    text-shadow: 0 0 scale(6) $color-button-dark;
+    &.master {
+      text-shadow: none;
+    }
+  }
+  .current-color {
+    height: 70%;
+    &.master {
+      position: relative;
+      .control-container {
+        position: absolute;
+        bottom: 0;
+        display: grid;
+        gap: scale(15);
+        width: scale(80);
+        height: scale(110);
+        margin: scale(15);
+        grid-template-rows: 1fr 1fr 1fr;
+        .button {
+          width: scale(70);
+          font-size: 0.8rem;
+          margin: 0;
+          padding: 0;
+        }
+      }
+      
+    }
+  }
+  .lesser-color {
+    cursor: pointer;
+    height: 15%;
+    float: middle;
+    text-align: center;
+    font-size: 4rem;
+    line-height: 100%;
+    text-shadow: 0 0 scale(6) $color-button-dark;
+    &.master {
+      text-shadow: none;
+    }
+  }
+  &:nth-last-child(2){
+    border-top-right-radius: $ui-block-radius;
+    border-bottom-right-radius: $ui-block-radius;
     overflow: hidden;
   }
 }

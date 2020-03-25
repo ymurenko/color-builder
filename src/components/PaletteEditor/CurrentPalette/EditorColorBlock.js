@@ -5,12 +5,12 @@ import {
   colorIntegersToHSL,
   HSLToColorIntegers
 } from "../../../util/color-utility";
-import { updateActivePalette } from "../../../redux/actions/actions";
+import { updatePaletteSingle } from "../../../redux/actions/actions";
 import { store } from "../../../redux/reducers/reducers";
-import "./EditorColorBlock.scss";
+
 
 const EditorColorBlock_ = props => {
-  let width = (1.437 * props.Viewport) / store.getState().actionReducer.ACTIVE_PALETTE.palette.length;
+  let width = (1.312 * props.viewport) / store.getState().actionReducer.ACTIVE_PALETTE.palette.length;
 
 
   const getColorString = (
@@ -31,26 +31,26 @@ const EditorColorBlock_ = props => {
     let greaterColor;
     if (props.editSetting[0] === true) {
       greaterColor = colorInts[0] + props.increment;
-      if (greaterColor < 360) {
-        colorInts[0] = greaterColor;
+      if (greaterColor >= 360) {
+        return HSLToColorIntegers(colorInts);
       } else {
-        colorInts[0] = 360;
+        colorInts[0] = greaterColor;
       }
     }
     if (props.editSetting[1] === true) {
       greaterColor = colorInts[1] + props.increment;
-      if (greaterColor < 100) {
-        colorInts[1] = greaterColor;
+      if (greaterColor >= 100) {
+        return HSLToColorIntegers(colorInts);
       } else {
-        colorInts[1] = 100;
+        colorInts[1] = greaterColor;
       }
     }
     if (props.editSetting[2] === true) {
       greaterColor = colorInts[2] + props.increment;
-      if (greaterColor < 100) {
-        colorInts[2] = greaterColor;
+      if (greaterColor >= 100) {
+        return HSLToColorIntegers(colorInts);
       } else {
-        colorInts[2] = 100;
+        colorInts[2] = greaterColor;
       }
     }
     return HSLToColorIntegers(colorInts);
@@ -62,26 +62,26 @@ const EditorColorBlock_ = props => {
     let lesserColor;
     if (props.editSetting[0] === true) {
       lesserColor = colorInts[0] - props.increment;
-      if (lesserColor > 0) {
-        colorInts[0] = lesserColor;
+      if (lesserColor <= 1) {
+        return HSLToColorIntegers(colorInts);
       } else {
-        colorInts[0] = 0;
+        colorInts[0] = lesserColor;
       }
     }
     if (props.editSetting[1] === true) {
       lesserColor = colorInts[1] - props.increment;
-      if (lesserColor > 0) {
-        colorInts[1] = lesserColor;
+      if (lesserColor <= 1) {
+        return HSLToColorIntegers(colorInts);
       } else {
-        colorInts[1] = 0;
+        colorInts[1] = lesserColor;
       }
     }
     if (props.editSetting[2] === true) {
       lesserColor = colorInts[2] - props.increment;
-      if (lesserColor > 0) {
-        colorInts[2] = lesserColor;
+      if (lesserColor <= 1) {
+        return HSLToColorIntegers(colorInts);
       } else {
-        colorInts[2] = 0;
+        colorInts[2] = lesserColor;
       }
     }
     return HSLToColorIntegers(colorInts);
@@ -90,8 +90,7 @@ const EditorColorBlock_ = props => {
   return (
     <div
       className={`editor-color-block
-      ${props.editor ? "editor-mode" : ""}
-      ${props.darkMode ? "dark" : ""}`}
+      ${props.editor ? "editor-mode" : ""}`}
       style={{ width: width }}
     >
       <div
@@ -101,7 +100,7 @@ const EditorColorBlock_ = props => {
           color: getColorString(getGreaterColor())
         }}
         onClick={() => {
-          props.updateActivePalette(getGreaterColor(), props.index);
+          props.updatePaletteSingle(getGreaterColor(), props.index);
         }}
       >
         +
@@ -117,7 +116,7 @@ const EditorColorBlock_ = props => {
           color: getColorString(getLesserColor())
         }}
         onClick={() => {
-          props.updateActivePalette(getLesserColor(), props.index)
+          props.updatePaletteSingle(getLesserColor(), props.index)
         }}
       >
         -
@@ -128,8 +127,7 @@ const EditorColorBlock_ = props => {
 
 function mapStateToProps(state, ownProps) {
   return {
-    darkMode: state.actionReducer.DARK_MODE,
-    Viewport: state.actionReducer.VIEWPORT_HEIGHT,
+    viewport: state.actionReducer.VIEWPORT_HEIGHT,
     activePalette: state.actionReducer.ACTIVE_PALETTE.palette[ownProps.index],
     colorMode: state.actionReducer.COLOR_MODE,
     editSetting: state.actionReducer.EDIT_SETTING,
@@ -138,7 +136,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 const mapDispatchToProps = {
-  updateActivePalette
+  updatePaletteSingle
 };
 
 const EditorColorBlock = connect(

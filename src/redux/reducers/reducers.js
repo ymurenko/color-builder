@@ -31,6 +31,7 @@ const initialState = {
 
 export const actionReducer = (state = initialState, action) => {
   let CURRENT_PALETTES_COPY = [...state.PALETTES];
+  let ACTIVE_PALETTE_COPY = state.ACTIVE_PALETTE;
   switch (action.type) {
     case "SET_VIEWPORT_HEIGHT":
       return {
@@ -215,18 +216,26 @@ export const actionReducer = (state = initialState, action) => {
         ...state,
         EDIT_INCREMENT: action.EDIT_INCREMENT
       };
-    case "UPDATE_ACTIVE_PALETTE":
-      
-      let ACTIVE_PALETTE_COPY = state.ACTIVE_PALETTE;
+    case "UPDATE_PALETTE_SINGLE":
       ACTIVE_PALETTE_COPY.palette[action.INDEX] = action.NEW_COLOR;
       CURRENT_PALETTES_COPY[ACTIVE_PALETTE_COPY.index] =
         ACTIVE_PALETTE_COPY.palette;
-        console.log(state.ACTIVE_PALETTE)
       return {
         ...state,
         ACTIVE_PALETTE: ACTIVE_PALETTE_COPY,
         PALETTES: CURRENT_PALETTES_COPY
       };
+
+    case "UPDATE_PALETTE_ALL":
+      ACTIVE_PALETTE_COPY.palette = action.NEW_COLORS;
+      CURRENT_PALETTES_COPY[ACTIVE_PALETTE_COPY.index] =
+        ACTIVE_PALETTE_COPY.palette;
+      return {
+        ...state,
+        ACTIVE_PALETTE: ACTIVE_PALETTE_COPY,
+        PALETTES: CURRENT_PALETTES_COPY
+      };
+
     default:
       return state;
   }

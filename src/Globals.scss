@@ -8,15 +8,18 @@ $font-family: "Verdana";
 $secondary-font-color-dark: #818181;
 
 $color-button: #f2f2f2;
-$color-button-dark: #3b3b3b;
+$color-button-dark: #424242;
 
 $color-primary: #e3e3e3;
 $color-secondary: #dbdbdb;
 $color-tertiary: #d3d3d3;
+$color-quaternary: #b2b2b2;
+
 
 $color-tertiary-dark: #272727;
 $color-secondary-dark: #2c2c2c;
 $color-primary-dark: #333333;
+$color-quaternary-dark: #353535;
 
 $ui-width: scale(1370);
 
@@ -65,7 +68,7 @@ $button-radius: scale(8);
   }
   &.dark {
     background-color: $color-button-dark;
-    color: $secondary-font-color;
+    color: #131313;
   }
 }
 
