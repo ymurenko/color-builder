@@ -9,7 +9,7 @@ const ColorBlock_ = props => {
   let textColor = props.lightness < 50 ? "#bdbdbd" : "#404040";
 
   const copyColor = event => {
-    let color = getColorString();
+    let color = getColorString(props.colorInts);
     if (!props.prefix) {
       if (props.colorMode === 1) {
         color = color.substr(1);
@@ -25,13 +25,13 @@ const ColorBlock_ = props => {
 
   useLayoutEffect(() => {}, [props.colorMode]);
 
-  const getColorString = () => {
+  const getColorString = (colorInts) => {
     if (props.colorMode === 1) {
-      return colorIntegersToString(props.colorInts, "hex");
+      return colorIntegersToString(colorInts, "hex");
     } else if (props.colorMode === 2) {
-      return colorIntegersToString(props.colorInts, "rgb");
+      return colorIntegersToString(colorInts, "rgb");
     } else if (props.colorMode === 3) {
-      return colorIntegersToString(colorIntegersToHSL(props.colorInts), "hsl");
+      return colorIntegersToString(colorIntegersToHSL(colorInts), "hsl");
     }
   };
 
@@ -42,7 +42,7 @@ const ColorBlock_ = props => {
       style={{
         height: height,
         color: textColor,
-        backgroundColor: getColorString()
+        backgroundColor: getColorString(props.colorInts)
       }}
       onClick={event => copyColor(event)}
     >
@@ -53,7 +53,7 @@ const ColorBlock_ = props => {
           paddingTop: `${(height - 0.025 * props.viewport) / 2}px`
         }}
       >
-        <p className="color-text hover-cta">{getColorString()}</p>
+        <p className="color-text hover-cta">{getColorString(props.colorInts)}</p>
         <p className="copy-text hover-cta">Click to copy</p>
       </div>
     </div>

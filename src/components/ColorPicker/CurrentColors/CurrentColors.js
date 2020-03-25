@@ -4,23 +4,39 @@ import { connect } from "react-redux";
 import { store } from "../../../redux/reducers/reducers";
 import ColorBlock from "./ColorBlock";
 import { setColorMode } from "../../../redux/actions/actions";
+import { colorIntegersToString, colorIntegersToHSL } from "../../../util/color-utility";
 import "./CurrentColors.scss";
 
 const CurrentColors_ = props => {
   const [prefix, setPrefix] = useState(true);
   const [quotes, setQuotes] = useState(true);
+  
   const copyAllColors = () => {
     let colorArr = [...store.getState().actionReducer.COLORS];
-
-    for (let i = 0; i < colorArr.length; i++) {
-      if (!props.hash) {
-        colorArr[i] = colorArr[i].substr(1);
+    colorArr.forEach((color, i) => {
+      colorArr[i] = getColorString(color)
+      if (!prefix) {
+        if (props.colorMode === 1) {
+          colorArr[i] = colorArr[i].substr(1);
+        } else if (props.colorMode === 2 || 3) {
+          colorArr[i] = colorArr[i].replace(/[^\d,]+/g, '')
+        }
       }
-      if (props.quotes) {
+      if (quotes) {
         colorArr[i] = `'${colorArr[i]}'`;
       }
-    }
+    })
     copy(colorArr);
+  };
+
+  const getColorString = (colorInts) => {
+    if (props.colorMode === 1) {
+      return colorIntegersToString(colorInts, "hex");
+    } else if (props.colorMode === 2) {
+      return colorIntegersToString(colorInts, "rgb");
+    } else if (props.colorMode === 3) {
+      return colorIntegersToString(colorIntegersToHSL(colorInts), "hsl");
+    }
   };
 
   const renderColorBlocks = () => {
@@ -126,7 +142,7 @@ function mapStateToProps(state) {
   return {
     selectorCount: state.actionReducer.SELECTOR_COUNT,
     darkMode: state.actionReducer.DARK_MODE,
-    colorMode: state.actionReducer.COLOR_MODE
+    colorMode: state.actionReducer.COLOR_MODE,
   };
 }
 

@@ -25,7 +25,7 @@ const Selectors_ = props => {
     } else {
       circleRefs[key].style.stroke = "#4d4d4d";
     }
-    props.storeColor([pixel[0],pixel[1],pixel[2]], key);
+    props.storeColor([pixel[0],pixel[1],pixel[2]],key);
   };
 
   const setHarmony = () => {
