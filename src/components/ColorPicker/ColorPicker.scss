@@ -1,10 +1,8 @@
 @import "../../Variables.scss";
 
 .color-picker-interface {
-  position: absolute;
   display: grid;
   column-gap: scale(10);
-  bottom: 0;
   width: scale(1350);
   height: scale(600);
   padding: scale(10);
@@ -19,7 +17,6 @@
     background-color: $color-tertiary-dark;
     box-shadow: 0 0 scale(15) 0 #161616;
   }
-  z-index: 1;
 }
 
 .color-block {

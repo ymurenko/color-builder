@@ -10,15 +10,6 @@ const App_ = props => {
     window.addEventListener("resize", () => props.setViewport());
   });
 
-  const selectedMode = () => {
-    switch (props.appMode) {
-      case 0:
-        return <ColorPicker />;
-      case 1:
-        return <PaletteEditor />;
-    }
-  };
-
   return (
     <div className={`App ${props.darkMode ? "dark" : ""}`}>
       <div className={`wrapper ${props.darkMode ? "dark" : ""}`}>
@@ -66,7 +57,13 @@ const App_ = props => {
               {props.darkMode ? "Light Mode" : "Dark Mode"}
             </button>
           </div>
-          {selectedMode()}
+          <div className="feature-wrapper" style={{display: props.appMode === 0 ? '' : 'none'}}>
+            <ColorPicker />
+          </div>
+         <div className="feature-wrapper" style={{display: props.appMode === 1 ? '' : 'none'}}>
+            <PaletteEditor />
+         </div>
+          
         </div>
       </div>
     </div>

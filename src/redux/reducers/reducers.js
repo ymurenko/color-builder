@@ -30,6 +30,7 @@ const initialState = {
 };
 
 export const actionReducer = (state = initialState, action) => {
+  let CURRENT_COLORS_COPY = [...state.COLORS]
   let CURRENT_PALETTES_COPY = [...state.PALETTES];
   let ACTIVE_PALETTE_COPY = [...state.ACTIVE_PALETTE.palette];
   let ACTIVE_PALETTE_INDEX = state.ACTIVE_PALETTE.index;
@@ -54,11 +55,18 @@ export const actionReducer = (state = initialState, action) => {
         COLOR_MODE: action.COLOR_MODE
       };
     case "STORE_PALETTE":
-      CURRENT_PALETTES_COPY.push([...state.COLORS]);
-      return {
-        ...state,
-        PALETTES: CURRENT_PALETTES_COPY
-      };
+      if (state.PALETTES.length < 5) {
+        CURRENT_PALETTES_COPY.push([...state.COLORS]);
+        return {
+          ...state,
+          PALETTES: CURRENT_PALETTES_COPY
+        };
+      }
+      else {
+        return {
+          ...state
+        };
+      }
     case "SET_CURRENT_PALETTE":
       let SELECTED_PALETTE = CURRENT_PALETTES_COPY[action.INDEX];
       return {
@@ -67,10 +75,18 @@ export const actionReducer = (state = initialState, action) => {
       };
     case "DELETE_PALETTE":
       CURRENT_PALETTES_COPY.splice(action.INDEX, 1);
-      return {
-        ...state,
-        PALETTES: CURRENT_PALETTES_COPY
-      };
+      if (state.ACTIVE_PALETTE.index === action.INDEX) {
+        return {
+          ...state,
+          ACTIVE_PALETTE: initialState.ACTIVE_PALETTE,
+          PALETTES: CURRENT_PALETTES_COPY
+        };
+      } else {
+        return {
+          ...state,
+          PALETTES: CURRENT_PALETTES_COPY
+        };
+      }
     case "SET_LIGHTNESS":
       return {
         ...state,
@@ -200,9 +216,17 @@ export const actionReducer = (state = initialState, action) => {
         RESET: 1 - state.RESET
       };
     case "SET_MODE":
+      if(state.PALETTES.length === 0){
+        CURRENT_PALETTES_COPY.push([...state.COLORS]);
+        return {
+          ...state,
+          ACTIVE_PALETTE:{index:1, palette: [...state.COLORS]},
+          PALETTES: CURRENT_PALETTES_COPY,
+          MODE: action.MODE
+        };
+      }
       return {
         ...state,
-        ACTIVE_PALETTE: initialState.ACTIVE_PALETTE,
         MODE: action.MODE
       };
     case "SET_EDIT_SETTING":

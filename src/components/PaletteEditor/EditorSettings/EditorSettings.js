@@ -50,7 +50,7 @@ const EditorSettings_ = props => {
       </div>
       <div className="controls-center">
         <div className="slider-container">
-          <p className="slider-label short">Increment: {props.editIncrement}</p>
+          <p className="slider-label short">+/- {props.editIncrement}</p>
           <input
             type="range"
             className={`slider short ${props.darkMode ? "dark" : ""}`}

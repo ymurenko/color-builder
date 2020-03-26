@@ -20,7 +20,7 @@ const PaletteBlock_ = props => {
       className={`palette-block 
       ${props.editor ? "editor-mode" : ""}
       ${props.darkMode ? "dark" : ""} 
-      ${props.activePalette.index === props.index ? "active-palette" : ""} 
+      ${props.activePalette.index === props.index && props.mode === 1 ? "active-palette" : ""} 
       ${props.deleteMode ? "delete-mode" : ""}`} 
       onClick={() => {
         if (props.deleteMode) {
@@ -40,7 +40,8 @@ function mapStateToProps(state) {
   return {
     darkMode: state.actionReducer.DARK_MODE,
     Viewport: state.actionReducer.VIEWPORT_HEIGHT,
-    activePalette: state.actionReducer.ACTIVE_PALETTE
+    activePalette: state.actionReducer.ACTIVE_PALETTE,
+    mode: state.actionReducer.MODE
   };
 }
 

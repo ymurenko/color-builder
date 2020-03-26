@@ -10,7 +10,7 @@ import { store } from "../../../redux/reducers/reducers";
 
 
 const EditorColorBlock_ = props => {
-  let width = (1.312 * props.viewport) / store.getState().actionReducer.ACTIVE_PALETTE.palette.length;
+  let width = (1.31 * props.viewport) / store.getState().actionReducer.ACTIVE_PALETTE.palette.length;
 
 
   const getColorString = (

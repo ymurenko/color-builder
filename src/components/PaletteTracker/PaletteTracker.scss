@@ -50,8 +50,8 @@
     &.active-palette {
       border: solid scale(5) $color-button;
       border-radius: scale(10);
-      height: scale(97);
-      margin: scale(5) scale(10);
+      height: scale(90);
+      margin: scale(10) scale(10);
       &.dark {
         border: solid scale(5) #818181;
       }
@@ -60,8 +60,8 @@
       cursor: pointer;
       border: solid scale(5) $color-button;
       border-radius: scale(10);
-      height: scale(97);
-      margin: scale(5) scale(10);
+      height: scale(90);
+      margin: scale(9) scale(10);
       .icon-overlay {
         display: block;
       }
