@@ -21,7 +21,7 @@ const initialState = {
   SELECTOR_STAGGER: 0,
   CLUSTER_ANGLE: 30,
   LINKED: false,
-  DARK_MODE: true,
+  DARK_MODE: false,
   PRESET: 1,
   RESET: 0, //for comp. rerender if init state doesnt change a prop
   MODE: 0,
@@ -31,7 +31,8 @@ const initialState = {
 
 export const actionReducer = (state = initialState, action) => {
   let CURRENT_PALETTES_COPY = [...state.PALETTES];
-  let ACTIVE_PALETTE_COPY = state.ACTIVE_PALETTE;
+  let ACTIVE_PALETTE_COPY = [...state.ACTIVE_PALETTE.palette];
+  let ACTIVE_PALETTE_INDEX = state.ACTIVE_PALETTE.index;
   switch (action.type) {
     case "SET_VIEWPORT_HEIGHT":
       return {
@@ -217,22 +218,20 @@ export const actionReducer = (state = initialState, action) => {
         EDIT_INCREMENT: action.EDIT_INCREMENT
       };
     case "UPDATE_PALETTE_SINGLE":
-      ACTIVE_PALETTE_COPY.palette[action.INDEX] = action.NEW_COLOR;
-      CURRENT_PALETTES_COPY[ACTIVE_PALETTE_COPY.index] =
-        ACTIVE_PALETTE_COPY.palette;
+      ACTIVE_PALETTE_COPY[action.INDEX] = action.NEW_COLOR;
+      CURRENT_PALETTES_COPY[ACTIVE_PALETTE_INDEX] = ACTIVE_PALETTE_COPY;
       return {
         ...state,
-        ACTIVE_PALETTE: ACTIVE_PALETTE_COPY,
+        ACTIVE_PALETTE: {index: ACTIVE_PALETTE_INDEX, palette: ACTIVE_PALETTE_COPY},
         PALETTES: CURRENT_PALETTES_COPY
       };
 
     case "UPDATE_PALETTE_ALL":
-      ACTIVE_PALETTE_COPY.palette = action.NEW_COLORS;
-      CURRENT_PALETTES_COPY[ACTIVE_PALETTE_COPY.index] =
-        ACTIVE_PALETTE_COPY.palette;
+      ACTIVE_PALETTE_COPY = action.NEW_COLORS;
+      CURRENT_PALETTES_COPY[ACTIVE_PALETTE_INDEX] = ACTIVE_PALETTE_COPY;
       return {
         ...state,
-        ACTIVE_PALETTE: ACTIVE_PALETTE_COPY,
+        ACTIVE_PALETTE: {index: ACTIVE_PALETTE_INDEX, palette: ACTIVE_PALETTE_COPY},
         PALETTES: CURRENT_PALETTES_COPY
       };
 
