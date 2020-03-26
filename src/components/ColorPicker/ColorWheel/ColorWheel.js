@@ -2,8 +2,8 @@ import React, { useLayoutEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { resetState, setLinkedState } from "../../../redux/actions/actions";
 import Selectors from "../Selectors/Selectors";
-import * as xLUT2 from "./xLUT2.json";
-import * as yLUT2 from "./yLUT2.json";
+import * as xLUT from "./xLUT.json";
+import * as yLUT from "./yLUT.json";
 import "./ColorWheel.scss";
 
 const ColorWheel_ = props => {
@@ -16,7 +16,7 @@ const ColorWheel_ = props => {
       canvasContext.beginPath();
       canvasContext.strokeStyle = `hsl(${value}, ${props.saturation}%, ${props.lightness}%)`;
       canvasContext.moveTo(130, 130);
-      canvasContext.lineTo(xLUT2.default[value], yLUT2.default[value]);
+      canvasContext.lineTo(xLUT.default[value], yLUT.default[value]);
       canvasContext.stroke();
     }
   };
@@ -25,9 +25,8 @@ const ColorWheel_ = props => {
     let canvasContext = canvas.current.getContext("2d");
     let gradient = canvasContext.createRadialGradient(130, 130, 0, 130, 130, 128);
 
-    gradient.addColorStop(0, `${props.lightness > 45 ? "white" : "black"}`);
-    gradient.addColorStop(1, "hsla(0,0%,0%,0)");
-
+    gradient.addColorStop(0, `${props.lightness > 45 ? "rgba(255,255,255,1)" : "rgba(0,0,0,1)"}`);
+    gradient.addColorStop(1, `${props.lightness > 45 ? "rgba(255,255,255,0)" : "rgba(0,0,0,0)"}`);
     canvasContext.fillStyle = gradient;
     canvasContext.fillRect(0, 0, 260, 260);
   };
@@ -74,7 +73,7 @@ const ColorWheel_ = props => {
             cy={`${props.CWRadius}`}
             r={`${props.CWRadius}`}
             stroke={props.darkMode ? '#2c2c2c' : '#dbdbdb'}
-            stroke-width="3"
+            strokeWidth="3"
             fill="none"
           />
         </svg>
