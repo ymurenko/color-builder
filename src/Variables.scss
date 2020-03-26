@@ -2,3 +2,36 @@
     @return ($px/800) * 100vh;
 }
 
+$secondary-font-size: 1rem;
+$secondary-font-weight: 400;
+$secondary-font-color: #222222;
+$font-family: "Verdana";
+
+$secondary-font-color-dark: #818181;
+
+$color-button: #f2f2f2;
+$color-button-dark: #424242;
+
+$color-primary: #e3e3e3;
+$color-secondary: #dbdbdb;
+$color-tertiary: #d3d3d3;
+$color-quaternary: #b2b2b2;
+
+
+$color-tertiary-dark: #272727;
+$color-secondary-dark: #2c2c2c;
+$color-primary-dark: #333333;
+$color-quaternary-dark: #353535;
+
+$ui-width: scale(1370);
+
+$ui-block-width: scale(260);
+$ui-block-height: scale(550);
+$ui-block-padding: scale(25);
+$ui-block-radius: scale(15);
+
+$ui-block-shadow-light: 0 0 scale(15) 0 #a1a1a1;
+$ui-block-shadow-dark: 0 0 scale(15) 0 #171717;
+
+$button-radius: scale(8);
+

@@ -1,4 +1,4 @@
-@import "../../../Globals.scss";
+@import "../../../Variables.scss";
 
 .editor-settings {
   display: grid;
@@ -18,8 +18,6 @@
     .mode-selector-container {
       display: grid;
       width: scale(180);
-      
-
       grid-template-columns: 1fr 1fr 1fr;
       gap: scale(15);
 
