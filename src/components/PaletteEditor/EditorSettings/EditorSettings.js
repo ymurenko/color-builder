@@ -1,20 +1,24 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   setColorMode,
   setEditSetting,
   setEditIncrement
 } from "../../../redux/actions/actions";
+import { copyAllColors } from "../../../util/copy-colors";
 import "../../Slider/Slider.scss";
 import "./EditorSettings.scss";
 
 const EditorSettings_ = props => {
+  const [prefix, setPrefix] = useState(true);
+  const [quotes, setQuotes] = useState(true);
+
   return (
     <div className={`editor-settings ${props.darkMode ? "dark" : ""}`}>
-      <div className="controls-left">
-        <div className="control-container mode-selector-container">
+      <div className="editor-controls increment-settings">
+        <div className="input-container">
           <button
-            className={`button color-mode ${
+            className={`button editor-button longest ${
               props.editMode[0] ? "active" : ""
             } ${props.darkMode ? "dark" : ""}`}
             type="button"
@@ -25,7 +29,7 @@ const EditorSettings_ = props => {
             Hue
           </button>
           <button
-            className={`button color-mode ${
+            className={`button editor-button longest ${
               props.editMode[1] ? "active" : ""
             } ${props.darkMode ? "dark" : ""}`}
             type="button"
@@ -36,7 +40,7 @@ const EditorSettings_ = props => {
             Saturation
           </button>
           <button
-            className={`button color-mode ${
+            className={`button editor-button longest ${
               props.editMode[2] ? "active" : ""
             } ${props.darkMode ? "dark" : ""}`}
             type="button"
@@ -46,28 +50,27 @@ const EditorSettings_ = props => {
           >
             Lightness
           </button>
+
+          <div className="slider-container short">
+            <p className="slider-label short">+/- {props.editIncrement}</p>
+            <input
+              type="range"
+              className={`slider short ${props.darkMode ? "dark" : ""}`}
+              min={1}
+              max={25}
+              step={1}
+              value={props.editIncrement}
+              onChange={val => {
+                props.setEditIncrement(parseInt(val.target.value));
+              }}
+            />
+          </div>
         </div>
       </div>
-      <div className="controls-center">
-        <div className="slider-container">
-          <p className="slider-label short">+/- {props.editIncrement}</p>
-          <input
-            type="range"
-            className={`slider short ${props.darkMode ? "dark" : ""}`}
-            min={1}
-            max={25}
-            step={1}
-            value={props.editIncrement}
-            onChange={val => {
-              props.setEditIncrement(parseInt(val.target.value));
-            }}
-          />
-        </div>
-      </div>
-      <div className="controls-right">
-        <div className="control-container mode-selector-container">
+      <div className="editor-controls color-modes">
+        <div className="input-container">
           <button
-            className={`button color-mode ${
+            className={`button editor-button shorter ${
               props.colorMode === 1 ? "active" : ""
             } ${props.darkMode ? "dark" : ""}`}
             type="button"
@@ -80,7 +83,7 @@ const EditorSettings_ = props => {
             HEX
           </button>
           <button
-            className={`button color-mode ${
+            className={`button editor-button shorter ${
               props.colorMode === 2 ? "active" : ""
             } ${props.darkMode ? "dark" : ""}`}
             type="button"
@@ -93,7 +96,7 @@ const EditorSettings_ = props => {
             RGB
           </button>
           <button
-            className={`button color-mode ${
+            className={`button editor-button shorter ${
               props.colorMode === 3 ? "active" : ""
             } ${props.darkMode ? "dark" : ""}`}
             type="button"
@@ -104,6 +107,52 @@ const EditorSettings_ = props => {
             }}
           >
             HSL
+          </button>
+        </div>
+      </div>
+      <div className="editor-controls copy-options">
+        <div className="input-container">
+          <button
+            className={`button editor-button longer ${prefix ? "active" : ""} ${
+              props.darkMode ? "dark" : ""
+            }`}
+            type="button"
+            onClick={() => {
+              setPrefix(!prefix);
+            }}
+          >
+            {props.colorMode === 1
+              ? "#..."
+              : props.colorMode === 2
+              ? "rgb(...)"
+              : "hsl(...)"}
+          </button>
+          <button
+            className={`button editor-button longer ${quotes ? "active" : ""} ${
+              props.darkMode ? "dark" : ""
+            }`}
+            type="button"
+            onClick={() => {
+              setQuotes(!quotes);
+            }}
+          >
+            Quotes
+          </button>
+          <button
+            className={`button editor-button longer ${
+              props.darkMode ? "dark" : ""
+            }`}
+            type="button"
+            onClick={() => {
+              copyAllColors(
+                [...props.activePalette.palette],
+                props.colorMode,
+                quotes,
+                prefix
+              );
+            }}
+          >
+            Copy all
           </button>
         </div>
       </div>

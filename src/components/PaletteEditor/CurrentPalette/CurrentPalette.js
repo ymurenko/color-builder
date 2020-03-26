@@ -5,14 +5,10 @@ import {
   colorIntegersToHSL,
   HSLToColorIntegers
 } from "../../../util/color-utility";
-import { copyAllColors } from "../../../util/copy-colors";
 import EditorColorBlock from "./EditorColorBlock";
 import "./CurrentPalette.scss";
 
 const CurrentPalette_ = props => {
-  const [prefix, setPrefix] = useState(true);
-  const [quotes, setQuotes] = useState(true);
-
   const renderEditorColorBlocks = props.activePalette.palette.map(
     (color, i) => <EditorColorBlock className="block-color" key={i} index={i} />
   );
@@ -116,48 +112,7 @@ const CurrentPalette_ = props => {
             +
           </div>
           <div className="current-color master">
-            <div className="control-container">
-              <button
-                className={`button ${prefix ? "active" : ""} ${
-                  props.darkMode ? "dark" : ""
-                }`}
-                type="button"
-                onClick={() => {
-                  setPrefix(!prefix);
-                }}
-              >
-                {props.colorMode === 1
-                  ? "#..."
-                  : props.colorMode === 2
-                  ? "rgb(...)"
-                  : "hsl(...)"}
-              </button>
-              <button
-                className={`button ${quotes ? "active" : ""} ${
-                  props.darkMode ? "dark" : ""
-                }`}
-                type="button"
-                onClick={() => {
-                  setQuotes(!quotes);
-                }}
-              >
-                Quotes
-              </button>
-              <button
-                className={`button ${props.darkMode ? "dark" : ""}`}
-                type="button"
-                onClick={() => {
-                  copyAllColors(
-                    [...props.activePalette.palette],
-                    props.colorMode,
-                    quotes,
-                    prefix
-                  );
-                }}
-              >
-                Copy all
-              </button>
-            </div>
+            
           </div>
           <div
             className="lesser-color master"

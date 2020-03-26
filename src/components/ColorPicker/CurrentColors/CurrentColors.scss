@@ -15,10 +15,10 @@
     }
     .control-container {
       margin-top: scale(15);
-      &.mode-selector-container {
+      &.input-container {
         margin-bottom: scale(10);
         margin-top: scale(10);
-        .color-mode {
+        .editor-button {
           line-height: 0;
           margin: 0 scale(15);
           padding: scale(3);

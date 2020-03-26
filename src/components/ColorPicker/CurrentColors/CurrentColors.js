@@ -23,9 +23,9 @@ const CurrentColors_ = props => {
 
   return (
     <div className={`current-colors ui-block ${props.darkMode ? "dark" : ""}`}>
-      <div className="control-container mode-selector-container">
+      <div className="control-container input-container">
         <button
-          className={`button color-mode ${
+          className={`button editor-button ${
             props.colorMode === 1 ? "active" : ""
           } ${props.darkMode ? "dark" : ""}`}
           type="button"
@@ -38,7 +38,7 @@ const CurrentColors_ = props => {
           HEX
         </button>
         <button
-          className={`button color-mode ${
+          className={`button editor-button ${
             props.colorMode === 2 ? "active" : ""
           } ${props.darkMode ? "dark" : ""}`}
           type="button"
@@ -51,7 +51,7 @@ const CurrentColors_ = props => {
           RGB
         </button>
         <button
-          className={`button color-mode ${
+          className={`button editor-button ${
             props.colorMode === 3 ? "active" : ""
           } ${props.darkMode ? "dark" : ""}`}
           type="button"

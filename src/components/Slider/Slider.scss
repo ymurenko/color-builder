@@ -23,6 +23,10 @@ $track-radius: scale(5);
 $contrast: 5%;
 
 .slider-container {
+  &.short {
+    height: scale(25);
+    text-align: left;
+  }
   .slider {
     height: $thumb-radius;
     width: 100%;
@@ -30,7 +34,7 @@ $contrast: 5%;
     margin: 0;
     &.short {
       display: inline-block;
-      width: scale(250);
+      width: scale(220);
       vertical-align: middle;
     }
     &.dark {
@@ -44,8 +48,8 @@ $contrast: 5%;
     line-height: scale(8);
     font-size: 0.9rem;
     &.short {
-      display: inline;
-      margin: scale(25);
+      display: inline-block;
+      margin: scale(10);
     }
   }
 }

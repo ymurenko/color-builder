@@ -2,73 +2,46 @@
 
 .editor-settings {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  width: scale(1160);
-  height: scale(25);
-  padding: scale(10);
-  background-color: $color-secondary;
-  border-radius: $ui-block-radius;
-  box-shadow: $ui-block-shadow-light;
-  &.dark {
-    background-color: $color-secondary-dark;
-    box-shadow: $ui-block-shadow-dark;
-  }
-  .controls-left {
-    width: scale(386);
-    .mode-selector-container {
+  grid-template-columns: 7fr 1fr 2fr;
+  width: scale(1180);
+  height: scale(45);
+  gap: scale(10);
+  .editor-controls {
+    padding: scale(10);
+    background-color: $color-secondary;
+    border-radius: $ui-block-radius;
+    box-shadow: $ui-block-shadow-light;
+    &.dark {
+      background-color: $color-secondary-dark;
+      box-shadow: $ui-block-shadow-dark;
+    }
+    .input-container {
       display: grid;
-      width: scale(180);
       grid-template-columns: 1fr 1fr 1fr;
       gap: scale(15);
-
-      margin: 0;
-      .color-mode {
-          
-        line-height: 0;
-        margin: 0;
-        padding: scale(3);
-        width: scale(100);
-        font-size: 0.8rem;
-      }
     }
   }
-  .controls-center {
-    width: scale(472);
-    .mode-selector-container {
-      display: grid;
-      width: scale(180);
-      
-
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: scale(15);
-
-      margin: 0;
-      .color-mode {
-          
-        line-height: 0;
-        margin: 0;
-        padding: scale(3);
-        width: scale(50);
-        font-size: 0.8rem;
-      }
+  .increment-settings {
+    .input-container {
+      grid-template-columns: 1fr 1fr 1fr 3fr;
     }
   }
-  .controls-right {
-    width: scale(300);
-    .mode-selector-container {
-      display: grid;
-      float: right;
-      width: scale(180);
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: scale(15);
-      margin: 0;
-      .color-mode {
-        line-height: 0;
-        margin: 0;
-        padding: scale(3);
-        width: scale(50);
-        font-size: 0.8rem;
-      }
-    }
+}
+
+.editor-button {
+  line-height: 0;
+  font-size: 0.8rem;
+
+  &.longest {
+    width: scale(100);
+  }
+  &.longer {
+    width: scale(80);
+  }
+  &.shorter {
+    width: scale(50);
+  }
+  &.active {
+    height: scale(27);
   }
 }

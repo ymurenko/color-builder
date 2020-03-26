@@ -3,7 +3,7 @@
 .palette-editor-interface {
   position: absolute;
   display: grid;
-  column-gap: scale(10);
+  gap: scale(10);
   bottom: 0;
   width: scale(1350);
   height: scale(600);
@@ -14,7 +14,7 @@
   .palette-components-wrapper {
     width: scale(1160);
     display: grid;
-    row-gap: scale(10);
+    gap: scale(10);
   }
   &.dark {
     background-color: $color-tertiary-dark;
