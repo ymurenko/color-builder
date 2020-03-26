@@ -10,7 +10,7 @@ const ColorWheel_ = props => {
   const canvas = useRef(null);
 
   const generateGradient = () => {
-    let canvasContext = canvas.current.getContext("2d");
+    let canvasContext = canvas.current.getContext("2d", {willReadFrequently: true});
     for (let i = 0; i < 3600; i += 1) {
       let value = i / 10;
       canvasContext.beginPath();
@@ -19,10 +19,6 @@ const ColorWheel_ = props => {
       canvasContext.lineTo(xLUT.default[value], yLUT.default[value]);
       canvasContext.stroke();
     }
-  };
-
-  const addGradient = () => {
-    let canvasContext = canvas.current.getContext("2d");
     let gradient = canvasContext.createRadialGradient(130, 130, 0, 130, 130, 128);
 
     gradient.addColorStop(0, `${props.lightness > 45 ? "rgba(255,255,255,1)" : "rgba(0,0,0,1)"}`);
@@ -32,13 +28,12 @@ const ColorWheel_ = props => {
   };
 
   useLayoutEffect(() => {
-    let canvasContext = canvas.current.getContext("2d");
+  let canvasContext = canvas.current.getContext("2d", {willReadFrequently: true});
     canvasContext.scale(props.CWRadius / 130, props.CWRadius / 130);
   }, [props.CWRadius]);
 
   useLayoutEffect(() => {
     generateGradient();
-    addGradient();
   });
 
   return (
