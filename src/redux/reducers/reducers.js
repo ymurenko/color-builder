@@ -30,7 +30,6 @@ const initialState = {
 };
 
 export const actionReducer = (state = initialState, action) => {
-  let CURRENT_COLORS_COPY = [...state.COLORS]
   let CURRENT_PALETTES_COPY = [...state.PALETTES];
   let ACTIVE_PALETTE_COPY = [...state.ACTIVE_PALETTE.palette];
   let ACTIVE_PALETTE_INDEX = state.ACTIVE_PALETTE.index;
@@ -61,8 +60,7 @@ export const actionReducer = (state = initialState, action) => {
           ...state,
           PALETTES: CURRENT_PALETTES_COPY
         };
-      }
-      else {
+      } else {
         return {
           ...state
         };
@@ -216,11 +214,11 @@ export const actionReducer = (state = initialState, action) => {
         RESET: 1 - state.RESET
       };
     case "SET_MODE":
-      if(state.PALETTES.length === 0){
+      if (state.PALETTES.length === 0) {
         CURRENT_PALETTES_COPY.push([...state.COLORS]);
         return {
           ...state,
-          ACTIVE_PALETTE:{index:1, palette: [...state.COLORS]},
+          ACTIVE_PALETTE: { index: 0, palette: [...state.COLORS] },
           PALETTES: CURRENT_PALETTES_COPY,
           MODE: action.MODE
         };
@@ -230,8 +228,8 @@ export const actionReducer = (state = initialState, action) => {
         MODE: action.MODE
       };
     case "SET_EDIT_SETTING":
-      let EDIT_SETTING_COPY = [...state.EDIT_SETTING]
-      EDIT_SETTING_COPY[action.INDEX] = !EDIT_SETTING_COPY[action.INDEX]
+      let EDIT_SETTING_COPY = [...state.EDIT_SETTING];
+      EDIT_SETTING_COPY[action.INDEX] = !EDIT_SETTING_COPY[action.INDEX];
       return {
         ...state,
         EDIT_SETTING: EDIT_SETTING_COPY
@@ -246,7 +244,10 @@ export const actionReducer = (state = initialState, action) => {
       CURRENT_PALETTES_COPY[ACTIVE_PALETTE_INDEX] = ACTIVE_PALETTE_COPY;
       return {
         ...state,
-        ACTIVE_PALETTE: {index: ACTIVE_PALETTE_INDEX, palette: ACTIVE_PALETTE_COPY},
+        ACTIVE_PALETTE: {
+          index: ACTIVE_PALETTE_INDEX,
+          palette: ACTIVE_PALETTE_COPY
+        },
         PALETTES: CURRENT_PALETTES_COPY
       };
 
@@ -255,7 +256,10 @@ export const actionReducer = (state = initialState, action) => {
       CURRENT_PALETTES_COPY[ACTIVE_PALETTE_INDEX] = ACTIVE_PALETTE_COPY;
       return {
         ...state,
-        ACTIVE_PALETTE: {index: ACTIVE_PALETTE_INDEX, palette: ACTIVE_PALETTE_COPY},
+        ACTIVE_PALETTE: {
+          index: ACTIVE_PALETTE_INDEX,
+          palette: ACTIVE_PALETTE_COPY
+        },
         PALETTES: CURRENT_PALETTES_COPY
       };
 
