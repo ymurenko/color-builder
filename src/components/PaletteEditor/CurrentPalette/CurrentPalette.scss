@@ -17,9 +17,9 @@
     border-radius: $ui-block-radius;
     height: 100%;
     overflow: hidden;
-    background-color: $color-tertiary;
+    background-color: $color-button;
     &.dark {
-      background-color: $color-quaternary-dark;
+      background-color:$color-button-dark;
     }
   }
 }
@@ -33,10 +33,10 @@
   user-select: none;
   &.master-block {
     width: scale(60);
-    background-color: $color-tertiary;
+    background-color: $color-button;
     color: $secondary-font-color-dark;
     &.dark {
-      background-color:  $color-quaternary-dark;
+      background-color:  $color-button-dark;
       color: #131313;
     }
     &.inactive {

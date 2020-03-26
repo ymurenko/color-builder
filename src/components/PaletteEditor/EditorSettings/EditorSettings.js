@@ -15,7 +15,7 @@ const EditorSettings_ = props => {
 
   return (
     <div className={`editor-settings ${props.darkMode ? "dark" : ""}`}>
-      <div className="editor-controls increment-settings">
+      <div className={`editor-controls increment-settings ${props.darkMode ? "dark" : ""}`}>
         <div className="input-container">
           <button
             className={`button editor-button longest ${
@@ -67,7 +67,7 @@ const EditorSettings_ = props => {
           </div>
         </div>
       </div>
-      <div className="editor-controls color-modes">
+      <div className={`editor-controls color-modes ${props.darkMode ? "dark" : ""}`}>
         <div className="input-container">
           <button
             className={`button editor-button shorter ${
@@ -110,7 +110,7 @@ const EditorSettings_ = props => {
           </button>
         </div>
       </div>
-      <div className="editor-controls copy-options">
+      <div className={`editor-controls copy-options ${props.darkMode ? "dark" : ""}`}>
         <div className="input-container">
           <button
             className={`button editor-button longer ${prefix ? "active" : ""} ${

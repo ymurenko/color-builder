@@ -5,7 +5,7 @@ import { colorIntegersToString } from "../../util/color-utility"
 import "./PaletteTracker.scss";
 
 const PaletteBlock_ = props => {
-  let width = (0.1623 * props.Viewport) / props.palette.length;
+  let width = (0.1624 * props.Viewport) / props.palette.length;
 
   const renderColors = props.palette.map((color, i) => (
     <div
