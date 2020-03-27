@@ -35,6 +35,8 @@ const ColorBlock_ = props => {
 
 function mapStateToProps(state, ownProps) {
   return {
+    prefix: state.actionReducer.PREFIX,
+    quotes: state.actionReducer.QUOTES,
     lightness: state.actionReducer.LIGHTNESS,
     selectorCount: state.actionReducer.SELECTOR_COUNT,
     viewport: state.actionReducer.VIEWPORT_HEIGHT,

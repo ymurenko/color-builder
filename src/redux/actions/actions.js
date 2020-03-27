@@ -6,6 +6,12 @@ export const setViewport = () => (
 export const storeColor = (val, index) => (
   { type: 'SET_COLOR', COLOR: val, INDEX: index }
 )
+export const setPrefix = () => (
+  { type: 'SET_PREFIX'}
+)
+export const setQuotes = () => (
+  { type: 'SET_QUOTES'}
+)
 export const setColorMode = (val) => (
   { type: 'SET_COLOR_MODE', COLOR_MODE: val }
 )

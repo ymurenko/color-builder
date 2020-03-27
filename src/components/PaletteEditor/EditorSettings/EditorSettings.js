@@ -3,15 +3,15 @@ import { connect } from "react-redux";
 import {
   setColorMode,
   setEditSetting,
-  setEditIncrement
+  setEditIncrement,
+  setPrefix,
+  setQuotes
 } from "../../../redux/actions/actions";
 import { copyAllColors } from "../../../util/copy-colors";
 import "../../Slider/Slider.scss";
 import "./EditorSettings.scss";
 
 const EditorSettings_ = props => {
-  const [prefix, setPrefix] = useState(true);
-  const [quotes, setQuotes] = useState(true);
 
   return (
     <div className={`editor-settings ${props.darkMode ? "dark" : ""}`}>
@@ -113,12 +113,12 @@ const EditorSettings_ = props => {
       <div className={`editor-controls copy-options ${props.darkMode ? "dark" : ""}`}>
         <div className="input-container">
           <button
-            className={`button editor-button longer ${prefix ? "active" : ""} ${
+            className={`button editor-button longer ${props.prefix ? "active" : ""} ${
               props.darkMode ? "dark" : ""
             }`}
             type="button"
             onClick={() => {
-              setPrefix(!prefix);
+              props.setPrefix();
             }}
           >
             {props.colorMode === 1
@@ -128,12 +128,12 @@ const EditorSettings_ = props => {
               : "hsl(...)"}
           </button>
           <button
-            className={`button editor-button longer ${quotes ? "active" : ""} ${
+            className={`button editor-button longer ${props.quotes ? "active" : ""} ${
               props.darkMode ? "dark" : ""
             }`}
             type="button"
             onClick={() => {
-              setQuotes(!quotes);
+              props.setQuotes();
             }}
           >
             Quotes
@@ -147,8 +147,8 @@ const EditorSettings_ = props => {
               copyAllColors(
                 [...props.activePalette.palette],
                 props.colorMode,
-                quotes,
-                prefix
+                props.quotes,
+                props.prefix
               );
             }}
           >
@@ -162,6 +162,8 @@ const EditorSettings_ = props => {
 
 function mapStateToProps(state) {
   return {
+    prefix: state.actionReducer.PREFIX,
+    quotes: state.actionReducer.QUOTES,
     darkMode: state.actionReducer.DARK_MODE,
     viewport: state.actionReducer.VIEWPORT_HEIGHT,
     activePalette: state.actionReducer.ACTIVE_PALETTE,
@@ -174,7 +176,9 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   setColorMode,
   setEditSetting,
-  setEditIncrement
+  setEditIncrement,
+  setPrefix,
+  setQuotes
 };
 
 const EditorSettings = connect(

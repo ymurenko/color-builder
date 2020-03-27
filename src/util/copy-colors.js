@@ -1,5 +1,5 @@
 import copy from "copy-to-clipboard";
-import { colorIntegersToString, colorIntegersToHSL } from "./color-utility";
+import { toColorString, intToHSL } from "./color-utility";
 
 export const copyAllColors = (colorArr, colorMode, quotes, prefix) => {
   colorArr.forEach((color, i) => {
@@ -35,10 +35,10 @@ export const copyColor = (colorInts, colorMode, quotes, prefix) => {
 
 export const getColorString = (colorInts, colorMode) => {
   if (colorMode === 1) {
-    return colorIntegersToString(colorInts, "hex");
+    return toColorString(colorInts, "hex");
   } else if (colorMode === 2) {
-    return colorIntegersToString(colorInts, "rgb");
+    return toColorString(colorInts, "rgb");
   } else if (colorMode === 3) {
-    return colorIntegersToString(colorIntegersToHSL(colorInts), "hsl");
+    return toColorString(intToHSL(colorInts), "hsl");
   }
 };

@@ -3,19 +3,20 @@ import copy from "copy-to-clipboard";
 import { connect } from "react-redux";
 import { store } from "../../../redux/reducers/reducers";
 import ColorBlock from "./ColorBlock";
-import { setColorMode } from "../../../redux/actions/actions";
+import {
+  setColorMode,
+  setPrefix,
+  setQuotes
+} from "../../../redux/actions/actions";
 import { copyAllColors } from "../../../util/copy-colors";
 import "./CurrentColors.scss";
 
 const CurrentColors_ = props => {
-  const [prefix, setPrefix] = useState(true);
-  const [quotes, setQuotes] = useState(true);
-
   const renderColorBlocks = () => {
     let colorBlockArray = [];
     for (let i = 0; i < props.selectorCount; i++) {
       colorBlockArray.push(
-        <ColorBlock index={i} key={i} quotes={quotes} prefix={prefix} />
+        <ColorBlock index={i} key={i} />
       );
     }
     return colorBlockArray;
@@ -69,12 +70,12 @@ const CurrentColors_ = props => {
       </div>
       <div className="control-container">
         <button
-          className={`button ${prefix ? "active" : ""} ${
+          className={`button ${props.prefix ? "active" : ""} ${
             props.darkMode ? "dark" : ""
           }`}
           type="button"
           onClick={() => {
-            setPrefix(!prefix);
+            props.setPrefix();
           }}
         >
           {props.colorMode === 1
@@ -84,12 +85,12 @@ const CurrentColors_ = props => {
             : "hsl(...)"}
         </button>
         <button
-          className={`button ${quotes ? "active" : ""} ${
+          className={`button ${props.quotes ? "active" : ""} ${
             props.darkMode ? "dark" : ""
           }`}
           type="button"
           onClick={() => {
-            setQuotes(!quotes);
+            props.setQuotes();
           }}
         >
           Quotes
@@ -103,8 +104,8 @@ const CurrentColors_ = props => {
             copyAllColors(
               [...store.getState().actionReducer.COLORS],
               props.colorMode,
-              quotes,
-              prefix
+              props.quotes,
+              props.prefix
             );
           }}
         >
@@ -117,6 +118,8 @@ const CurrentColors_ = props => {
 
 function mapStateToProps(state) {
   return {
+    prefix: state.actionReducer.PREFIX,
+    quotes: state.actionReducer.QUOTES,
     selectorCount: state.actionReducer.SELECTOR_COUNT,
     darkMode: state.actionReducer.DARK_MODE,
     colorMode: state.actionReducer.COLOR_MODE
@@ -124,7 +127,9 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  setColorMode
+  setColorMode,
+  setPrefix,
+  setQuotes
 };
 
 const CurrentColors = connect(

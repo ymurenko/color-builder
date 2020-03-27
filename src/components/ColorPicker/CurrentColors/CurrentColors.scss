@@ -1,32 +1,60 @@
 @import "../../../Variables.scss";
 
 .current-colors {
-    text-align: center;
-    display: inline-block;
-    grid-column: 3;
-    height: scale(595);
-    width: scale(290);
-    padding: 0 scale(5) scale(5);
-    .colors-container {
-      border-radius: scale(10);
-      height: scale(440);
-      overflow: hidden;
-      margin: scale(0) scale(10)
-    }
-    .control-container {
-      margin-top: scale(15);
-      &.input-container {
-        margin-bottom: scale(10);
-        margin-top: scale(10);
-        .editor-button {
-          line-height: 0;
-          margin: 0 scale(15);
-          padding: scale(3);
-          width: scale(50);
-          font-size: 0.8rem;
-        }
-      } 
+  text-align: center;
+  display: inline-block;
+  grid-column: 3;
+  height: scale(595);
+  width: scale(290);
+  padding: 0 scale(5) scale(5);
+  .colors-container {
+    border-radius: scale(10);
+    height: scale(440);
+    overflow: hidden;
+    margin: scale(0) scale(10);
+  }
+  .control-container {
+    margin-top: scale(15);
+    &.input-container {
+      margin-bottom: scale(10);
+      margin-top: scale(10);
+      .editor-button {
+        line-height: 0;
+        margin: 0 scale(15);
+        padding: scale(3);
+        width: scale(50);
+        font-size: 0.8rem;
+      }
     }
   }
-
-  
+  .color-block {
+    cursor: pointer;
+    border: none;
+    background-color: #fff;
+    width: 100%;
+    font-family: Verdana;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: filter;
+    .copy-prompt {
+      text-align: center;
+      .hover-cta {
+        margin: 0;
+      }
+      .copy-text {
+        display: none;
+      }
+      &:hover {
+        .color-text {
+          display: none;
+        }
+        .copy-text {
+          display: inline;
+        }
+      }
+    }
+    &:active {
+      filter: invert(0.3);
+    }
+  }
+}

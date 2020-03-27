@@ -25,16 +25,30 @@
 }
 
 .editor-color-block {
+  cursor: pointer;
   display: inline-block;
   height: 100%;
   margin: 0;
   overflow: hidden;
   text-align: left;
   user-select: none;
+  .label {
+    font-weight: 400;
+    transform: rotate(-90deg);
+    position: absolute;
+    bottom: scale(175);
+    left: scale(-15);
+    white-space: nowrap;
+    width: scale(100);
+    height: scale(25);
+    margin: 0;
+    line-height: scale(15);
+  }
   &.master-block {
     width: scale(60);
     background-color: $color-button;
     color: $secondary-font-color-dark;
+    text-align: center;
     &.dark {
       background-color:  $color-button-dark;
       color: #131313;
@@ -44,48 +58,48 @@
     }
   }
   .greater-color {
-    cursor: pointer;
     height: 15%;
     float: middle;
     text-align: center;
     font-size: 3rem;
     line-height: 100%;
-    text-shadow: 0 0 scale(6) $color-button-dark;
     &.master {
       text-shadow: none;
     }
   }
   .current-color {
     height: 70%;
-    &.master {
-      position: relative;
-      .control-container {
-        position: absolute;
-        bottom: 0;
-        display: grid;
-        gap: scale(15);
-        width: scale(80);
-        height: scale(110);
-        margin: scale(15);
-        grid-template-rows: 1fr 1fr 1fr;
-        .button {
-          width: scale(70);
-          font-size: 0.8rem;
-          margin: 0;
-          padding: 0;
-        }
-      }
-      
+    position: relative;
+    .color-label {
+      bottom: scale(50);
+      left: scale(-25);
     }
+    .copy-prompt {
+      text-align: center;
+      width: 100%;
+      margin: scale(15) 0;
+      font-size: 1.2rem;
+      display: none;
+    }
+    &.master {
+      cursor: default;
+    }
+    &:hover {
+      .copy-prompt {
+      display: inline-block
+      }
+      &:active {
+        filter: invert(0.3);
+      }
+    }
+    
   }
   .lesser-color {
-    cursor: pointer;
     height: 15%;
     float: middle;
     text-align: center;
     font-size: 4rem;
     line-height: 100%;
-    text-shadow: 0 0 scale(6) $color-button-dark;
     &.master {
       text-shadow: none;
     }

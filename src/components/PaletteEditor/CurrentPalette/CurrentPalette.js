@@ -2,8 +2,8 @@ import React, { useRef, useState } from "react";
 import { connect } from "react-redux";
 import { updatePaletteAll } from "../../../redux/actions/actions";
 import {
-  colorIntegersToHSL,
-  HSLToColorIntegers
+  intToHSL,
+  HSLtoInt
 } from "../../../util/color-utility";
 import EditorColorBlock from "./EditorColorBlock";
 import "./CurrentPalette.scss";
@@ -14,12 +14,12 @@ const CurrentPalette_ = props => {
   );
 
   const getGreaterColors = colorInts => {
-    colorInts = colorIntegersToHSL(colorInts);
+    colorInts = intToHSL(colorInts);
     let greaterColor;
     if (props.editSetting[0] === true) {
       greaterColor = colorInts[0] + props.increment;
       if (greaterColor >= 360) {
-        return HSLToColorIntegers(colorInts);
+        return HSLtoInt(colorInts);
       } else {
         colorInts[0] = greaterColor;
       }
@@ -27,7 +27,7 @@ const CurrentPalette_ = props => {
     if (props.editSetting[1] === true) {
       greaterColor = colorInts[1] + props.increment;
       if (greaterColor >= 100) {
-        return HSLToColorIntegers(colorInts);
+        return HSLtoInt(colorInts);
       } else {
         colorInts[1] = greaterColor;
       }
@@ -35,21 +35,21 @@ const CurrentPalette_ = props => {
     if (props.editSetting[2] === true) {
       greaterColor = colorInts[2] + props.increment;
       if (greaterColor >= 100) {
-        return HSLToColorIntegers(colorInts);
+        return HSLtoInt(colorInts);
       } else {
         colorInts[2] = greaterColor;
       }
     }
-    return HSLToColorIntegers(colorInts);
+    return HSLtoInt(colorInts);
   };
 
   const getLesserColors = colorInts => {
-    colorInts = colorIntegersToHSL(colorInts);
+    colorInts = intToHSL(colorInts);
     let lesserColor;
     if (props.editSetting[0] === true) {
       lesserColor = colorInts[0] - props.increment;
       if (lesserColor <= 1) {
-        return HSLToColorIntegers(colorInts);
+        return HSLtoInt(colorInts);
       } else {
         colorInts[0] = lesserColor;
       }
@@ -57,7 +57,7 @@ const CurrentPalette_ = props => {
     if (props.editSetting[1] === true) {
       lesserColor = colorInts[1] - props.increment;
       if (lesserColor <= 1) {
-        return HSLToColorIntegers(colorInts);
+        return HSLtoInt(colorInts);
       } else {
         colorInts[1] = lesserColor;
       }
@@ -65,12 +65,12 @@ const CurrentPalette_ = props => {
     if (props.editSetting[2] === true) {
       lesserColor = colorInts[2] - props.increment;
       if (lesserColor <= 1) {
-        return HSLToColorIntegers(colorInts);
+        return HSLtoInt(colorInts);
       } else {
         colorInts[2] = lesserColor;
       }
     }
-    return HSLToColorIntegers(colorInts);
+    return HSLtoInt(colorInts);
   };
 
   const incrementAllUp = () => {
@@ -112,7 +112,7 @@ const CurrentPalette_ = props => {
             +
           </div>
           <div className="current-color master">
-            
+            <h2 className="label">ALL</h2>
           </div>
           <div
             className="lesser-color master"

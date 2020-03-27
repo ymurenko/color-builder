@@ -29,6 +29,7 @@
     border-radius: $button-radius;
     overflow: hidden;
     text-align: left;
+    display: flex;
     .block-color {
       display: inline-block;
       height: 100%;

@@ -9,6 +9,8 @@ const initialState = {
     [255, 255, 255],
     [255, 255, 255]
   ],
+  PREFIX: true,
+  QUOTES: true,
   COLOR_MODE: 1,
   PALETTES: [],
   ACTIVE_PALETTE: { index: -1, palette: [] },
@@ -47,6 +49,16 @@ export const actionReducer = (state = initialState, action) => {
       return {
         ...state,
         COLORS: CURRENT_COLORS
+      };
+    case "SET_PREFIX":
+      return {
+        ...state,
+        PREFIX: !state.PREFIX
+      };
+    case "SET_QUOTES":
+      return {
+        ...state,
+        QUOTES: !state.QUOTES
       };
     case "SET_COLOR_MODE":
       return {
