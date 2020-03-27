@@ -31,7 +31,6 @@
   margin: 0;
   overflow: hidden;
   text-align: left;
-  user-select: none;
   .label {
     font-weight: 400;
     transform: rotate(-90deg);
@@ -63,9 +62,6 @@
     text-align: center;
     font-size: 3rem;
     line-height: 100%;
-    &.master {
-      text-shadow: none;
-    }
   }
   .current-color {
     height: 70%;
@@ -100,9 +96,6 @@
     text-align: center;
     font-size: 4rem;
     line-height: 100%;
-    &.master {
-      text-shadow: none;
-    }
   }
   &:nth-last-child(2){
     border-top-right-radius: $ui-block-radius;

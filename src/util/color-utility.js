@@ -117,9 +117,9 @@ export const toColorString = (ints, mode) => {
         .toUpperCase()
         .slice(1);
   } else if (mode === "rgb") {
-    result = `rgb(${ints[0]},${ints[1]},${ints[2]})`;
+    result = `rgb(${ints[0]}, ${ints[1]}, ${ints[2]})`;
   } else if (mode === "hsl") {
-    result = `hsl(${ints[0]},${ints[1]}%,${ints[2]}%)`;
+    result = `hsl(${ints[0]}, ${ints[1]}%, ${ints[2]}%)`;
   }
   return result;
 };

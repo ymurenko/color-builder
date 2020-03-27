@@ -12,7 +12,7 @@ $thumb-border-width: scale(2);
 $thumb-border-color: #696969;
 
 $track-width: 100%;
-$track-height: scale(2);
+$track-height: scale(4);
 $track-shadow-size: scale(2);
 $track-shadow-blur: scale(2);
 $track-shadow-color: #222;
@@ -51,6 +51,9 @@ $contrast: 5%;
       display: inline-block;
       margin: scale(10);
     }
+  .label-value {
+    font-weight: bold;
+  }
   }
 }
 

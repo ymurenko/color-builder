@@ -65,7 +65,7 @@ const Presets_ = props => {
       >
         <p className="slider-label">
           Cluster Spacing Angle:{" "}
-          {(Math.round(props.clusterAngle * 10) / 10).toFixed(1)}º
+          <span className="label-value">{(Math.round(props.clusterAngle * 10) / 10).toFixed(1)}º</span>
         </p>
         <input
           type="range"

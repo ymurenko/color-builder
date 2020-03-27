@@ -30,8 +30,8 @@ const App_ = props => {
               Color Picker
             </div>
             <div
-              className={`shadow-tab tab color-picker-tab ${
-                props.darkMode ? "dark" : ""
+              className={`shadow-tab tab color-picker-tab 
+              ${props.darkMode ? "dark" : ""
               }`}
             />
             <div
@@ -47,6 +47,19 @@ const App_ = props => {
                 props.darkMode ? "dark" : ""
               }`}
             />
+            <div
+              className={`tab export-tab ${
+                props.appMode === 2 ? "active-tab" : ""
+              } ${props.darkMode ? "dark" : ""}`}
+             // onClick={() => props.setMode(2)}
+            >
+              File Export (WIP)
+            </div>
+            <div
+              className={`shadow-tab tab export-tab ${
+                props.darkMode ? "dark" : ""
+              }`}
+            />
             <button
               className={`button set-dark ${props.darkMode ? "dark" : ""}`}
               type="button"
@@ -57,13 +70,18 @@ const App_ = props => {
               {props.darkMode ? "Light Mode" : "Dark Mode"}
             </button>
           </div>
-          <div className="feature-wrapper" style={{display: props.appMode === 0 ? '' : 'none'}}>
+          <div
+            className="feature-wrapper"
+            style={{ display: props.appMode === 0 ? "" : "none" }}
+          >
             <ColorPicker />
           </div>
-         <div className="feature-wrapper" style={{display: props.appMode === 1 ? '' : 'none'}}>
+          <div
+            className="feature-wrapper"
+            style={{ display: props.appMode === 1 ? "" : "none" }}
+          >
             <PaletteEditor />
-         </div>
-          
+          </div>
         </div>
       </div>
     </div>

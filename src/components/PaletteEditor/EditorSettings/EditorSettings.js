@@ -52,7 +52,7 @@ const EditorSettings_ = props => {
           </button>
 
           <div className="slider-container short">
-            <p className="slider-label short">+/- {props.editIncrement}</p>
+            <p className="slider-label short"><span className="label-value">+/- {props.editIncrement}</span></p>
             <input
               type="range"
               className={`slider short ${props.darkMode ? "dark" : ""}`}

@@ -30,36 +30,9 @@ const Controls_ = props => {
     <div className={`controls ui-half-block ${props.darkMode ? "dark" : ""}`}>
       <div className="controls-wrapper">
         <div className="slider-container">
-          <p className="slider-label">Lightness: {props.lightness}%</p>
-          <input
-            type="range"
-            className={`slider ${props.darkMode ? "dark" : ""}`}
-            min={10}
-            max={90}
-            step={1}
-            value={props.lightness}
-            onChange={val => {
-              props.setLightness(parseInt(val.target.value));
-            }}
-          />
-        </div>
-        <div className="slider-container">
-          <p className="slider-label">Saturation: {props.saturation}%</p>
-          <input
-            type="range"
-            className={`slider ${props.darkMode ? "dark" : ""}`}
-            min={10}
-            max={100}
-            step={1}
-            value={props.saturation}
-            onChange={val => {
-              props.setSaturation(parseInt(val.target.value));
-            }}
-          />
-        </div>
-        <div className="slider-container">
           <p className="slider-label">
-            Number of Points: {props.selectorCount}
+            Number of Colors:{" "}
+            <span className="label-value">{props.selectorCount}</span>
           </p>
           <input
             type="range"
@@ -75,12 +48,48 @@ const Controls_ = props => {
         </div>
         <div className="slider-container">
           <p className="slider-label">
-            Point Spacing Angle:{" "}
-            {(
-              Math.round((props.selectorAngle / props.selectorCount) * 10) / 10
-            ).toFixed(1)}
-            º
+            Saturation: <span className="label-value">{props.saturation}%</span>
           </p>
+          <input
+            type="range"
+            className={`slider ${props.darkMode ? "dark" : ""}`}
+            min={10}
+            max={100}
+            step={1}
+            value={props.saturation}
+            onChange={val => {
+              props.setSaturation(parseInt(val.target.value));
+            }}
+          />
+        </div>
+        <div className="slider-container">
+          <p className="slider-label">
+            Lightness: <span className="label-value">{props.lightness}%</span>
+          </p>
+          <input
+            type="range"
+            className={`slider ${props.darkMode ? "dark" : ""}`}
+            min={10}
+            max={90}
+            step={1}
+            value={props.lightness}
+            onChange={val => {
+              props.setLightness(parseInt(val.target.value));
+            }}
+          />
+        </div>
+        <div className="slider-container">
+          <p className="slider-label">
+            Hue Offset:{" "}
+            <span className="label-value">
+              {(
+                Math.round((props.selectorAngle / props.selectorCount) * 10) /
+                10
+              ).toFixed(1)}
+              º
+            </span>
+          </p>
+
           <input
             type="range"
             className={`slider ${props.darkMode ? "dark" : ""}`}
@@ -95,8 +104,14 @@ const Controls_ = props => {
         </div>
         <div className="slider-container">
           <p className="slider-label">
-            Distance From Origin:{" "}
-            {(Math.round((props.selectorLinkedRadius / (props.viewport * 0.325)) * 1000) / 10).toFixed(0)}
+            Distance:{" "}
+            <span className="label-value">
+              {(
+                Math.round(
+                  (props.selectorLinkedRadius / (props.viewport * 0.325)) * 1000
+                ) / 10
+              ).toFixed(0)}
+            </span>
           </p>
           <input
             type="range"
@@ -113,8 +128,10 @@ const Controls_ = props => {
         </div>
         <div className="slider-container">
           <p className="slider-label">
-            Distance Stagger:{" "}
-            {(Math.round(props.selectorStagger * 10) / 10).toFixed(0)}
+            Stagger:{" "}
+            <span className="label-value">
+              {(Math.round(props.selectorStagger * 10) / 10).toFixed(0)}
+            </span>
           </p>
           <input
             type="range"
