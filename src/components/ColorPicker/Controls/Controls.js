@@ -12,6 +12,7 @@ import {
   setDarkMode
 } from "../../../redux/actions/actions";
 import "./Controls.scss";
+import Slider from "../../Slider/Slider";
 import "../../Slider/Slider.scss";
 
 const Controls_ = props => {
@@ -29,123 +30,74 @@ const Controls_ = props => {
   return (
     <div className={`controls ui-half-block ${props.darkMode ? "dark" : ""}`}>
       <div className="controls-wrapper">
-        <div className="slider-container">
-          <p className="slider-label">
-            Number of Colors:{" "}
-            <span className="label-value">{props.selectorCount}</span>
-          </p>
-          <input
-            type="range"
-            className={`slider ${props.darkMode ? "dark" : ""}`}
-            min={props.preset}
-            max={15}
-            step={props.preset}
-            value={props.selectorCount}
-            onChange={val => {
-              props.setSelectorCount(parseInt(val.target.value));
-            }}
-          />
-        </div>
-        <div className="slider-container">
-          <p className="slider-label">
-            Saturation: <span className="label-value">{props.saturation}%</span>
-          </p>
-          <input
-            type="range"
-            className={`slider ${props.darkMode ? "dark" : ""}`}
-            min={10}
-            max={100}
-            step={1}
-            value={props.saturation}
-            onChange={val => {
-              props.setSaturation(parseInt(val.target.value));
-            }}
-          />
-        </div>
-        <div className="slider-container">
-          <p className="slider-label">
-            Lightness: <span className="label-value">{props.lightness}%</span>
-          </p>
-          <input
-            type="range"
-            className={`slider ${props.darkMode ? "dark" : ""}`}
-            min={10}
-            max={90}
-            step={1}
-            value={props.lightness}
-            onChange={val => {
-              props.setLightness(parseInt(val.target.value));
-            }}
-          />
-        </div>
-        <div className="slider-container">
-          <p className="slider-label">
-            Hue Offset:{" "}
-            <span className="label-value">
-              {(
-                Math.round((props.selectorAngle / props.selectorCount) * 10) /
-                10
-              ).toFixed(1)}
-              º
-            </span>
-          </p>
-
-          <input
-            type="range"
-            className={`slider ${props.darkMode ? "dark" : ""}`}
-            min={10}
-            max={360}
-            step={1}
-            value={props.selectorAngle}
-            onChange={val => {
-              props.setSelectorAngle(parseInt(val.target.value));
-            }}
-          />
-        </div>
-        <div className="slider-container">
-          <p className="slider-label">
-            Distance:{" "}
-            <span className="label-value">
-              {(
-                Math.round(
-                  (props.selectorLinkedRadius / (props.viewport * 0.325)) * 1000
-                ) / 10
-              ).toFixed(0)}
-            </span>
-          </p>
-          <input
-            type="range"
-            className={`slider ${props.darkMode ? "dark" : ""}`}
-            ref={radiusSlider}
-            min={1}
-            max={0.325 * props.viewport}
-            step={1}
-            value={props.selectorLinkedRadius}
-            onChange={val => {
-              props.setSelectorRadius(parseInt(val.target.value));
-            }}
-          />
-        </div>
-        <div className="slider-container">
-          <p className="slider-label">
-            Stagger:{" "}
-            <span className="label-value">
-              {(Math.round(props.selectorStagger * 10) / 10).toFixed(0)}
-            </span>
-          </p>
-          <input
-            type="range"
-            className={`slider ${props.darkMode ? "dark" : ""}`}
-            ref={staggerSlider}
-            min={-(0.315 * props.viewport - props.selectorRadius)}
-            max={props.selectorRadius}
-            step={1}
-            value={props.selectorStagger}
-            onChange={val => {
-              props.setSelectorStagger(parseInt(val.target.value));
-            }}
-          />
-        </div>
+      <Slider
+          label={"Number of Colors: "}
+          min={props.preset}
+          max={15}
+          step={props.preset}
+          unit={""}
+          labelValue={props.selectorCount}
+          value={props.selectorCount}
+          updateAction={val => props.setSelectorCount(parseInt(val))}
+        />
+        <Slider
+          label={"Saturation: "}
+          min={10}
+          max={100}
+          step={1}
+          unit={"%"}
+          labelValue={props.saturation}
+          value={props.saturation}
+          updateAction={val => props.setSaturation(parseInt(val))}
+        />
+        <Slider
+          label={"Lightness: "}
+          min={10}
+          max={90}
+          step={1}
+          unit={"%"}
+          labelValue={props.lightness}
+          value={props.lightness}
+          updateAction={val => props.setLightness(parseInt(val))}
+        />
+        <Slider
+          label={"Hue Offset: "}
+          min={10}
+          max={360}
+          step={1}
+          unit={"º"}
+          labelValue={(
+            Math.round((props.selectorAngle / props.selectorCount) * 10) / 10
+          ).toFixed(1)}
+          value={props.selectorAngle}
+          updateAction={val => props.setSelectorAngle(parseInt(val))}
+        />
+        <Slider
+          label={"Distance: "}
+          refProp={radiusSlider}
+          min={1}
+          max={0.325 * props.viewport}
+          step={1}
+          unit={"%"}
+          labelValue={(
+            Math.round(
+              (props.selectorLinkedRadius / (props.viewport * 0.325)) * 1000
+            ) / 10
+          ).toFixed(0)}
+          value={props.selectorLinkedRadius}
+          updateAction={val => props.setSelectorRadius(parseInt(val))}
+        />
+        <Slider
+          label={"Stagger: "}
+          refProp={staggerSlider}
+          min={-(0.315 * props.viewport - props.selectorRadius)}
+          max={props.selectorRadius}
+          step={1}
+          unit={""}
+          labelValue={(Math.round(props.selectorStagger * 10) / 10).toFixed(0)}
+          value={props.selectorStagger}
+          updateAction={val => props.setSelectorStagger(parseInt(val))}
+        />
       </div>
     </div>
   );

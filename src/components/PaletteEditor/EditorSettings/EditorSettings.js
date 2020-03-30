@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import {
   setColorMode,
@@ -8,14 +8,18 @@ import {
   setQuotes
 } from "../../../redux/actions/actions";
 import { copyAllColors } from "../../../util/copy-colors";
+import Slider from "../../Slider/Slider";
 import "../../Slider/Slider.scss";
 import "./EditorSettings.scss";
 
 const EditorSettings_ = props => {
-
   return (
     <div className={`editor-settings ${props.darkMode ? "dark" : ""}`}>
-      <div className={`editor-controls increment-settings ${props.darkMode ? "dark" : ""}`}>
+      <div
+        className={`editor-controls increment-settings ${
+          props.darkMode ? "dark" : ""
+        }`}
+      >
         <div className="input-container">
           <button
             className={`button editor-button longest ${
@@ -50,24 +54,24 @@ const EditorSettings_ = props => {
           >
             Lightness
           </button>
-
-          <div className="slider-container short">
-            <p className="slider-label short"><span className="label-value">+/- {props.editIncrement}</span></p>
-            <input
-              type="range"
-              className={`slider short ${props.darkMode ? "dark" : ""}`}
-              min={1}
-              max={25}
-              step={1}
-              value={props.editIncrement}
-              onChange={val => {
-                props.setEditIncrement(parseInt(val.target.value));
-              }}
-            />
-          </div>
+          <Slider
+            label={"+/- "}
+            min={1}
+            max={25}
+            step={1}
+            unit={""}
+            extraClass={'short'}
+            labelValue={props.editIncrement}
+            value={props.editIncrement}
+            updateAction={val => props.setEditIncrement(parseInt(val))}
+          />
         </div>
       </div>
-      <div className={`editor-controls color-modes ${props.darkMode ? "dark" : ""}`}>
+      <div
+        className={`editor-controls color-modes ${
+          props.darkMode ? "dark" : ""
+        }`}
+      >
         <div className="input-container">
           <button
             className={`button editor-button shorter ${
@@ -75,7 +79,7 @@ const EditorSettings_ = props => {
             } ${props.darkMode ? "dark" : ""}`}
             type="button"
             onClick={() => {
-              if (props.colorMode != 1) {
+              if (props.colorMode !== 1) {
                 props.setColorMode(1);
               }
             }}
@@ -88,7 +92,7 @@ const EditorSettings_ = props => {
             } ${props.darkMode ? "dark" : ""}`}
             type="button"
             onClick={() => {
-              if (props.colorMode != 2) {
+              if (props.colorMode !== 2) {
                 props.setColorMode(2);
               }
             }}
@@ -101,7 +105,7 @@ const EditorSettings_ = props => {
             } ${props.darkMode ? "dark" : ""}`}
             type="button"
             onClick={() => {
-              if (props.colorMode != 3) {
+              if (props.colorMode !== 3) {
                 props.setColorMode(3);
               }
             }}
@@ -110,12 +114,16 @@ const EditorSettings_ = props => {
           </button>
         </div>
       </div>
-      <div className={`editor-controls copy-options ${props.darkMode ? "dark" : ""}`}>
+      <div
+        className={`editor-controls copy-options ${
+          props.darkMode ? "dark" : ""
+        }`}
+      >
         <div className="input-container">
           <button
-            className={`button editor-button longer ${props.prefix ? "active" : ""} ${
-              props.darkMode ? "dark" : ""
-            }`}
+            className={`button editor-button longer ${
+              props.prefix ? "active" : ""
+            } ${props.darkMode ? "dark" : ""}`}
             type="button"
             onClick={() => {
               props.setPrefix();
@@ -128,9 +136,9 @@ const EditorSettings_ = props => {
               : "hsl(...)"}
           </button>
           <button
-            className={`button editor-button longer ${props.quotes ? "active" : ""} ${
-              props.darkMode ? "dark" : ""
-            }`}
+            className={`button editor-button longer ${
+              props.quotes ? "active" : ""
+            } ${props.darkMode ? "dark" : ""}`}
             type="button"
             onClick={() => {
               props.setQuotes();

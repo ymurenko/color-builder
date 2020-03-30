@@ -84,7 +84,7 @@ const EditorColorBlock_ = props => {
 
   useEffect(() => {
     setAvg(avgColor());
-  }, [props.color, props.colorMode]);
+  }, [props.color, props.colorMode, avgColor]);
 
   return (
     <div

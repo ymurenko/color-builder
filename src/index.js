@@ -17,7 +17,4 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 
-const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
 serviceWorker.unregister();

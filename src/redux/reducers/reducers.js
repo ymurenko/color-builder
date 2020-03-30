@@ -147,11 +147,6 @@ export const actionReducer = (state = initialState, action) => {
         ...state,
         DARK_MODE: !state.DARK_MODE
       };
-    case "SET_DARK_MODE":
-      return {
-        ...state,
-        DARK_MODE: !state.DARK_MODE
-      };
     case "SET_PRESET":
       switch (action.PRESET) {
         case 2:

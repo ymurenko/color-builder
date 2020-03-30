@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { updatePaletteAll } from "../../../redux/actions/actions";
 import {

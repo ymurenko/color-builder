@@ -47,6 +47,8 @@ export const intToHSL = rgb => {
     case rgb[2]:
       H = 60 * (4 + (rgb[0] - rgb[1]) / chroma);
       break;
+    default:
+      H = 0;
   }
   H = chroma === 0 ? 0 : H < 1 ? Math.round(H + 360) : Math.round(H);
   S = Math.round(S * 100);

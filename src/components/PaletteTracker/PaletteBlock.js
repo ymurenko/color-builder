@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { deletePalette, setCurrentPalette } from "../../redux/actions/actions";
 import { toColorString } from "../../util/color-utility"
