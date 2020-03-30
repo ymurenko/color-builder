@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
   setSelectorCount,
@@ -7,12 +7,13 @@ import {
   setPreset
 } from "../../../redux/actions/actions";
 import "./Presets.scss";
+import Slider from "../../Slider/Slider";
 import "../../Slider/Slider.scss";
 
 const Presets_ = props => {
 
   useEffect(() => {
-    if (props.preset != 1) {
+    if (props.preset !== 1) {
       props.setSelectorCount(props.preset * 3);
     }
   }, [props.preset]);
@@ -59,29 +60,17 @@ const Presets_ = props => {
           />
         </div>
       </div>
-      <div
-        className="slider-container"
-        style={{ marginTop: `${props.Viewport * 0.1}` }}
-      >
-        <p className="slider-label">
-          Cluster Spacing Angle:{" "}
-          <span className="label-value">{(Math.round(props.clusterAngle * 10) / 10).toFixed(1)}º</span>
-        </p>
-        <input
-          type="range"
-          className={`slider ${props.darkMode ? "dark" : ""}`}
+      <Slider
+          label={"Cluster Spacing Angle: "}
           min={1}
-          max={
-            (props.selectorAngle / props.preset / props.selectorCount) *
-            props.preset
-          }
+          max={(props.selectorAngle / props.preset / props.selectorCount) *
+            props.preset}
           step={1}
+          unit={"º"}
+          labelValue={(Math.round(props.clusterAngle * 10) / 10).toFixed(1)}
           value={props.clusterAngle}
-          onChange={val => {
-            props.setClusterAngle(parseInt(val.target.value));
-          }}
+          updateAction={val => props.setClusterAngle(parseInt(val))}
         />
-      </div>
     </div>
   );
 };

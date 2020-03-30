@@ -1,6 +1,5 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef } from "react";
 import { connect } from "react-redux";
-import copy from "copy-to-clipboard";
 import { copyColor, getColorString } from "../../../util/copy-colors";
 
 const ColorBlock_ = props => {

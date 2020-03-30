@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, createRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { storeColor, setSelectorLinkedRadius } from "../../../redux/actions/actions";
 import { store } from "../../../redux/reducers/reducers";
@@ -32,7 +32,7 @@ const Selectors_ = props => {
     //sets the angle of the polar offset from +X-axis
     let radOffset;
     let harmony = { total: 0, count: 1 };
-    if (props.preset != 1 && props.selectorCount != props.preset) {
+    if (props.preset !== 1 && props.selectorCount !== props.preset) {
       radOffset = [initialOffsetAngle.current, initialOffsetAngle.current];
       for (let i = 1; i < props.selectorCount; i++) {
         if (harmony.count === Math.round(props.selectorCount / props.preset)) {
@@ -281,7 +281,9 @@ const Selectors_ = props => {
     props.selectorRadius,
     props.selectorAngle,
     props.clusterAngle,
-    props.CWRadius
+    props.CWRadius,
+    circleRefs,
+    setHarmony
   ]);
 
   useEffect(() => {

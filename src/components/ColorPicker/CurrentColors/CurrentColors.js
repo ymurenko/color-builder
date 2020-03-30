@@ -1,5 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
-import copy from "copy-to-clipboard";
+import React from "react";
 import { connect } from "react-redux";
 import { store } from "../../../redux/reducers/reducers";
 import ColorBlock from "./ColorBlock";
@@ -31,7 +30,7 @@ const CurrentColors_ = props => {
           } ${props.darkMode ? "dark" : ""}`}
           type="button"
           onClick={() => {
-            if (props.colorMode != 1) {
+            if (props.colorMode !== 1) {
               props.setColorMode(1);
             }
           }}
@@ -44,7 +43,7 @@ const CurrentColors_ = props => {
           } ${props.darkMode ? "dark" : ""}`}
           type="button"
           onClick={() => {
-            if (props.colorMode != 2) {
+            if (props.colorMode !== 2) {
               props.setColorMode(2);
             }
           }}
@@ -57,7 +56,7 @@ const CurrentColors_ = props => {
           } ${props.darkMode ? "dark" : ""}`}
           type="button"
           onClick={() => {
-            if (props.colorMode != 3) {
+            if (props.colorMode !== 3) {
               props.setColorMode(3);
             }
           }}
