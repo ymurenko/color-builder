@@ -4,6 +4,7 @@ import { setViewport, setDarkMode, setMode } from "./redux/actions/actions";
 import "./App.scss";
 import ColorPicker from "./components/ColorPicker/ColorPicker";
 import PaletteEditor from "./components/PaletteEditor/PaletteEditor";
+import FileExport from "./components/FileExport/FileExport";
 
 const App_ = props => {
   useLayoutEffect(() => {
@@ -51,9 +52,9 @@ const App_ = props => {
               className={`tab export-tab ${
                 props.appMode === 2 ? "active-tab" : ""
               } ${props.darkMode ? "dark" : ""}`}
-             // onClick={() => props.setMode(2)}
+               onClick={() => props.setMode(2)}
             >
-              File Export (WIP)
+              File Export
             </div>
             <div
               className={`shadow-tab tab export-tab ${
@@ -81,6 +82,12 @@ const App_ = props => {
             style={{ display: props.appMode === 1 ? "" : "none" }}
           >
             <PaletteEditor />
+          </div>
+          <div
+            className="feature-wrapper"
+            style={{ display: props.appMode === 2 ? "" : "none" }}
+          >
+            <FileExport />
           </div>
         </div>
       </div>
