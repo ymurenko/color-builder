@@ -11,6 +11,12 @@
   background-color: $color-tertiary;
   border-radius: scale(15);
   box-shadow: 0 0 scale(15) 0 #a1a1a1;
+  .export-heading {
+    line-height: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-align: center;
+  }
   .file-export-wrapper {
     width: scale(1160);
     display: grid;
@@ -29,6 +35,31 @@
         background-color: $color-secondary-dark;
         box-shadow: $ui-block-shadow-dark;
       }
+      .small-label {
+        text-align: center;
+      }
+      .export-color-mode {
+        height: scale(100);
+        width: scale(350);
+      }
+      .save-button {
+        position: absolute;
+        width: scale(350);
+        height: scale(100);
+        font-size: 1.2rem;
+        bottom: scale(15);
+      }
+      .save-button-container {
+        position: absolute;
+        display: grid;
+        bottom: scale(5);
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        gap: scale(10);
+        .save-button {
+          position: initial;
+        }
+      }
+
     }
   }
   &.dark {

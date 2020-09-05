@@ -17,17 +17,6 @@ const stringToUTF = (text, stream) => {
   return stream;
 };
 
-//optional download code
-const download = (filename, data) => {
-  let a = document.createElement("a");
-  //must use Uint16Array buffer
-  //application/octet-stream works as a mime type for .aco files
-  let file = new Blob([data.buffer], { type: "application/octet-stream" });
-  a.href = URL.createObjectURL(file);
-  a.download = filename;
-  a.click();
-};
-
 function bigEndian(val) {
   //Adobe based their swatch format on Apple specs
   //which used big-endian data handling
@@ -35,7 +24,7 @@ function bigEndian(val) {
   return ((val & 0xff) << 8) | ((val >> 8) & 0xff);
 }
 
-export const saveACO = (colors) => {
+export const saveACO = (colors, colorNames) => {
   let stream = [];
   //set ACO version (1 or 2)
   stream.push(bigEndian(2));
@@ -53,14 +42,22 @@ export const saveACO = (colors) => {
     //leading 0
     stream.push(bigEndian(0));
     //length of color name string
-    stream.push(bigEndian(7));
-    //color name string as array of UTF-16 int16s
-    stream = stringToUTF(`color${i}`, stream);
+    if (colorNames[i]){
+      stream.push(bigEndian(colorNames[i].length + 1));
+      //color name string as array of UTF-16 int16s
+      stream = stringToUTF(colorNames[i], stream);
+    } else {
+      let defaultName = `Color ${i+1}`
+      stream.push(bigEndian(defaultName.length + 1));
+      //color name string as array of UTF-16 int16s
+      stream = stringToUTF(defaultName, stream);
+    }
     //trailing 0
     stream.push(bigEndian(0));
   });
   //convert the stream to a Uint16Array
   let streamInt16 = new Uint16Array(stream);
   //download("colorbuilder.aco", Uint16);
-  return streamInt16
+  let blob = new Blob([streamInt16.buffer], { type: "application/octet-stream" });
+  return blob
 };
