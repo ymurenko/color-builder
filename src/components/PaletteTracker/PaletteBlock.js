@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { deletePalette, setCurrentPalette } from "../../redux/actions/actions";
+import { deletePalette, setCurrentPalette, } from "../../redux/actions/actions";
 import { toColorString } from "../../util/color-utility"
 import "./PaletteTracker.scss";
 
@@ -20,7 +20,7 @@ const PaletteBlock_ = props => {
       className={`palette-block 
       ${props.editor ? "editor-mode" : ""}
       ${props.darkMode ? "dark" : ""} 
-      ${props.activePalette.index === props.index && props.mode === 1 ? "active-palette" : ""} 
+      ${props.activePalette.index === props.index && props.mode !== 0 ? "active-palette" : ""} 
       ${props.deleteMode ? "delete-mode" : ""}`} 
       onClick={() => {
         if (props.deleteMode) {

@@ -60,6 +60,7 @@ export const saveACO = (colors) => {
     stream.push(bigEndian(0));
   });
   //convert the stream to a Uint16Array
-  let Uint16 = new Uint16Array(stream);
-  download("colorbuilder.aco", Uint16);
+  let streamInt16 = new Uint16Array(stream);
+  //download("colorbuilder.aco", Uint16);
+  return streamInt16
 };

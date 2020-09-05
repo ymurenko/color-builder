@@ -1,0 +1,41 @@
+@import "../../../Variables.scss";
+
+.color-names {
+  text-align: center;
+  display: inline-block;
+  grid-column: 1;
+  height: scale(570);
+  width: scale(360);
+  padding: scale(15);
+  .color-names-container {
+    height: scale(570);
+    width: 100%;
+    overflow: hidden;
+    border-radius: scale(10);
+    .color-name-block {
+      margin-bottom: scale(5);
+      text-align: left;
+      width: 100%;
+      height: scale(33);
+      input {
+        font-size: 0.9rem;
+        font-weight: $secondary-font-weight;
+        font-family: $font-family;
+        padding-left: scale(5);
+        margin: 0 scale(5) scale(5) scale(10);
+        vertical-align: top;
+        width: scale(305);
+        height: scale(30);
+        color: #4d4d4d;
+        background-color: $color-button;
+        border-style: none;
+        border-radius: scale(10);
+        &.dark {
+          background-color: $color-button-dark;
+          color: #818181;
+        }
+      }
+    }
+  }
+
+}

@@ -1,0 +1,40 @@
+@import "../../Variables.scss";
+
+.file-export-interface {
+  position: absolute;
+  display: grid;
+  gap: scale(10);
+  bottom: 0;
+  width: scale(1350);
+  height: scale(600);
+  padding: scale(10);
+  background-color: $color-tertiary;
+  border-radius: scale(15);
+  box-shadow: 0 0 scale(15) 0 #a1a1a1;
+  .file-export-wrapper {
+    width: scale(1160);
+    display: grid;
+    gap: scale(10);
+    grid-template-columns: 1fr 1fr 1fr;
+    .file-export-options {
+      position: relative;
+      text-align: left;
+      height: scale(570);
+      padding: scale(15);
+      width: scale(355);
+      background-color: $color-secondary;
+      border-radius: $ui-block-radius;
+      box-shadow: $ui-block-shadow-light;
+      &.dark {
+        background-color: $color-secondary-dark;
+        box-shadow: $ui-block-shadow-dark;
+      }
+    }
+  }
+  &.dark {
+    background-color: $color-tertiary-dark;
+    box-shadow: 0 0 scale(15) 0 #161616;
+  }
+  z-index: 1;
+}
+

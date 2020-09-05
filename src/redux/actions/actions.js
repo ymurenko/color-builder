@@ -78,3 +78,6 @@ export const updatePaletteSingle = (val, index) => (
 export const updatePaletteAll = (val) => (
   { type: 'UPDATE_PALETTE_ALL', NEW_COLORS: val }
 )
+export const setColorName = (val) => (
+  {type: 'SET_COLOR_NAME', NAME: val}
+)

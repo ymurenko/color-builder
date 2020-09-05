@@ -13,6 +13,7 @@ const initialState = {
   QUOTES: true,
   COLOR_MODE: 1,
   PALETTES: [],
+  COLOR_NAMES: [[null,null,null,null]],
   ACTIVE_PALETTE: { index: -1, palette: [] },
   LIGHTNESS: 50,
   SATURATION: 100,
@@ -35,6 +36,7 @@ export const actionReducer = (state = initialState, action) => {
   let CURRENT_PALETTES_COPY = [...state.PALETTES];
   let ACTIVE_PALETTE_COPY = [...state.ACTIVE_PALETTE.palette];
   let ACTIVE_PALETTE_INDEX = state.ACTIVE_PALETTE.index;
+  let COLOR_NAMES_COPY = [...state.COLOR_NAMES];
   switch (action.type) {
     case "SET_VIEWPORT_HEIGHT":
       return {
@@ -50,6 +52,12 @@ export const actionReducer = (state = initialState, action) => {
         ...state,
         COLORS: CURRENT_COLORS
       };
+    case "SET_COLOR_NAME":
+      COLOR_NAMES_COPY[action.NAME.paletteIndex][action.NAME.colorIndex] = action.NAME.name;
+      return {
+        ...state,
+       COLOR_NAMES: COLOR_NAMES_COPY
+      }
     case "SET_PREFIX":
       return {
         ...state,
@@ -68,9 +76,12 @@ export const actionReducer = (state = initialState, action) => {
     case "STORE_PALETTE":
       if (state.PALETTES.length < 5) {
         CURRENT_PALETTES_COPY.push([...state.COLORS]);
+        let initNames = new Array(state.COLORS.length).fill(null);
+        COLOR_NAMES_COPY.push([...initNames])
         return {
           ...state,
-          PALETTES: CURRENT_PALETTES_COPY
+          PALETTES: CURRENT_PALETTES_COPY,
+          COLOR_NAMES: COLOR_NAMES_COPY
         };
       } else {
         return {
@@ -85,16 +96,19 @@ export const actionReducer = (state = initialState, action) => {
       };
     case "DELETE_PALETTE":
       CURRENT_PALETTES_COPY.splice(action.INDEX, 1);
+      COLOR_NAMES_COPY.splice(action.INDEX, 1);
       if (state.ACTIVE_PALETTE.index === action.INDEX) {
         return {
           ...state,
           ACTIVE_PALETTE: initialState.ACTIVE_PALETTE,
-          PALETTES: CURRENT_PALETTES_COPY
+          PALETTES: CURRENT_PALETTES_COPY,
+          COLOR_NAMES: COLOR_NAMES_COPY
         };
       } else {
         return {
           ...state,
-          PALETTES: CURRENT_PALETTES_COPY
+          PALETTES: CURRENT_PALETTES_COPY,
+          COLOR_NAMES: COLOR_NAMES_COPY
         };
       }
     case "SET_LIGHTNESS":

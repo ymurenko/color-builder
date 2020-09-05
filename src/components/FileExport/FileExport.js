@@ -1,19 +1,24 @@
 import React, { useEffect } from "react";
 import "./FileExport.scss";
 import { connect } from "react-redux";
-import {saveACO} from "../../util/aco-export";
+import { saveACO } from "../../util/aco-export";
+import PaletteTracker from "../PaletteTracker/PaletteTracker";
+import ColorNames from "./ColorNames/ColorNames";
 
-const FileExport_ = props => {
 
-  useEffect(()=>{
+const FileExport_ = (props) => {
+  useEffect(() => {
     saveACO(props.colors);
-  },[])
+  }, []);
 
   return (
-    <div className={`palette-editor-interface ${props.darkMode ? "dark" : ""}`}>
-      <div className="palette-components-wrapper">
-
+    <div className={`file-export-interface ${props.darkMode ? "dark" : ""}`}>
+      <div className="file-export-wrapper">
+          <ColorNames/>
+        <div className={`file-export-options ${props.darkMode ? "dark" : ""}`}></div>
+        <div className={`file-export-options ${props.darkMode ? "dark" : ""}`}></div>
       </div>
+      <PaletteTracker editor={true} />
     </div>
   );
 };
@@ -21,7 +26,7 @@ const FileExport_ = props => {
 function mapStateToProps(state) {
   return {
     darkMode: state.actionReducer.DARK_MODE,
-    colors: state.actionReducer.COLORS
+    colors: state.actionReducer.COLORS,
   };
 }
 
